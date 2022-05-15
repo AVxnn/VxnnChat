@@ -1,0 +1,55 @@
+.member-item {
+  width: 330px;
+  height: 90px;
+  padding: 0 20px;
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.member-item:active {
+  width: 330px;
+  height: 88px;
+  padding: 0 19px;
+  border-radius: 14px;
+  border: 1px solid #00FFB2;
+}
+.member-item:focus {
+  width: 330px;
+  height: 88px;
+  padding: 0 19px;
+  border-radius: 14px;
+  border: 1px solid #00FFB2;
+}
+.member-item .member_avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 1000px;
+  margin-right: 20px;
+}
+.member-item .member-content {
+  width: 100%;
+}
+.member-item .member-content .member_section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.member-item .member-content .member_section .member_name {
+  font-size: 18px;
+  color: #FFFFFF;
+}
+.member-item .member-content .member_section .member_time {
+  color: #FFFFFF;
+  font-size: 12px;
+}
+.member-item .member-content .member_description {
+  font-size: 12px;
+  color: #CFCFCF;
+}
+
+.navlink {
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=style.css.map */

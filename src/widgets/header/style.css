@@ -1,0 +1,56 @@
+.container {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.container .section-logo {
+  width: 218px;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.container .section-logo .logotype_title {
+  color: #EEEEEE;
+  text-decoration: none;
+  font-size: 36px;
+}
+.container .navigation {
+  width: 240px;
+  display: flex;
+  justify-content: space-between;
+}
+.container .navigation .nav-item {
+  color: #EEEEEE;
+  font-weight: 500;
+  text-decoration: none;
+}
+.container .navigation .active {
+  position: relative;
+  color: #00FFB2;
+}
+.container .navigation .active::before {
+  position: absolute;
+  content: "";
+  margin-left: -10%;
+  width: 120%;
+  height: 2px;
+  background-color: #00FFB2;
+  top: 24px;
+}
+.container .section-profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.container .section-profile .profile_img {
+  margin-right: 20px;
+}
+.container .section-profile .profile_name {
+  color: #EEEEEE;
+  margin-right: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */

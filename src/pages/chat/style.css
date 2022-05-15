@@ -1,0 +1,27 @@
+.section-chat {
+  width: 100%;
+  height: 790px;
+  display: flex;
+  justify-content: space-between;
+}
+.section-chat .members {
+  width: 400px;
+  height: 770px;
+  padding-top: 20px;
+  background-color: #24272C;
+  border-radius: 14px;
+}
+.section-chat .members .active {
+  width: 330px;
+  height: 88px;
+  padding: 0 19px;
+  border-radius: 14px;
+  border: 1px solid #00FFB2;
+}
+.section-chat .block {
+  width: 400px;
+  height: 790px;
+  border-radius: 14px;
+}
+
+/*# sourceMappingURL=style.css.map */

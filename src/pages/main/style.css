@@ -1,0 +1,36 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1160px;
+  height: 70vh;
+}
+.main .main_img {
+  margin-right: 85px;
+}
+.main .section-content .content-title {
+  color: #EEEEEE;
+  font-size: 72px;
+  margin-bottom: 15px;
+}
+.main .section-content .content-description {
+  font-size: 24px;
+  color: #EEEEEE;
+  margin-bottom: 56px;
+}
+.main .section-content .content-description .telegram {
+  text-decoration: none;
+  color: #00FFB2;
+}
+.main .section-content .content-button {
+  color: #00FFB2;
+  background-color: #24272C;
+  font-size: 18px;
+  padding: 23px 71px;
+  border: 0;
+  text-decoration: none;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=style.css.map */

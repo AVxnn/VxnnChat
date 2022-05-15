@@ -1,0 +1,30 @@
+.error-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 74px;
+}
+.error-page .section-error {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.error-page .section-error .error-title {
+  color: #24272C;
+  font-size: 96px;
+  width: 556px;
+}
+.error-page .section-error .error-description {
+  color: #FFFFFF;
+  font-size: 36px;
+  width: 556px;
+}
+.error-page .section-error .error-description .link {
+  color: #00FFB2;
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=style.css.map */
