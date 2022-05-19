@@ -6,10 +6,13 @@
   border-radius: 14px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 .chat .message-list {
   width: 100%;
-  height: 685px;
+  height: 64vh;
+  display: flex;
+  flex-direction: column;
 }
 .chat .send-bar {
   height: 70px;
@@ -22,6 +25,20 @@
   background-color: rgba(255, 255, 255, 0);
   border: 0;
   padding: 19px;
+  cursor: pointer;
+}
+.chat .send-bar .file-btn {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+}
+.chat .send-bar .field__file {
+  padding: 19px;
+}
+.chat .send-bar .field__file .field__file-img {
+  background-image: url(./img/clip.png);
+  background-repeat: no-repeat;
+  background-position: 50%;
   cursor: pointer;
 }
 .chat .send-bar .text-form {

@@ -1,18 +1,35 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from "../../widgets/header/header";
 import './style.css'
 
-import ItemChat from "../../shared/item-chat/itemChat";
+import ItemMessage from "../../shared/item-message/itemMessage";
 import Messenger from "../../features/messenger/messenger";
 import {useState} from "react";
+import { collection, onSnapshot, getFirestore, query } from "firebase/firestore";
+
+const data = [
+    {id: '1', title: 'Mike Jones', msg: 'Goodbye!', avatar: '', time: '23:51'},
+    {id: '2', title: 'Alex Blender', msg: 'Hi there, How are you?', avatar: '', time: '15:36'},
+    {id: '3', title: 'Frank', msg: 'Hello, bro', avatar: '', time: '12:41'},
+]
 
 const Chat = () => {
 
-    const data = [
-        {id: '1', title: 'Alex Blender', msg: 'Hi there, How are you?', avatar: '', time: '12:36'},
-        {id: '2', title: 'Alex Blender', msg: 'Hi there, How are you?', avatar: '', time: '12:36'},
-        {id: '3', title: 'Alex Blender', msg: 'Hi there, How are you?', avatar: '', time: '12:36'},
-    ]
+    const [activeTab, setActiveTab] = useState('')
+    let clickEventHandler = (id) => { setActiveTab(id) }
+    const [data, setData] = useState([])
+    const [loading, setLoading] = useState(false)
+
+    const db = getFirestore()
+
+    onSnapshot(query(collection(db, "users")), (querySnapshot) => {
+        const cities = [];
+        querySnapshot.forEach((doc) => {
+            cities.push(doc.data());
+        });
+        setData(cities)
+        setLoading(true)
+    });
 
     return (
         <>
@@ -21,9 +38,17 @@ const Chat = () => {
                 <section className="section-chat">
                     <section className="members">
                         {
-                            data.map(e => {
-                                return <ItemChat key={e.id} id={e.id} title={e.title} msg={e.msg} avatar={e.avatar} time={e.time}/>
-                            })
+                            loading ? data.map(e => {
+                                return <ItemMessage active={() => clickEventHandler(e.uid)}
+                                                    key={e.uid}
+                                                    id={e.uid}
+                                                    title={e.name}
+                                                    msg={e.msg}
+                                                    avatar={e.avatar}
+                                                    time={e.time}
+                                                    addedName={activeTab === e.uid ? "active" : ''}
+                                                    isOnline={e.isOnline} />
+                            }) : null
                         }
                     </section>
                     <Messenger />

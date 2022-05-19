@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .member-item:active {
   width: 330px;
@@ -14,14 +15,15 @@
   border-radius: 14px;
   border: 1px solid #00FFB2;
 }
-.member-item:focus {
+.member-item:hover {
   width: 330px;
-  height: 88px;
-  padding: 0 19px;
+  height: 86px;
+  padding: 0 18px;
   border-radius: 14px;
-  border: 1px solid #00FFB2;
+  border: 2px solid #151618;
 }
 .member-item .member_avatar {
+  position: relative;
   width: 60px;
   height: 60px;
   border-radius: 1000px;
@@ -32,6 +34,7 @@
 }
 .member-item .member-content .member_section {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin-bottom: 4px;
 }
@@ -42,6 +45,15 @@
 .member-item .member-content .member_section .member_time {
   color: #FFFFFF;
   font-size: 12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50px;
+}
+.member-item .member-content .member_section .online {
+  background-color: #00FFB2;
+}
+.member-item .member-content .member_section .offline {
+  background-color: #fe000f;
 }
 .member-item .member-content .member_description {
   font-size: 12px;

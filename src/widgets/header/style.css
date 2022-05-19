@@ -40,17 +40,5 @@
   background-color: #00FFB2;
   top: 24px;
 }
-.container .section-profile {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.container .section-profile .profile_img {
-  margin-right: 20px;
-}
-.container .section-profile .profile_name {
-  color: #EEEEEE;
-  margin-right: 20px;
-}
 
 /*# sourceMappingURL=style.css.map */
