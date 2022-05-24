@@ -1,8 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import img from "../../img/te.png";
-import login from "../../img/login.svg";
+import login from "../../img/login.png";
 import {getAuth} from "firebase/auth";
 import './style.css'
+import avatar from '../../features/message-item/img/avatar.png'
 import {AuthContext} from '../../shared/contextauth/auth'
 import {useNavigate} from "react-router-dom";
 import {signOut} from "firebase/auth"
@@ -34,7 +35,7 @@ const SectionProfile = () => {
     ):(
         <>
             <section className="section-profile">
-                <img className="profile_img" src={auth.currentUser.photoURL} alt="Avatar"/>
+                <img className="profile_img" src={auth.currentUser.photoURL ? auth.currentUser.photoURL : avatar} alt="Avatar"/>
                 <h3 className="profile_name">{auth.currentUser.displayName ? auth.currentUser.displayName : ''}</h3>
                 <img onClick={handleSignOut} className="profile_icon" src={login} alt="icon"/>
             </section>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "../../widgets/header/header";
 import block from '../../img/block.png'
+import github from '../../img/github.png'
 import './style.css'
 import Button from "../../shared/button/button";
 import {getAuth} from "firebase/auth";
@@ -20,6 +21,10 @@ const Main = () => {
                         <p className="content-description">В данной версии возможны баги. Если нашли ошибку напишите мне в телеграм <a href='https://t.me/romashkog' target='_blank' className="telegram">@romashkog</a> буду благодарен!</p>
                         {!auth ? <Button text={'Зарегистрироваться'} url={'register'}/> : <Button text={'Перейти в чат'} url={'chat'}/>}
                     </section>
+                </section>
+                <section className='github-info'>
+                    <img className='github-icon' src={github} alt="github"/>
+                    <a href='https://github.com/AVxnn' className='github-title'>V1.2 - Vxnn</a>
                 </section>
             </main>
         </>

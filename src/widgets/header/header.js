@@ -3,7 +3,6 @@ import logo from '../../img/logo.png'
 import "./style.css"
 
 import img from '../../img/te.png'
-import login from '../../img/login.svg'
 import {Link, NavLink} from "react-router-dom";
 import SectionProfile from "../../features/section-profile/section-profile";
 

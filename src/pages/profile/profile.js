@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react';
 import Header from "../../widgets/header/header";
 import './style.css'
 import avatar from '../../img/te.png'
+import camera from '../../img/camera.png'
 import edit from '../../img/edit.png'
 import {doc, getDoc, getFirestore, updateDoc} from "firebase/firestore";
 import {ref, getDownloadURL, uploadBytes, deleteObject} from "firebase/storage";
 import { storage } from '../../shared/api/firebase'
-import {getAuth} from "firebase/auth";
+import {getAuth, updateProfile} from "firebase/auth";
 
 const Profile = () => {
 
@@ -56,8 +57,12 @@ const Profile = () => {
                         avatar: url,
                         avatarPath: snap.ref.fullPath
                     })
+                    await updateProfile(auth.currentUser, {
+                        displayName: us.name,
+                        photoURL: url,
+                    })
                     console.log(snap.ref.fullPath)
-                    console.log(url)
+                    console.log(us.name)
                     setImg('')
                 } catch (e) {
                     console.log(e.message)
@@ -80,8 +85,9 @@ const Profile = () => {
                                    type="file"
                                    onChange={e => setImg(e.target.files[0])}/>
                             <label htmlFor='file' className='section-upload_avatar'>
+                                <img className='profile-avatar_add' src={camera} alt=""/>
                                 <img className='profile-avatar' src={user.avatar || avatar} alt="avatar"/>
-                                <span className='profile-upload_text'>Загрузить фото...</span>
+                                <span className='profile-upload_text'>Upload a photo...</span>
                             </label>
                         </>
                     ) : null

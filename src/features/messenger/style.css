@@ -1,5 +1,7 @@
+@charset "UTF-8";
 .chat {
-  width: 740px;
+  width: 1200px;
+  max-width: 1240px;
   height: 710px;
   padding: 40px 30px;
   background-color: #24272C;
@@ -13,7 +15,23 @@
   height: 64vh;
   display: flex;
   overflow-y: scroll;
+  overflow-x: hidden;
   flex-direction: column;
+  /* полоса прокрутки (скроллбар) */
+  /* ползунок скроллбара */
+}
+.chat .message-list::-webkit-scrollbar {
+  width: 12px;
+  height: 8px;
+  background-color: #24272C;
+}
+.chat .message-list::-webkit-scrollbar-thumb {
+  background-color: #00FFB2;
+  border-radius: 9em;
+  box-shadow: inset 1px 1px 4px #000000;
+}
+.chat .message-list::-webkit-scrollbar-thumb:hover {
+  background-color: #00e09c;
 }
 .chat .send-bar {
   height: 70px;

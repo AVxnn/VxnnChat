@@ -6,15 +6,14 @@ import MessageItem from "../message-item/messageItem";
 import {getAuth} from "firebase/auth";
 import {collection} from "firebase/firestore";
 
-const Messenger = ({chat, handleSubmit, text, setText, setImg, msgs}) => {
+const Messenger = ({chat, handleSubmit, text, setText, setImg, msgs, chatImg}) => {
 
     return (
         <>
             <section className="chat">
                 <section className='message-list'>
-                    {msgs.length ? msgs.map((msg, i) => <MessageItem key={i} msg={msg}/>) : null
-
-
+                    {msgs.length ? msgs.map((msg, i) =>
+                        <MessageItem chatImg={chatImg} key={i} msg={msg}/>) : null
                     }
                 </section>
                 <section className='send-bar'>

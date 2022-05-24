@@ -6,7 +6,18 @@ import ItemMessage from "../../shared/item-message/itemMessage";
 import Messenger from "../../features/messenger/messenger";
 import {useState} from "react";
 import { storage } from '../../shared/api/firebase'
-import {collection, onSnapshot, getFirestore, query, where, addDoc, Timestamp, orderBy} from "firebase/firestore";
+import {
+    collection,
+    onSnapshot,
+    getFirestore,
+    query,
+    where,
+    addDoc,
+    Timestamp,
+    orderBy,
+    doc,
+    setDoc, getDoc, updateDoc
+} from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import {getAuth} from "firebase/auth";
 
@@ -41,9 +52,8 @@ const Chat = () => {
     }, [])
 
 
-    const selectUser = (user) => {
+    const selectUser = async (user) => {
         setChat(user)
-        console.log(user)
 
         const user2 = user.uid
         const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
@@ -58,9 +68,13 @@ const Chat = () => {
             })
             setMsgs(msgs)
         })
-    }
 
-    console.log(msgs)
+        const docSnap = await getDoc(doc(db, 'lastMsg', id))
+        if (docSnap.data()?.from !== user1){
+            await updateDoc(doc(db, 'lastMsg', id), { unread: false })
+        }
+
+    }
 
     const user1 = auth.currentUser.uid
 
@@ -89,6 +103,16 @@ const Chat = () => {
             createdAt: Timestamp.fromDate(new Date()),
             media: url || "",
         })
+
+        await setDoc(doc(db, 'lastMsg', id), {
+            text,
+            from: user1,
+            to: user2,
+            createdAt: Timestamp.fromDate(new Date()),
+            media: url || "",
+            unread: true,
+        })
+
         setText('')
 
     }
@@ -100,25 +124,28 @@ const Chat = () => {
                 <section className="section-chat">
                     <section className="members">
                         {
-                            data ? data.map(user => {
+                            data ? data.map((user, i) => {
                                 return <ItemMessage active={() => clickEventHandler(user.uid)}
+                                                    key={i}
                                                     selectUser={selectUser}
                                                     user={user}
+                                                    chat={chat}
+                                                    user1={user1}
                                                     addedName={activeTab === user.uid ? "active" : ''}/>
                             }) : null
                         }
                     </section>
                     {chat ? (
                         <>
-                            <Messenger handleSubmit={handleSubmit} msgs={msgs} text={text} setText={setText} chat={chat} setImg={setImg}/>
+                            <Messenger handleSubmit={handleSubmit} chatImg={chat.avatar} msgs={msgs} text={text} setText={setText} chat={chat} setImg={setImg}/>
                         </>
-                    ) : <h1>Select a user to start conversation</h1>
+                    ) : (
+                        <section className='pin-user'>
+                            <h1 className='pin-title'>Select a user to start conversation</h1>
+                        </section>
+                    )
 
                     }
-
-                    <section className="block">
-
-                    </section>
                 </section>
             </main>
         </>

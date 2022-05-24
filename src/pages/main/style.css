@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1160px;
+  max-width: 1160px;
   height: 70vh;
 }
 .main .main_img {
@@ -31,6 +31,66 @@
   text-decoration: none;
   border-radius: 14px;
   cursor: pointer;
+}
+
+.github-info {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  right: 110px;
+}
+.github-info .github-icon {
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+}
+.github-info .github-title {
+  margin-top: 1px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+@media (max-width: 1268px) {
+  .main {
+    max-width: 1160px;
+    height: 70vh;
+  }
+  .main .main_img {
+    margin-right: 45px;
+  }
+}
+@media (max-width: 1200px) {
+  .main {
+    max-width: 1160px;
+    height: 70vh;
+  }
+  .main .main_img {
+    width: 300px;
+    margin-right: 45px;
+  }
+  .main .section-content .content-title {
+    font-size: 48px;
+    margin-bottom: 15px;
+  }
+  .main .section-content .content-description {
+    max-width: 500px;
+    font-size: 18px;
+    color: #EEEEEE;
+    margin-bottom: 36px;
+  }
+  .main .section-content .content-description .telegram {
+    text-decoration: none;
+    color: #00FFB2;
+  }
+  .main .section-content .content-button {
+    font-size: 18px;
+    padding: 15px 71px;
+    border: 0;
+    text-decoration: none;
+    border-radius: 14px;
+    cursor: pointer;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

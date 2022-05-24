@@ -26,9 +26,16 @@
   color: #EEEEEE;
   font-weight: 500;
   text-decoration: none;
+  transition: all 0.1s ease-in-out;
+}
+.container .navigation .nav-item:hover {
+  color: #BBBBBB;
 }
 .container .navigation .active {
   position: relative;
+  color: #00FFB2;
+}
+.container .navigation .active:hover {
   color: #00FFB2;
 }
 .container .navigation .active::before {

@@ -14,6 +14,7 @@
   display: none;
 }
 .block-profile .section-upload_avatar {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +24,20 @@
   border-radius: 14px;
   cursor: pointer;
   margin-bottom: 40px;
+}
+.block-profile .section-upload_avatar .profile-avatar_add {
+  position: absolute;
+  top: 36px;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  padding: 45px;
+  border-radius: 5000%;
+  transition: all 0.2s ease-in-out;
+}
+.block-profile .section-upload_avatar .profile-avatar_add:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .block-profile .section-upload_avatar .profile-avatar {
   width: 130px;

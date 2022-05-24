@@ -16,6 +16,7 @@
     display: none
 
   .section-upload_avatar
+    position: relative
     display: flex
     justify-content: center
     align-items: center
@@ -25,6 +26,20 @@
     border-radius: 14px
     cursor: pointer
     margin-bottom: 40px
+
+    .profile-avatar_add
+      position: absolute
+      top: 36px
+      width: 40px
+      height: 40px
+      opacity: 0
+      padding: 45px
+      border-radius: 5000%
+      transition: all .2s ease-in-out
+
+      &:hover
+        opacity: 1
+        background-color: rgba(255, 255, 255, 0.7)
 
     .profile-avatar
       width: 130px

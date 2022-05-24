@@ -4,12 +4,27 @@
   display: flex;
   justify-content: space-between;
 }
+.section-chat .pin-user {
+  width: 100%;
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #151618;
+}
+.section-chat .pin-user .pin-title {
+  color: #00FFB2;
+  padding: 20px 30px;
+  border-radius: 14px;
+  background-color: #24272C;
+}
 .section-chat .members {
   width: 400px;
   height: 770px;
   padding-top: 20px;
   background-color: #24272C;
   border-radius: 14px;
+  margin-right: 40px;
 }
 .section-chat .members .active {
   width: 330px;

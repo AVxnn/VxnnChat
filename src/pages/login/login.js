@@ -50,7 +50,6 @@ const Login = () => {
                 displayName: us.name,
                 photoURL: us.avatar
             })
-            console.log(us.avatar)
         } catch (e) {
             console.log(e)
         }
