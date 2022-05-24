@@ -1,3 +1,52 @@
-
+.block-profile {
+  width: 520px;
+  height: 72.7vh;
+  background-color: #24272C;
+  padding: 40px;
+  border-radius: 14px;
+  color: #FFFFFF;
+}
+.block-profile .block-title {
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+.block-profile #file {
+  display: none;
+}
+.block-profile .section-upload_avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #151618;
+  height: 240px;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-bottom: 40px;
+}
+.block-profile .section-upload_avatar .profile-avatar {
+  width: 130px;
+  height: 130px;
+  margin-bottom: 20px;
+  border-radius: 5000%;
+  font-size: 16px;
+}
+.block-profile .info-block {
+  position: relative;
+  display: flex;
+  margin-bottom: 30px;
+  align-items: center;
+  font-size: 24px;
+  width: 100%;
+}
+.block-profile .info-block .info-name-description {
+  margin-left: 20px;
+  color: #BBBBBB;
+}
+.block-profile .info-block .info-edit {
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+}
 
 /*# sourceMappingURL=style.css.map */

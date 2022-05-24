@@ -47,8 +47,10 @@ const Login = () => {
 
         try {
             await updateProfile(auth.currentUser, {
-                displayName: us.name
+                displayName: us.name,
+                photoURL: us.avatar
             })
+            console.log(us.avatar)
         } catch (e) {
             console.log(e)
         }

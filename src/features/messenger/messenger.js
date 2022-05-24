@@ -3,34 +3,27 @@ import './style.css'
 import send from './img/send.png'
 import clip from './img/clip.png'
 import MessageItem from "../message-item/messageItem";
+import {getAuth} from "firebase/auth";
+import {collection} from "firebase/firestore";
 
-const data = [
-    {message: 'me', id: '1'},
-    {message: 'you', id: '2'},
-    {message: 'me', id: '3'},
-    {message: 'you', id: '4'},
-]
+const Messenger = ({chat, handleSubmit, text, setText, setImg, msgs}) => {
 
-const Messenger = () => {
     return (
         <>
             <section className="chat">
                 <section className='message-list'>
-                    {
-                        data.map(e => {
-                            return (
-                                <MessageItem message={e.message} key={e.id}/>
-                            )
-                        })
+                    {msgs.length ? msgs.map((msg, i) => <MessageItem key={i} msg={msg}/>) : null
+
+
                     }
                 </section>
                 <section className='send-bar'>
-                    <input id='field__file-2' className='btn file-btn' type='file'/>
+                    <input onChange={(e) => setImg(e.target.files[0])} id='field__file-2' className='btn file-btn' type='file'/>
                     <label className="field__file" htmlFor="field__file-2">
                         <img src={clip} className='field__file-img' alt="clip"/>
                     </label>
-                    <input className='text-form' type="text" placeholder='Type a message'/>
-                    <button className='btn send-btn'>
+                    <input onChange={e => setText(e.currentTarget.value)} className='text-form' type="text" placeholder='Type a message'/>
+                    <button onClick={(e) => handleSubmit(e)} className='btn send-btn'>
                         <img src={send} alt="send message"/>
                     </button>
                 </section>

@@ -17,14 +17,25 @@
 
     .message-time
       color: #FFFFFF
-      font-size: 12px
+      font-size: 8px
 
-.message-text
-  padding: 25px 24px
-  background-color: #151618
-  color: #CFCFCF
+.message-block
+  padding: 20px 20px
   border-radius: 0 14px 14px 14px
-  font-size: 16px
+  background-color: #151618
+  display: flex
+  flex-direction: column
+
+  .message-media
+    width: 300px
+    margin-bottom: 20px
+
+  .message-text
+
+
+    color: #CFCFCF
+
+    font-size: 16px
 
 .me
   justify-content: flex-start
@@ -33,14 +44,15 @@
   .avatar-time
     margin-left: 20px
 
-  .message-text
+  .message-block
     border-radius: 14px 0 14px 14px
 
 
-.you
 
+.you
   .avatar-time
     margin-right: 20px
 
-  .message-text
+  .message-block
     border-radius: 0 14px 14px 14px
+

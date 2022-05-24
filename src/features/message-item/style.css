@@ -15,14 +15,22 @@
 }
 .message-section .avatar-time .message-time {
   color: #FFFFFF;
-  font-size: 12px;
+  font-size: 8px;
 }
 
-.message-text {
-  padding: 25px 24px;
-  background-color: #151618;
-  color: #CFCFCF;
+.message-block {
+  padding: 20px 20px;
   border-radius: 0 14px 14px 14px;
+  background-color: #151618;
+  display: flex;
+  flex-direction: column;
+}
+.message-block .message-media {
+  width: 300px;
+  margin-bottom: 20px;
+}
+.message-block .message-text {
+  color: #CFCFCF;
   font-size: 16px;
 }
 
@@ -33,14 +41,14 @@
 .me .avatar-time {
   margin-left: 20px;
 }
-.me .message-text {
+.me .message-block {
   border-radius: 14px 0 14px 14px;
 }
 
 .you .avatar-time {
   margin-right: 20px;
 }
-.you .message-text {
+.you .message-block {
   border-radius: 0 14px 14px 14px;
 }
 

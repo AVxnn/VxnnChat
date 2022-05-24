@@ -21,7 +21,11 @@ function App() {
                         <Chat />
                     </PrivateRoute>
                 }/>
-                <Route path="profile" element={<Profile />}/>
+                <Route path="profile" element={
+                    <PrivateRoute>
+                        <Profile />
+                    </PrivateRoute>
+                }/>
                 <Route path="*" element={<Error />}/>
             </Routes>
         </>

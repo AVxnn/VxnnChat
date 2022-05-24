@@ -12,6 +12,7 @@
   width: 100%;
   height: 64vh;
   display: flex;
+  overflow-y: scroll;
   flex-direction: column;
 }
 .chat .send-bar {
