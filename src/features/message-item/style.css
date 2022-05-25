@@ -4,6 +4,7 @@
   margin-top: 16px;
 }
 .message-section .avatar-time {
+  min-width: 54px;
   display: flex;
   flex-direction: column;
   align-items: center;

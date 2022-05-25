@@ -24,7 +24,7 @@ const Main = () => {
                 </section>
                 <section className='github-info'>
                     <img className='github-icon' src={github} alt="github"/>
-                    <a href='https://github.com/AVxnn' className='github-title'>V1.2 - Vxnn</a>
+                    <a href='https://github.com/AVxnn/VxnnChat' target='_blank' className='github-title'>V1.4 - Vxnn</a>
                 </section>
             </main>
         </>

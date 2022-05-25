@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 const Login = () => {
 
     const [us, setUs] = useState(null)
+    const [error, setError] = useState('')
     const [data, setData] = useState({
         name: '',
         email: '',
@@ -35,7 +36,13 @@ const Login = () => {
                 });
             })
             .catch((error) => {
+                setError('Неправильно набран email или пароль')
                 console.log(error.code, error.message)
+                setData({
+                    ...data,
+                    password: '',
+                    email: '',
+                })
             });
         await getDoc(doc(db, "users", auth.currentUser.uid))
             .then((e) => {
@@ -51,13 +58,9 @@ const Login = () => {
                 photoURL: us.avatar
             })
         } catch (e) {
-            console.log(e)
+            console.log('error: ', e)
         }
-
-
-
         navigate(`/`)
-        console.log('login', auth.currentUser)
     }
 
     return (
@@ -68,13 +71,17 @@ const Login = () => {
                     <span className="form-title">Email</span>
                     <input onChange={(e) => {setData({
                         ...data, email: e.currentTarget.value
-                    })}} className="form-input" id='email' type="text"/>
+                    })}} className="form-input" value={data.email} id='email' type="text"/>
+                    {
+                        error ? <span className='form-error'>{error}</span> : null
+                    }
+
                 </label>
                 <label className="form-section" htmlFor="Password">
                     <span className="form-title">Password</span>
                     <input onChange={(e) => {setData({
                         ...data, password: e.currentTarget.value
-                    })}} className="form-input" id='Password' type="text"/>
+                    })}} className="form-input" value={data.password} id='Password' type="text"/>
                 </label>
                 <button onClick={() => login()} className="form-button">Let's Go</button>
                 <span onClick={() => {navigate(`/register`)}} className="form-skip">Registration</span>

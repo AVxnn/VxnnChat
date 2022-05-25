@@ -78,8 +78,12 @@ const Chat = () => {
 
     const user1 = auth.currentUser.uid
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e, text) => {
         e.preventDefault();
+        console.log(e.currentTarget.value)
+        if (!text) {
+            return null
+        }
 
         const user2 = chat.uid
 
@@ -113,6 +117,7 @@ const Chat = () => {
             unread: true,
         })
 
+        setImg('')
         setText('')
 
     }
@@ -137,7 +142,14 @@ const Chat = () => {
                     </section>
                     {chat ? (
                         <>
-                            <Messenger handleSubmit={handleSubmit} chatImg={chat.avatar} msgs={msgs} text={text} setText={setText} chat={chat} setImg={setImg}/>
+                            <Messenger handleSubmit={handleSubmit}
+                                       chatImg={chat.avatar}
+                                       msgs={msgs}
+                                       text={text}
+                                       setText={setText}
+                                       chat={chat}
+                                       setImg={setImg}
+                                       img={img}/>
                         </>
                     ) : (
                         <section className='pin-user'>

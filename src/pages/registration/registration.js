@@ -24,7 +24,7 @@ const Registration = () => {
         console.log(data)
         if (!data.name || !data.email || !data.password) {
             return setData({
-                ...data, error: 'invalid'
+                ...data, error: 'Все поля должны быть заполнены'
             })
 
         }
@@ -57,6 +57,9 @@ const Registration = () => {
                     <input onChange={(e) => {setData({
                         ...data, name: e.currentTarget.value
                     })}} className="form-input" id='name' type="text"/>
+                    {
+                        data.error ? <span className='form-error'>{data.error}</span> : null
+                    }
                 </label>
                 <label className="form-section" htmlFor="email">
                     <span className="form-title">Email</span>

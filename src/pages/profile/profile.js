@@ -39,7 +39,6 @@ const Profile = () => {
                 setUser(docSnap.data())
             }
         })
-        console.log(auth.currentUser)
         if (img) {
             const uploadImg = async () => {
                 const imgRef = ref(
@@ -61,8 +60,6 @@ const Profile = () => {
                         displayName: us.name,
                         photoURL: url,
                     })
-                    console.log(snap.ref.fullPath)
-                    console.log(us.name)
                     setImg('')
                 } catch (e) {
                     console.log(e.message)

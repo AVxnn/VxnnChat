@@ -19,7 +19,11 @@
   background-color: #24272C;
 }
 .section-chat .members {
-  width: 400px;
+  width: 30vw;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 770px;
   padding-top: 20px;
   background-color: #24272C;
@@ -27,7 +31,9 @@
   margin-right: 40px;
 }
 .section-chat .members .active {
-  width: 330px;
+  box-sizing: border-box;
+  width: 90%;
+  max-width: 360px;
   height: 88px;
   padding: 0 19px;
   border-radius: 14px;
