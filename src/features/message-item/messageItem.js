@@ -5,7 +5,7 @@ import avatar from './img/avatar.png'
 import {getAuth} from "firebase/auth";
 import Moment from "react-moment";
 
-const MessageItem = ({keyу, msg, chatImg}) => {
+const MessageItem = ({keyу, msg, chatImg, user2Avatar}) => {
     const scrollRef = useRef()
 
     useEffect(() => {
@@ -13,10 +13,11 @@ const MessageItem = ({keyу, msg, chatImg}) => {
     }, [msg])
 
     const auth = getAuth()
+    console.log(chatImg)
     return (
             <section ref={scrollRef} key={keyу} className={`message-section ${msg.from === auth.currentUser.uid ? 'me' : 'you'}`}>
                 <section className='avatar-time'>
-                    <img className='message-avatar' src={`${msg.from === auth.currentUser.uid ? auth.currentUser.photoURL : chatImg ? chatImg : avatar}`} alt="avatar"/>
+                    <img className='message-avatar' src={`${msg.from === auth.currentUser.uid ? (auth.currentUser.photoURL ? auth.currentUser.photoURL : avatar) : (user2Avatar ? user2Avatar : avatar)}`} alt="avatar"/>
                     <span className='message-time'><Moment fromNow>{msg.createdAt.toDate()}</Moment></span>
                 </section>
                 <section className='message-block'>

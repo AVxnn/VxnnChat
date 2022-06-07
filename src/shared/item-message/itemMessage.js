@@ -31,18 +31,20 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
                     <span className={`member_active ${user.isOnline ? 'online' : 'offline'}`}></span>
                 </section>
                 <section className="member-content">
-                    {data ? (
-                        <>
-                            <section className="member_section">
-                                <h4 className="member_name">{user.name}</h4>
-                                <span className="member_time"><Moment format="H:mm">{data.createdAt.toDate()}</Moment></span>
-                            </section>
-                            <section className='member-new-info'>
+                    <section className="member_section">
+                        <h4 className="member_name">{user.name}</h4>
+                        {data ? (
+                            <span className="member_time"><Moment format="H:mm">{data.createdAt.toDate()}</Moment></span>
+                        ) : <h2 style={{color: '#FFFFFF'}}></h2> }
+                    </section>
+                    <section className='member-new-info'>
+                        {data ? (
+                            <>
                                 <p className="member_description">{data.from == user1 ? '' : 'he: '}{data.text}</p>
                                 {data?.from !== user1 && data?.unread ? <span className='member-new-msg'>1</span> : null}
-                            </section>
-                        </>
-                    ) : <h2 style={{color: '#FFFFFF'}}>...</h2> }
+                            </>
+                        ) : <p style={{color: '#FFFFFF'}}> </p> }
+                    </section>
                 </section>
             </section>
         </>

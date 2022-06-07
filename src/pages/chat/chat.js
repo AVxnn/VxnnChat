@@ -122,6 +122,8 @@ const Chat = () => {
 
     }
 
+    console.log(chat)
+
     return (
         <>
             <main className="background">
