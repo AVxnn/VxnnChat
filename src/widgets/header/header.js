@@ -2,7 +2,6 @@ import React from 'react';
 import logo from '../../img/logo.png'
 import "./style.css"
 
-import img from '../../img/te.png'
 import {Link, NavLink} from "react-router-dom";
 import SectionProfile from "../../features/section-profile/section-profile";
 
@@ -16,9 +15,10 @@ const Header = () => {
                     <Link to='/' className="logotype_title">PetChat</Link>
                 </section>
                 <nav className="navigation">
-                    <NavLink to='/' className="nav-item">HOME</NavLink>
-                    <NavLink to='/chat' className="nav-item">CHAT</NavLink>
-                    <NavLink to='/profile' className="nav-item">PROFILE</NavLink>
+                    <NavLink to='/' className="nav-item home-y">HOME</NavLink>
+                    <NavLink to='/chat' className="nav-item chat-y">CHAT</NavLink>
+                    <NavLink to='/profile' className="nav-item profile-y">PROFILE</NavLink>
+                    <div className='down-trip'></div>
                 </nav>
                 <SectionProfile />
             </section>

@@ -17,7 +17,7 @@ const Messenger = ({chat, handleSubmit, text, setText, setImg, img, msgs, chatIm
             <section className="chat">
                 <section className='message-list'>
                     {msgs.length ? msgs.map((msg, i) =>
-                        <MessageItem user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>) : null
+                        <MessageItem user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>) : <h1>пусто</h1>
                     }
                 </section>
                 <section className='send-bar'>
