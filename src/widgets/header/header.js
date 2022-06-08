@@ -11,8 +11,7 @@ const Header = () => {
         <>
             <section className="container">
                 <section className="section-logo">
-                    <img className="logotype_img" src={logo} alt="logotype"/>
-                    <Link to='/' className="logotype_title">PetChat</Link>
+                    <Link to='/' className="logotype_title"><img className="logotype_img" src={logo} alt="logotype"/></Link>
                 </section>
                 <nav className="navigation">
                     <NavLink to='/' className="nav-item home-y">HOME</NavLink>

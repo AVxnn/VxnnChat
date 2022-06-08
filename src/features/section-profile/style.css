@@ -42,5 +42,16 @@
   color: #EEEEEE;
   margin-right: 20px;
 }
+.section-profile .profile_icon {
+  padding: 10px;
+  border-radius: 14px;
+}
+.section-profile .icon {
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+.section-profile .icon:hover {
+  background-color: #24272C;
+}
 
 /*# sourceMappingURL=style.css.map */

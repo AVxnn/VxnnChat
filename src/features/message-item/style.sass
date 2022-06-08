@@ -22,19 +22,32 @@
       color: #FFFFFF
       font-size: 8px
 
+  .trash
+    width: 24px
+    height: 24px
+    cursor: pointer
+
 .message-block
-  padding: 20px 20px
+  padding: 14px 14px
+  justify-content: flex-start
+  align-self: flex-start
   border-radius: 0 14px 14px 14px
   background-color: #151618
   display: flex
   flex-direction: column
 
   .message-media
-    width: 300px
-    margin-bottom: 20px
+    position: relative
+    min-width: 430px
+    max-width: 430px
+    margin-bottom: 10px
+    cursor: pointer
 
   .message-text
     color: #CFCFCF
+    word-break: keep-all
+    line-height: 1.3
+    max-width: 430px
     font-size: 16px
 
 .me
@@ -42,17 +55,22 @@
   flex-direction: row-reverse
 
   .avatar-time
-    margin-left: 20px
+    margin-left: 10px
 
   .message-block
     border-radius: 14px 0 14px 14px
 
+  .message-media
+    border-radius: 10px 0 10px 10px
 
 
 .you
   .avatar-time
-    margin-right: 20px
+    margin-right: 10px
 
   .message-block
     border-radius: 0 14px 14px 14px
+
+  .message-media
+    border-radius: 0 10px 10px 10px
 

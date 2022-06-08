@@ -1,23 +1,24 @@
 
 
 .chat
-  width: 1300px
-  max-width: 1440px
-  height: 710px
-  padding: 40px 30px
+  width: 77vw
+  height: 94%
+  padding: 30px 20px
   background-color: #24272C
   border-radius: 14px
+  box-sizing: border-box
   display: flex
   flex-direction: column
   justify-content: space-between
 
   .message-list
     width: 100%
-    height: 64vh
+    height: 100%
     display: flex
     overflow-y: scroll
     overflow-x: hidden
     flex-direction: column
+    margin-bottom: 10px
 
     /* полоса прокрутки (скроллбар) */
     &::-webkit-scrollbar
@@ -25,16 +26,14 @@
       height: 8px /* высота для горизонтального скролла */
       background-color: #24272C
 
-
     /* ползунок скроллбара */
     &::-webkit-scrollbar-thumb
-      background-color: #00FFB2
+      background-color: #e00086
       border-radius: 9em
       box-shadow: inset 1px 1px 4px #000000
 
-
     &::-webkit-scrollbar-thumb:hover
-      background-color: #00e09c
+      background-color: #c90077
 
 
   .send-bar

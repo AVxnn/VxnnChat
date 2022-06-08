@@ -5,15 +5,9 @@
   padding: 0 20px
   margin: 15px
   display: flex
-  justify-content: center
+  justify-content: space-between
   align-items: center
   cursor: pointer
-
-  &:active
-
-    padding: 0 19px
-    border-radius: 14px
-    border: 1px solid #00FFB2
 
   &:hover
 
@@ -49,14 +43,16 @@
       background-color: #fe000f
 
   .member-content
-    width: 100%
+    width: 200px
     height: 50px
     display: flex
+    flex-grow: 2
     flex-direction: column
     justify-content: space-around
 
     .member_section
       display: flex
+      width: auto
       align-items: center
       justify-content: space-between
       margin-bottom: 6px

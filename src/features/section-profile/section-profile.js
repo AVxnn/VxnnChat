@@ -37,7 +37,7 @@ const SectionProfile = () => {
             <section className="section-profile">
                 <img className="profile_img" src={auth.currentUser.photoURL ? auth.currentUser.photoURL : avatar} alt="Avatar"/>
                 <h3 className="profile_name">{auth.currentUser.displayName ? auth.currentUser.displayName : ''}</h3>
-                <img onClick={handleSignOut} className="profile_icon" src={login} alt="icon"/>
+                <img onClick={handleSignOut} className="profile_icon icon" src={login} alt="icon"/>
             </section>
         </>
     )
