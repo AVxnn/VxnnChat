@@ -75,6 +75,7 @@
 .container .navigation .active {
   position: relative;
   color: #00FFB2;
+  transition: all 1s ease-in-out;
 }
 .container .navigation .active:hover {
   color: #00FFB2;
@@ -87,7 +88,6 @@
 .container .navigation .home-y.active {
   position: relative;
   color: #00FFB2;
-  transition: all;
 }
 .container .navigation .chat-y.active {
   position: relative;

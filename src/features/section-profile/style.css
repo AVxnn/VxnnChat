@@ -11,6 +11,7 @@
   padding: 10px 20px;
   border: 1px solid #151618;
   border-radius: 14px;
+  transition: all 0.1s ease-in-out;
 }
 .profile-login:hover {
   margin: 9px;
@@ -19,11 +20,12 @@
 
 .profile-register {
   padding: 10px 20px;
-  border: 1px solid #00FFB2;
+  border: 2px solid #00FFB2;
   border-radius: 14px;
+  transition: all 0.1s ease-in-out;
 }
 .profile-register:hover {
-  margin: 9px;
+  margin: 10px;
   border: 2px solid #24272C;
 }
 

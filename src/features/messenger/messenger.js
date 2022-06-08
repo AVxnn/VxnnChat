@@ -17,7 +17,11 @@ const Messenger = ({chat, handleSubmit, deleteHandler, text, setText, setImg, im
             <section className="chat">
                 <section className='message-list'>
                     {msgs.length ? msgs.map((msg, i) =>
-                        <MessageItem msgIds={msgIds[i]} deleteHandler={deleteHandler} msgIds={msgIds[i]} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>) : <h1>пусто</h1>
+                        <MessageItem msgIds={msgIds[i]} deleteHandler={deleteHandler} msgIds={msgIds[i]} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>)
+                        :
+                        <section className='message-container'>
+                            <h1 className='message-title'>Write a message to start chatting</h1>
+                        </section>
                     }
                 </section>
                 <section className='send-bar'>

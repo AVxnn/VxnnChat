@@ -2,6 +2,7 @@ import React from 'react';
 import Header from "../../widgets/header/header";
 import block from '../../img/block.png'
 import github from '../../img/github.png'
+import bug from '../../img/bug.png'
 import './style.css'
 import Button from "../../shared/button/button";
 import {getAuth} from "firebase/auth";
@@ -23,8 +24,11 @@ const Main = () => {
                     </section>
                 </section>
                 <section className='github-info'>
-                    <img className='github-icon' src={github} alt="github"/>
-                    <a href='https://github.com/AVxnn/VxnnChat' target='_blank' className='github-title'>V1.4 - Vxnn</a>
+                    <a href="https://forms.gle/6L8ss6vvftnSFrym6" target='_blank'><img className='bug-icon' src={bug} alt="bug"/></a>
+                    <section className='github-container'>
+                        <img className='github-icon' src={github} alt="github"/>
+                        <a href='https://github.com/AVxnn/VxnnChat' target='_blank' className='github-title'>V1.7 - Vxnn</a>
+                    </section>
                 </section>
             </main>
         </>

@@ -84,8 +84,9 @@ const Chat = () => {
 
     const handleSubmit = async (e, text) => {
         e.preventDefault();
-        console.log(e.currentTarget.value)
-        if (!text) {
+
+        if (!text && img) {
+        } else if (!text) {
             return null
         }
 

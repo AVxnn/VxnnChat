@@ -14,9 +14,10 @@
   background-color: #151618;
 }
 .section-chat .pin-user .pin-title {
-  color: #e00086;
+  color: #FFFFFF;
   padding: 20px 30px;
   border-radius: 14px;
+  font-size: 16px;
   background-color: #24272C;
 }
 .section-chat .members {

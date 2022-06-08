@@ -23,33 +23,66 @@
   margin-bottom: 56px;
 }
 .main .section-content .content-description .telegram {
+  position: relative;
   text-decoration: none;
   color: #00FFB2;
 }
-.main .section-content .content-button {
-  color: #00FFB2;
-  background-color: #24272C;
-  font-size: 18px;
-  padding: 20px 60px;
-  border: 0;
-  text-decoration: none;
+.main .section-content .content-description .telegram:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+  opacity: 0;
+  left: 0;
+  height: 3px;
+  background-color: #00FFB2;
   border-radius: 14px;
-  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.main .section-content .content-description .telegram:hover:after {
+  opacity: 1;
+  bottom: -8px;
 }
 
 .github-info {
   position: absolute;
   bottom: 40px;
   display: flex;
+  justify-content: center;
   align-items: center;
   right: 110px;
 }
-.github-info .github-icon {
+.github-info a {
+  line-height: 0;
+}
+.github-info .bug-icon {
+  padding: 12px;
+  border-radius: 14px;
+  margin-right: 20px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.github-info .bug-icon:hover {
+  background-color: #24272C;
+}
+.github-info .github-container {
+  padding: 10px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+.github-info .github-container:hover {
+  background-color: #24272C;
+}
+.github-info .github-container .github-icon {
   width: 28px;
   height: 28px;
   margin-right: 10px;
 }
-.github-info .github-title {
+.github-info .github-container .github-title {
   margin-top: 1px;
   color: #FFFFFF;
   text-decoration: none;

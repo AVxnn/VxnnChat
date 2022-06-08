@@ -4,6 +4,8 @@ import {updateDoc, doc, getFirestore, Timestamp, getDoc} from "firebase/firestor
 
 import './style.css'
 import {useNavigate} from "react-router-dom";
+import bg from "../registration/img/bg.png";
+import logo from "../../img/logo.png";
 
 const Login = () => {
 
@@ -65,26 +67,38 @@ const Login = () => {
 
     return (
         <>
-            <section className="login">
-                <h3 className="login-title">Login</h3>
-                <label className="form-section" htmlFor="email">
-                    <span className="form-title">Email</span>
-                    <input onChange={(e) => {setData({
-                        ...data, email: e.currentTarget.value
-                    })}} className="form-input" value={data.email} id='email' type="text"/>
-                    {
-                        error ? <span className='form-error'>{error}</span> : null
-                    }
+            <section className='login-container'>
+                <section className='login-img-container'>
+                    <img className='login-img' src={bg} alt=""/>
+                </section>
+                <section className="login">
+                    <section className='login-c'>
+                        <section className='login-logotype'>
+                            <img onClick={() => {navigate(`/`)}} className='login-logotype-img' src={logo} alt="logotype cat"/>
+                        </section>
+                        <h3 className="login-title">Login</h3>
+                        <label className="form-section" htmlFor="email">
+                            <span className="form-title">Email</span>
+                            <input onChange={(e) => {setData({
+                                ...data, email: e.currentTarget.value
+                            })}} className="form-input" value={data.email} id='email' type="text"/>
+                            {
+                                error ? <span className='form-error'>{error}</span> : null
+                            }
 
-                </label>
-                <label className="form-section" htmlFor="Password">
-                    <span className="form-title">Password</span>
-                    <input onChange={(e) => {setData({
-                        ...data, password: e.currentTarget.value
-                    })}} className="form-input" value={data.password} id='Password' type="text"/>
-                </label>
-                <button onClick={() => login()} className="form-button">Let's Go</button>
-                <span onClick={() => {navigate(`/register`)}} className="form-skip">Registration</span>
+                        </label>
+                        <label className="form-section" htmlFor="Password">
+                            <span className="form-title">Password</span>
+                            <input onChange={(e) => {setData({
+                                ...data, password: e.currentTarget.value
+                            })}} className="form-input" value={data.password} id='Password' type="text"/>
+                        </label>
+                        <button onClick={() => login()} className="form-button">Let's Go</button>
+                        <section className='form-login-container'>
+                            <p color='form-login_p'>Don't have an account? <span onClick={() => {navigate(`/register`)}} className="form-login_span">Register</span></p>
+                        </section>
+                    </section>
+                </section>
             </section>
         </>
     )
