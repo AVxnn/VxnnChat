@@ -4,6 +4,7 @@ import './style.css'
 import avatar from '../../img/te.png'
 import camera from '../../img/camera.png'
 import edit from '../../img/edit.png'
+import lock from '../../img/lock.png'
 import {doc, getDoc, getFirestore, updateDoc} from "firebase/firestore";
 import {ref, getDownloadURL, uploadBytes, deleteObject} from "firebase/storage";
 import { storage } from '../../shared/api/firebase'
@@ -94,7 +95,7 @@ const Profile = () => {
                             <section className='info-block'>
                                 <span className='info-name-title'>Имя: </span>
                                 <span className='info-name-description'>{us.name}</span>
-                                <img className='info-edit' src={edit} alt=""/>
+                                <img className='info-edit' src={edit} alt="edit"/>
                             </section>
                             <section className='info-block'>
                                 <span className='info-name-title'>Email: </span>
@@ -103,6 +104,11 @@ const Profile = () => {
                             <section className='info-block'>
                                 <span className='info-name-title'>Joined on: </span>
                                 <span className='info-name-description'>{user.createdAt.toDate().toDateString()}</span>
+                            </section>
+                            <section className='info-block'>
+                                <span className='info-name-title'>Admin: </span>
+                                <span className='info-name-description'>{us.isAdmin ? 'True': 'False'}</span>
+                                <a href="https://t.me/romashkog" target='_blank'><img className='info-admin' src={lock} alt="lock"/></a>
                             </section>
                             <section className='info-block'>
                             <span className='info-name-title'>ID: </span>

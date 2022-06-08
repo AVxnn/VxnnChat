@@ -27,7 +27,7 @@ const Main = () => {
                     <a href="https://forms.gle/6L8ss6vvftnSFrym6" target='_blank'><img className='bug-icon' src={bug} alt="bug"/></a>
                     <section className='github-container'>
                         <img className='github-icon' src={github} alt="github"/>
-                        <a href='https://github.com/AVxnn/VxnnChat' target='_blank' className='github-title'>V1.7 - Vxnn</a>
+                        <a href='https://github.com/AVxnn/VxnnChat' target='_blank' className='github-title'>V1.72 - Vxnn</a>
                     </section>
                 </section>
             </main>

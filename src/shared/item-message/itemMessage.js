@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import logo from "../../img/te.png";
+import admin from "../../img/admin.png";
 import './style.css'
 import {onSnapshot, doc, getFirestore} from "firebase/firestore";
 import Moment from "react-moment";
@@ -34,7 +35,7 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
                 </section>
                 <section className="member-content">
                     <section className="member_section">
-                        <h4 className="member_name">{user.name}</h4>
+                        <h4 className="member_name">{user.name}{user.isAdmin ? <img src={admin} className='member_admin' alt='Админ'></img> : null}</h4>
                         {data ? (
                             <span className="member_time"><Moment format="H:mm">{data.createdAt.toDate()}</Moment></span>
                         ) : <h2 style={{color: '#FFFFFF'}}></h2> }

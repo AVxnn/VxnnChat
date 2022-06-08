@@ -8,8 +8,26 @@ import Error from "./pages/error/error";
 import app from './shared/api/firebase'
 import Registration from "./pages/registration/registration";
 import PrivateRoute from "./shared/privateroute/privateRoute";
+import {useEffect} from "react";
+import {doc, getFirestore, updateDoc} from "firebase/firestore";
+import {getAuth} from "firebase/auth";
 
-function App() {
+const App = () => {
+
+    const auth = getAuth();
+    const db = getFirestore();
+
+    const leaveHandler = async (event) => {
+        event.preventDefault()
+        await updateDoc(doc(db, "users", auth.currentUser.uid), {
+            isOnline: false,
+        });
+    }
+
+    useEffect(() => {
+        window.addEventListener('unload', leaveHandler);
+    }, [])
+
     return (
         <>
             <Routes>

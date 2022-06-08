@@ -63,6 +63,13 @@
 .member-item .member-content .member_section .member_name {
   font-size: 18px;
   color: #FFFFFF;
+  display: flex;
+  align-items: center;
+}
+.member-item .member-content .member_section .member_name .member_admin {
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
 }
 .member-item .member-content .member-new-info {
   display: flex;

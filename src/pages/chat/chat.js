@@ -134,24 +134,36 @@ const Chat = () => {
         console.log('delete', e)
     }
 
+    const onlineHandler = async () => {
+        if (auth.currentUser.uid) {
+            await updateDoc(doc(db, "users", auth.currentUser.uid), {
+                isOnline: true,
+            });
+        } else {
+            console.log('non')
+        }
+    }
+
 
     return (
         <>
-            <main className="background">
+            <main className="background" onClick={() => onlineHandler()}>
                 <Header />
                 <section className="section-chat">
                     <section className="members">
-                        {
-                            data && msgIds ? data.map((user, i) => {
-                                return <ItemMessage active={() => clickEventHandler(user.uid)}
-                                                    key={i}
-                                                    selectUser={selectUser}
-                                                    user={user}
-                                                    chat={chat}
-                                                    user1={user1}
-                                                    addedName={activeTab === user.uid ? "active" : ''}/>
-                            }) : null
-                        }
+                        <section className='members-container'>
+                            {
+                                data && msgIds ? data.map((user, i) => {
+                                    return <ItemMessage active={() => clickEventHandler(user.uid)}
+                                                        key={i}
+                                                        selectUser={selectUser}
+                                                        user={user}
+                                                        chat={chat}
+                                                        user1={user1}
+                                                        addedName={activeTab === user.uid ? "active" : ''}/>
+                                }) : null
+                            }
+                        </section>
                     </section>
                     {chat ? (
                         <>

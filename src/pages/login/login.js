@@ -4,7 +4,7 @@ import {updateDoc, doc, getFirestore, Timestamp, getDoc} from "firebase/firestor
 
 import './style.css'
 import {useNavigate} from "react-router-dom";
-import bg from "../registration/img/bg.png";
+import bg from "../registration/img/bg1.png";
 import logo from "../../img/logo.png";
 
 const Login = () => {
@@ -62,8 +62,15 @@ const Login = () => {
         } catch (e) {
             console.log('error: ', e)
         }
-        navigate(`/`)
+        navigate(`/chat`)
     }
+
+    useEffect(() => {
+        const quit = setTimeout(() => {
+            setError('')
+        }, 2500)
+        return () => clearTimeout(quit)
+    }, [error])
 
     return (
         <>
@@ -81,17 +88,13 @@ const Login = () => {
                             <span className="form-title">Email</span>
                             <input onChange={(e) => {setData({
                                 ...data, email: e.currentTarget.value
-                            })}} className="form-input" value={data.email} id='email' type="text"/>
-                            {
-                                error ? <span className='form-error'>{error}</span> : null
-                            }
-
+                            })}} className={`form-input ${error ? 'error': ''}`} value={data.email} id='email' type="text"/>
                         </label>
                         <label className="form-section" htmlFor="Password">
                             <span className="form-title">Password</span>
                             <input onChange={(e) => {setData({
                                 ...data, password: e.currentTarget.value
-                            })}} className="form-input" value={data.password} id='Password' type="text"/>
+                            })}} className={`form-input ${error ? 'error': ''}`} value={data.password} id='Password' type="text"/>
                         </label>
                         <button onClick={() => login()} className="form-button">Let's Go</button>
                         <section className='form-login-container'>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
 import {doc, getFirestore, setDoc, Timestamp} from "firebase/firestore";
 import {useState} from "react";
@@ -29,7 +29,6 @@ const Registration = () => {
             return setData({
                 ...data, error: 'Все поля должны быть заполнены'
             })
-
         }
         createUserWithEmailAndPassword(auth, data.email, data.password)
             .then( async (userCredential) => {
@@ -39,11 +38,16 @@ const Registration = () => {
                     email: data.email,
                     uid: user.uid,
                     createdAt: Timestamp.fromDate(new Date()),
-                    isOnline: true
+                    isOnline: true,
+                    isAdmin: false
                 });
                 console.log(data)
             })
             .catch((error) => {
+                setData({
+                    ...data,
+                    error: true
+                })
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.error(errorCode, errorMessage)
@@ -67,7 +71,7 @@ const Registration = () => {
                             <span className="form-title">Name</span>
                             <input onChange={(e) => {setData({
                                 ...data, name: e.currentTarget.value
-                            })}} className="form-input" id='name' type="text"/>
+                            })}} className={`form-input ${data.error ? 'error': ''}`} id='name' type="text"/>
                             {
                                 data.error ? <span className='form-error'>{data.error}</span> : null
                             }
@@ -76,13 +80,13 @@ const Registration = () => {
                             <span className="form-title">Email</span>
                             <input onChange={(e) => {setData({
                                 ...data, email: e.currentTarget.value
-                            })}} className="form-input" id='email' type="text"/>
+                            })}} className={`form-input ${data.error ? 'error': ''}`} id='email' type="text"/>
                         </label>
                         <label className="form-section" htmlFor="Password">
                             <span className="form-title">Password</span>
                             <input onChange={(e) => {setData({
                                 ...data, password: e.currentTarget.value
-                            })}} className="form-input" id='Password' type="text"/>
+                            })}} className={`form-input ${data.error ? 'error': ''}`} id='Password' type="text"/>
                         </label>
                         <button onClick={() => register()} className="form-button">Create Account</button>
                         <section className='form-login-container'>

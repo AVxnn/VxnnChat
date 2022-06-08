@@ -61,7 +61,27 @@
 .block-profile .info-block .info-edit {
   position: absolute;
   cursor: pointer;
+  padding: 10px;
+  border-radius: 14px;
   right: 0;
+  transition: all 0.1s ease-in-out;
+}
+.block-profile .info-block .info-edit:hover {
+  background-color: #151618;
+}
+.block-profile .info-block a .info-admin {
+  position: absolute;
+  cursor: pointer;
+  padding: 10px;
+  width: 32px;
+  height: 32px;
+  top: -10px;
+  border-radius: 14px;
+  right: 0;
+  transition: all 0.1s ease-in-out;
+}
+.block-profile .info-block a .info-admin:hover {
+  background-color: #151618;
 }
 
 /*# sourceMappingURL=style.css.map */

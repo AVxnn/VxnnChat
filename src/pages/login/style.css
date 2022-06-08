@@ -37,6 +37,7 @@
   color: #FFFFFF;
 }
 .login .login-c {
+  position: relative;
   width: 400px;
   height: 664px;
 }
@@ -74,9 +75,6 @@
   display: flex;
   flex-direction: column;
 }
-.login .login-c .form-section .form-error {
-  margin-top: 10px;
-}
 .login .login-c .form-section .form-title {
   font-size: 16px;
   margin-bottom: 12px;
@@ -94,6 +92,9 @@
 }
 .login .login-c .form-section .form-input:focus {
   border: 2px solid #00FFB2;
+}
+.login .login-c .form-section .error {
+  border: 2px solid #FF002E;
 }
 .login .login-c .form-button {
   position: relative;
