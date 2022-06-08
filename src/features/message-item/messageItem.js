@@ -6,12 +6,13 @@ import {getAuth} from "firebase/auth";
 import Moment from "react-moment";
 import Popup from "../popup/popup";
 import trash from './img/trash.png'
+import {doc, query, deleteDoc, getFirestore} from "firebase/firestore";
 
-const MessageItem = ({keyу, msg, chatImg, user2Avatar}) => {
+const MessageItem = ({keyу, msg, chatImg, user2Avatar, deleteHandler, msgIds}) => {
     const scrollRef = useRef()
 
     const [open, setOpen] = useState(false)
-    const [del, setDel] = useState(true)
+
 
     useEffect(() => {
         scrollRef.current?.scrollIntoView({behavior: 'smooth'})
@@ -21,10 +22,6 @@ const MessageItem = ({keyу, msg, chatImg, user2Avatar}) => {
 
     const openHandler = () => {
         open ? setOpen(false) : setOpen(true)
-    }
-
-    const deleteHandler = () => {
-
     }
 
     return (
@@ -39,7 +36,7 @@ const MessageItem = ({keyу, msg, chatImg, user2Avatar}) => {
                     {msg.media ? <img className='message-media' onClick={() => openHandler()} src={msg.media} alt={msg.text}/> : null}
                     <span className='message-text'>{msg.text}</span>
                 </section>
-                {msg.from === auth.currentUser.uid ? <img className='trash' src={trash} alt="delete"/> : null}
+                {msg.from === auth.currentUser.uid ? <img onClick={() => deleteHandler(msgIds, msg.from)} className='trash' src={trash} alt="delete"/> : null}
             </section>
         </>
     );

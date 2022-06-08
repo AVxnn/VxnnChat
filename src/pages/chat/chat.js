@@ -16,7 +16,7 @@ import {
     Timestamp,
     orderBy,
     doc,
-    setDoc, getDoc, updateDoc
+    setDoc, getDoc, updateDoc, deleteDoc
 } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import {getAuth} from "firebase/auth";
@@ -35,6 +35,7 @@ const Chat = () => {
     const [chat, setChat] = useState('')
     const [img, setImg] = useState('')
     const [msgs, setMsgs] = useState([])
+    const [msgIds, setMsgIds] = useState([])
     const [text, setText] = useState('')
     const auth = getAuth()
 
@@ -63,10 +64,13 @@ const Chat = () => {
 
         onSnapshot(q, querySnapshot => {
             let msgs = []
+            let msgIds = []
             querySnapshot.forEach(snapshot => {
                 msgs.push(snapshot.data())
+                msgIds.push(snapshot._document.key.path.segments[8])
             })
             setMsgs(msgs)
+            setMsgIds(msgIds)
         })
 
         const docSnap = await getDoc(doc(db, 'lastMsg', id))
@@ -122,7 +126,13 @@ const Chat = () => {
 
     }
 
-    console.log(chat)
+    const deleteHandler = async (e, u2) => {
+        const user2 = chat.uid
+        const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
+        await deleteDoc(doc(db, 'messages', id, 'chat', e))
+        console.log('delete', e)
+    }
+
 
     return (
         <>
@@ -131,7 +141,7 @@ const Chat = () => {
                 <section className="section-chat">
                     <section className="members">
                         {
-                            data ? data.map((user, i) => {
+                            data && msgIds ? data.map((user, i) => {
                                 return <ItemMessage active={() => clickEventHandler(user.uid)}
                                                     key={i}
                                                     selectUser={selectUser}
@@ -148,6 +158,8 @@ const Chat = () => {
                                        chatImg={chat.avatar}
                                        msgs={msgs}
                                        text={text}
+                                       deleteHandler={deleteHandler}
+                                       msgIds={msgIds}
                                        setText={setText}
                                        chat={chat}
                                        setImg={setImg}

@@ -18,6 +18,8 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
         return () => unsub();
     }, [])
 
+
+
     return (
         <>
             <section onClick={() => {

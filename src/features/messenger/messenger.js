@@ -6,7 +6,7 @@ import MessageItem from "../message-item/messageItem";
 import {getAuth} from "firebase/auth";
 import {collection} from "firebase/firestore";
 
-const Messenger = ({chat, handleSubmit, text, setText, setImg, img, msgs, chatImg}) => {
+const Messenger = ({chat, handleSubmit, deleteHandler, text, setText, setImg, img, msgs, chatImg, msgIds}) => {
 
     useEffect(() => {
         console.log(img)
@@ -17,7 +17,7 @@ const Messenger = ({chat, handleSubmit, text, setText, setImg, img, msgs, chatIm
             <section className="chat">
                 <section className='message-list'>
                     {msgs.length ? msgs.map((msg, i) =>
-                        <MessageItem user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>) : <h1>пусто</h1>
+                        <MessageItem msgIds={msgIds[i]} deleteHandler={deleteHandler} msgIds={msgIds[i]} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>) : <h1>пусто</h1>
                     }
                 </section>
                 <section className='send-bar'>
