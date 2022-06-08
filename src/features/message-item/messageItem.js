@@ -5,7 +5,7 @@ import avatar from './img/avatar.png'
 import {getAuth} from "firebase/auth";
 import Moment from "react-moment";
 import Popup from "../popup/popup";
-import trash from '../../img/trash.svg'
+import trash from './img/trash.png'
 
 const MessageItem = ({keyу, msg, chatImg, user2Avatar}) => {
     const scrollRef = useRef()
