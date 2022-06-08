@@ -1,16 +1,16 @@
-.login-container {
+.register-container {
   width: 100%;
   display: flex;
   align-items: flex-end;
   overflow-y: hidden;
 }
-.login-container .login-img-container {
+.register-container .register-img-container {
   position: relative;
   width: 70%;
   height: 100vh;
   object-fit: cover;
 }
-.login-container .login-img-container:after {
+.register-container .register-img-container:after {
   content: "";
   position: absolute;
   width: 70px;
@@ -21,14 +21,13 @@
   background-color: #151618;
   animation: topDown 6s ease-in-out infinite;
 }
-.login-container .login-img-container .login-img {
+.register-container .register-img-container .register-img {
   position: relative;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
-.login {
+.register-container .register {
   width: 100%;
   height: 100%;
   display: flex;
@@ -36,18 +35,18 @@
   justify-content: center;
   color: #FFFFFF;
 }
-.login .login-c {
+.register-container .register .register-c {
   width: 400px;
-  height: 664px;
+  height: 764px;
 }
-.login .login-c .login-logotype {
+.register-container .register .register-c .register-logotype {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 76px;
 }
-.login .login-c .login-logotype:before {
+.register-container .register .register-c .register-logotype:before {
   content: "";
   position: absolute;
   width: 20px;
@@ -61,27 +60,28 @@
   transition: all 0.3s ease-in-out;
   animation: topDownLogo 6s ease-in-out infinite;
 }
-.login .login-c .login-logotype .login-logotype-img {
+.register-container .register .register-c .register-logotype .register-logotype-img {
   cursor: pointer;
 }
-.login .login-c .login-title {
+.register-container .register .register-c .register-title {
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 50px;
 }
-.login .login-c .form-section {
+.register-container .register .register-c .form-section {
   position: relative;
   display: flex;
   flex-direction: column;
 }
-.login .login-c .form-section .form-error {
-  margin-top: 10px;
+.register-container .register .register-c .form-section .form-error {
+  position: absolute;
+  top: 320px;
 }
-.login .login-c .form-section .form-title {
+.register-container .register .register-c .form-section .form-title {
   font-size: 16px;
   margin-bottom: 12px;
 }
-.login .login-c .form-section .form-input {
+.register-container .register .register-c .form-section .form-input {
   background-color: rgba(0, 0, 0, 0);
   outline: none;
   border: 2px solid #FFFFFF;
@@ -92,10 +92,10 @@
   padding: 0 20px;
   margin-bottom: 30px;
 }
-.login .login-c .form-section .form-input:focus {
+.register-container .register .register-c .form-section .form-input:focus {
   border: 2px solid #00FFB2;
 }
-.login .login-c .form-button {
+.register-container .register .register-c .form-button {
   position: relative;
   width: 100%;
   height: 60px;
@@ -110,7 +110,7 @@
   cursor: pointer;
   transition: all 0.1s ease-in-out;
 }
-.login .login-c .form-button:after {
+.register-container .register .register-c .form-button:after {
   content: "";
   position: absolute;
   width: 100%;
@@ -119,23 +119,23 @@
   height: 4px;
   background-color: #24272C;
 }
-.login .login-c .form-button:hover {
+.register-container .register .register-c .form-button:hover {
   background-color: #24272C;
 }
-.login .login-c .form-button:active {
+.register-container .register .register-c .form-button:active {
   background-color: #0d1a14;
 }
-.login .login-c .form-login-container {
+.register-container .register .register-c .form-login-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.login .login-c .form-login-container .form-login_span {
+.register-container .register .register-c .form-login-container .form-login_span {
   position: relative;
   color: #00FFB2;
   cursor: pointer;
 }
-.login .login-c .form-login-container .form-login_span:after {
+.register-container .register .register-c .form-login-container .form-login_span:after {
   content: "";
   position: absolute;
   width: 100%;
@@ -147,12 +147,9 @@
   border-radius: 14px;
   transition: all 0.1s ease-in-out;
 }
-.login .login-c .form-login-container .form-login_span:hover:after {
+.register-container .register .register-c .form-login-container .form-login_span:hover:after {
   opacity: 1;
   bottom: -8px;
-}
-.login .login-c .form-skip {
-  cursor: pointer;
 }
 
 @keyframes topDown {
