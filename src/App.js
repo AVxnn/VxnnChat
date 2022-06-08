@@ -25,7 +25,7 @@ const App = () => {
     }
 
     useEffect(() => {
-        window.addEventListener('unload', leaveHandler);
+        window.addEventListener('beforeunload', leaveHandler);
     }, [])
 
     return (
