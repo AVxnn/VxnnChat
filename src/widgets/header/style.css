@@ -34,6 +34,7 @@
   animation: none;
 }
 .container .section-logo .logotype_img {
+  width: 100%;
   position: relative;
 }
 .container .section-logo .logotype_title {
@@ -148,6 +149,30 @@
   transition: all 0.2s ease-in-out;
 }
 
+@media screen and (max-width: 1280px) {
+  .section-logo {
+    width: 150px !important;
+  }
+  .section-logo:before {
+    content: "";
+    position: absolute;
+    width: 10px !important;
+    height: 8px !important;
+    left: 26px !important;
+    opacity: 1;
+    top: 24px;
+    background-color: #151618;
+    z-index: 1;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+    animation: topDown3 6s ease-in-out infinite !important;
+  }
+  .section-logo:hover:after {
+    top: 24px !important;
+    transition: all 0.3s ease-in-out;
+    animation: none;
+  }
+}
 @keyframes topDown2 {
   0% {
     top: 20px;
@@ -157,6 +182,20 @@
   }
   95% {
     top: 36px;
+  }
+  100% {
+    top: 20px;
+  }
+}
+@keyframes topDown3 {
+  0% {
+    top: 20px;
+  }
+  90% {
+    top: 20px;
+  }
+  95% {
+    top: 30px;
   }
   100% {
     top: 20px;

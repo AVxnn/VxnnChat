@@ -6,9 +6,7 @@ import check from '../../img/check.png'
 import uploadimage from '../../img/uploadimage.png'
 import Post from "../../features/post/post";
 import {getAuth} from "firebase/auth";
-import bug from "../../img/bug.png";
-import github from "../../img/github.png";
-import {addDoc, collection, doc, getFirestore, onSnapshot, orderBy, query, Timestamp, where} from "firebase/firestore";
+import {addDoc, collection, getFirestore, onSnapshot, orderBy, query, Timestamp} from "firebase/firestore";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "../../shared/api/firebase";
 import Github from "../../features/github/github";
@@ -52,26 +50,26 @@ const Lenta = () => {
     }
 
     const sendPostHandler = async (e) => {
-        if (auth.currentUser.uid !== 'MnNJHrLjWRWqUoMa1aBdoqnwPO43') {
-            setError('У вас недостаточно прав!')
-            setTimeout(() => {
-                setError('')
-            }, 2000)
-            setData({
-                img: '',
-                title: '',
-                desc: '',
-                uid: '',
-                createdAt: ''
-            })
-            return 'error'
-        }
+        // if (auth.currentUser.uid !== 'MnNJHrLjWRWqUoMa1aBdoqnwPO43') {
+        //     setError('У вас недостаточно прав!')
+        //     setTimeout(() => {
+        //         setError('')
+        //     }, 2000)
+        //     setData({
+        //         img: '',
+        //         title: '',
+        //         desc: '',
+        //         uid: '',
+        //         createdAt: ''
+        //     })
+        //     return 'error'
+        // }
         e.preventDefault();
         let rec = false
-        if (data.title.length <= 20 && data.desc.length <= 40) return null
+        if (data.title.length <= 10 && data.desc.length <= 10) return null
         if (!data.title && !data.desc) return null
 
-        if (data.title.length >= 25 && data.desc.length >= 80 && data.img) {
+        if (data.title.length >= 20 && data.desc.length >= 60 && data.img) {
             rec = true
         }
 

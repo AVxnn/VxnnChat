@@ -5,7 +5,6 @@ import './style.css'
 import Chat from "./pages/chat/chat";
 import Profile from "./pages/profile/profile";
 import Error from "./pages/error/error";
-import app from './shared/api/firebase'
 import Registration from "./pages/registration/registration";
 import PrivateRoute from "./shared/privateroute/privateRoute";
 import {useEffect} from "react";

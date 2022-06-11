@@ -11,7 +11,7 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
     const db = getFirestore();
     const user2 = user?.uid
     const [data, setData] = useState('')
-
+    console.log(user)
     useEffect(() => {
         const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
         let unsub = onSnapshot(doc(db, 'lastMsg', id), (doc) => {
@@ -22,7 +22,7 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
 
 
 
-    return data ? (
+    return (
         <>
             <section onClick={() => {
                         selectUser(user)
@@ -52,7 +52,7 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
                 </section>
             </section>
         </>
-    ) : null
+    )
 };
 
 export default ChatItem;

@@ -4,6 +4,7 @@
   height: 85vh
   display: flex
   align-self: stretch
+  overflow-y: hidden
   justify-content: space-between
 
   .pin-user
@@ -35,6 +36,9 @@
     margin-right: 40px
 
     .members-container
+      display: flex
+      flex-direction: column
+      align-items: center
       width: 100%
       overflow-y: scroll
       overflow-x: hidden
@@ -43,7 +47,6 @@
       &::-webkit-scrollbar
         width: 12px /* ширина для вертикального скролла */
         height: 8px /* высота для горизонтального скролла */
-        background-color: #24272C
 
       /* ползунок скроллбара */
       &::-webkit-scrollbar-thumb
@@ -57,7 +60,6 @@
       .active
         box-sizing: border-box
         height: 90px
-        width: 90%
         padding: 0 19px
         border-radius: 14px
         border: 1px solid #e00086
@@ -66,3 +68,14 @@
     width: 400px
     height: 790px
     border-radius: 14px
+
+@media screen and (max-width: 1280px)
+  .member-item
+    width: 97%
+    margin: 15px 10px 10px 10px !important
+
+  .members-container
+    margin-left: 10px !important
+
+  .member_name
+    font-size: 14px !important

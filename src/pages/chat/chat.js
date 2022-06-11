@@ -21,12 +21,6 @@ import {
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import {getAuth} from "firebase/auth";
 
-const data = [
-    {id: '1', title: 'Mike Jones', msg: 'Goodbye!', avatar: '', time: '23:51'},
-    {id: '2', title: 'Alex Blender', msg: 'Hi there, How are you?', avatar: '', time: '15:36'},
-    {id: '3', title: 'Frank', msg: 'Hello, bro', avatar: '', time: '12:41'},
-]
-
 const Chat = () => {
 
     const [activeTab, setActiveTab] = useState('')
@@ -43,11 +37,12 @@ const Chat = () => {
 
     useEffect(() => {
         const unsub = onSnapshot(query(collection(db, "users"), where('uid', 'not-in', [auth.currentUser.uid])), (querySnapshot) => {
-            const cities = [];
+            const users = [];
             querySnapshot.forEach((doc) => {
-                cities.push(doc.data());
+                users.push(doc.data());
             });
-            setData(cities)
+            setData(users)
+            console.log(data)
         });
         return () => unsub()
     }, [])
@@ -147,9 +142,9 @@ const Chat = () => {
 
     return (
         <>
-            <main className="background" onClick={() => onlineHandler()}>
+            <main className="background">
                 <Header />
-                <section className="section-chat">
+                <section className="section-chat" onClick={() => onlineHandler()}>
                     <section className="members">
                         <section className='members-container'>
                             {

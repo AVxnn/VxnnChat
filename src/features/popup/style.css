@@ -13,6 +13,8 @@
 }
 .popup-container .popup-img {
   width: 600px;
+  border-radius: 14px;
+  max-height: 750px;
 }
 .popup-container .popup-text {
   margin-top: 50px;
@@ -20,6 +22,18 @@
   border-radius: 14px;
   background-color: #151618;
   color: #FFFFFF;
+}
+
+@media screen and (max-width: 1280px) {
+  .popup-img {
+    object-fit: cover;
+    width: 500px !important;
+    max-height: 700px !important;
+  }
+
+  .popup-text {
+    margin-top: 15px !important;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

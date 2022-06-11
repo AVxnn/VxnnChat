@@ -83,6 +83,7 @@
 }
 .member-item .member-content .member-new-info .member_description {
   font-size: 14px;
+  width: 90%;
   height: 18px;
   overflow: hidden;
   color: #CFCFCF;

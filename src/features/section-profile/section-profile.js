@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import img from "../../img/te.png";
 import login from "../../img/login.png";
 import {getAuth} from "firebase/auth";
@@ -7,7 +7,7 @@ import avatar from '../../features/message-item/img/avatar.png'
 import {AuthContext} from '../../shared/contextauth/auth'
 import {useNavigate} from "react-router-dom";
 import {signOut} from "firebase/auth"
-import {updateDoc, doc, getFirestore, getDoc} from "firebase/firestore"
+import {updateDoc, doc, getFirestore} from "firebase/firestore"
 
 const SectionProfile = () => {
 
@@ -17,12 +17,17 @@ const SectionProfile = () => {
     const navigate = useNavigate()
 
     const handleSignOut = async () => {
-        await updateDoc(doc(db, "users", auth.currentUser.uid), {
-            isOnline: false,
-        })
-        await signOut(auth);
-        navigate('/login')
-        console.log('exit', auth.currentUser)
+        if (auth.currentUser.uid) {
+            await updateDoc(doc(db, "users", auth.currentUser.uid), {
+                isOnline: false,
+            })
+            await signOut(auth);
+            navigate('/login')
+            console.log('exit', auth.currentUser)
+        } else {
+            console.log('non')
+        }
+
     }
 
     return !user ? (

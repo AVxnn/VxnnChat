@@ -4,6 +4,7 @@
   height: 85vh;
   display: flex;
   align-self: stretch;
+  overflow-y: hidden;
   justify-content: space-between;
 }
 .section-chat .pin-user {
@@ -35,6 +36,9 @@
   margin-right: 40px;
 }
 .section-chat .members .members-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -44,7 +48,6 @@
 .section-chat .members .members-container::-webkit-scrollbar {
   width: 12px;
   height: 8px;
-  background-color: #24272C;
 }
 .section-chat .members .members-container::-webkit-scrollbar-thumb {
   background-color: #e00086;
@@ -57,7 +60,6 @@
 .section-chat .members .members-container .active {
   box-sizing: border-box;
   height: 90px;
-  width: 90%;
   padding: 0 19px;
   border-radius: 14px;
   border: 1px solid #e00086;
@@ -66,6 +68,21 @@
   width: 400px;
   height: 790px;
   border-radius: 14px;
+}
+
+@media screen and (max-width: 1280px) {
+  .member-item {
+    width: 97%;
+    margin: 15px 10px 10px 10px !important;
+  }
+
+  .members-container {
+    margin-left: 10px !important;
+  }
+
+  .member_name {
+    font-size: 14px !important;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

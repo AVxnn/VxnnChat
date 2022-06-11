@@ -11,8 +11,6 @@ import {ref, getDownloadURL, uploadBytes, deleteObject} from "firebase/storage";
 import { storage } from '../../shared/api/firebase'
 import {getAuth, updateProfile} from "firebase/auth";
 import {useParams} from "react-router-dom";
-import bug from "../../img/bug.png";
-import github from "../../img/github.png";
 import Github from "../../features/github/github";
 
 const Profile = () => {

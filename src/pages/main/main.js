@@ -1,8 +1,6 @@
 import React from 'react';
 import Header from "../../widgets/header/header";
 import block from '../../img/block.png'
-import github from '../../img/github.png'
-import bug from '../../img/bug.png'
 import './style.css'
 import Button from "../../shared/button/button";
 import {getAuth} from "firebase/auth";
@@ -26,6 +24,7 @@ const Main = () => {
                 </section>
                 <Github />
             </main>
+
         </>
     );
 };

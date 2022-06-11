@@ -26,7 +26,6 @@
     &::-webkit-scrollbar
       width: 12px /* ширина для вертикального скролла */
       height: 8px /* высота для горизонтального скролла */
-      background-color: #24272C
 
     /* ползунок скроллбара */
     &::-webkit-scrollbar-thumb
@@ -95,3 +94,10 @@
 
     .send-btn
 
+@media screen and (max-width: 1280px)
+  .send-bar
+    height: 60px !important
+
+  .field__file
+    display: flex
+    align-items: center

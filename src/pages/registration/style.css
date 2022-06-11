@@ -152,18 +152,67 @@
   bottom: -8px;
 }
 
+@media screen and (max-width: 1280px) {
+  .register-title {
+    margin-bottom: 20px !important;
+  }
+
+  .register-logotype {
+    margin-bottom: 20px !important;
+  }
+
+  .register-c {
+    height: 670px !important;
+  }
+
+  .form-input {
+    margin-bottom: 15px !important;
+  }
+
+  .register-img-container {
+    position: relative;
+    width: 70%;
+    height: 100vh;
+    object-fit: cover;
+  }
+  .register-img-container:after {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    left: 50%;
+    border-radius: 20px;
+    top: 40% !important;
+    background-color: #151618;
+    animation: topDown2 6s ease-in-out infinite !important;
+  }
+}
 @keyframes topDown {
   0% {
-    top: 42%;
+    top: 42% !important;
   }
   90% {
-    top: 42%;
+    top: 42% !important;
   }
   95% {
-    top: 49%;
+    top: 49% !important;
   }
   100% {
-    top: 42%;
+    top: 42% !important;
+  }
+}
+@keyframes topDown2 {
+  0% {
+    top: 40%;
+  }
+  90% {
+    top: 40%;
+  }
+  95% {
+    top: 48%;
+  }
+  100% {
+    top: 40%;
   }
 }
 @keyframes topDownLogo {

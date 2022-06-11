@@ -36,10 +36,8 @@
       animation: none
 
     .logotype_img
+      width: 100%
       position: relative
-
-
-      
 
     .logotype_title
       color: #EEEEEE
@@ -161,6 +159,37 @@
       background-color: #00e09c
       transition: all 0.2s ease-in-out
 
+@media screen and (max-width: 1280px)
+
+  .section-logo
+    width: 150px !important
+
+    &:before
+      content: ""
+      position: absolute
+      width: 10px !important
+      height: 8px !important
+      left: 26px !important
+      opacity: 1
+      top: 24px
+      background-color: #151618
+      z-index: 1
+      border-radius: 50%
+      transition: all 0.3s ease-in-out
+      animation: topDown3 6s ease-in-out infinite !important
+
+    &:hover:after
+      top: 24px !important
+      transition: all 0.3s ease-in-out
+      animation: none
+
+  .logotype_img
+
+
+@media screen and (max-width: 900px)
+
+
+
 
 @keyframes topDown2
   0%
@@ -171,6 +200,19 @@
 
   95%
     top: 36px
+
+  100%
+    top: 20px
+
+@keyframes topDown3
+  0%
+    top: 20px
+
+  90%
+    top: 20px
+
+  95%
+    top: 30px
 
   100%
     top: 20px

@@ -26,7 +26,6 @@
 .chat .message-list::-webkit-scrollbar {
   width: 12px;
   height: 8px;
-  background-color: #24272C;
 }
 .chat .message-list::-webkit-scrollbar-thumb {
   background-color: #e00086;
@@ -90,6 +89,16 @@
   font-size: 16px;
   width: 100%;
   outline: none;
+}
+@media screen and (max-width: 1280px) {
+  .send-bar {
+    height: 60px !important;
+  }
+
+  .field__file {
+    display: flex;
+    align-items: center;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
