@@ -147,9 +147,9 @@ const Chat = () => {
 
     return (
         <>
-            <main className="background" onClick={() => onlineHandler()}>
+            <main className="background">
                 <Header />
-                <section className="section-chat">
+                <section className="section-chat" onClick={() => onlineHandler()}>
                     <section className="members">
                         <section className='members-container'>
                             {

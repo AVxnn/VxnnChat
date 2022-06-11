@@ -52,26 +52,26 @@ const Lenta = () => {
     }
 
     const sendPostHandler = async (e) => {
-        if (auth.currentUser.uid !== 'MnNJHrLjWRWqUoMa1aBdoqnwPO43') {
-            setError('У вас недостаточно прав!')
-            setTimeout(() => {
-                setError('')
-            }, 2000)
-            setData({
-                img: '',
-                title: '',
-                desc: '',
-                uid: '',
-                createdAt: ''
-            })
-            return 'error'
-        }
+        // if (auth.currentUser.uid !== 'MnNJHrLjWRWqUoMa1aBdoqnwPO43') {
+        //     setError('У вас недостаточно прав!')
+        //     setTimeout(() => {
+        //         setError('')
+        //     }, 2000)
+        //     setData({
+        //         img: '',
+        //         title: '',
+        //         desc: '',
+        //         uid: '',
+        //         createdAt: ''
+        //     })
+        //     return 'error'
+        // }
         e.preventDefault();
         let rec = false
-        if (data.title.length <= 20 && data.desc.length <= 40) return null
+        if (data.title.length <= 10 && data.desc.length <= 10) return null
         if (!data.title && !data.desc) return null
 
-        if (data.title.length >= 25 && data.desc.length >= 80 && data.img) {
+        if (data.title.length >= 20 && data.desc.length >= 60 && data.img) {
             rec = true
         }
 

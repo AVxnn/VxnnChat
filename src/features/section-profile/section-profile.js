@@ -17,12 +17,17 @@ const SectionProfile = () => {
     const navigate = useNavigate()
 
     const handleSignOut = async () => {
-        await updateDoc(doc(db, "users", auth.currentUser.uid), {
-            isOnline: false,
-        })
-        await signOut(auth);
-        navigate('/login')
-        console.log('exit', auth.currentUser)
+        if (auth.currentUser.uid) {
+            await updateDoc(doc(db, "users", auth.currentUser.uid), {
+                isOnline: false,
+            })
+            await signOut(auth);
+            navigate('/login')
+            console.log('exit', auth.currentUser)
+        } else {
+            console.log('non')
+        }
+
     }
 
     return !user ? (

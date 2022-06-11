@@ -10,7 +10,42 @@
   flex-direction: column;
 }
 .post .post-header {
+  display: flex;
+  height: 40px;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 15px;
+}
+.post .post-header .header-tools {
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+.post .post-header .header-tools .header-trash {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.post .post-header .header-tools .header-trash:hover {
+  padding: 10px;
+  border-radius: 14px;
+  margin-left: -10px;
+  margin-right: -10px;
+  background-color: #151618;
+}
+.post .post-header .header-tools .header-edit {
+  width: 24px;
+  height: 24px;
+  margin-right: 20px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.post .post-header .header-tools .header-edit:hover {
+  padding: 10px;
+  border-radius: 14px;
+  margin-right: 10px;
+  background-color: #151618;
 }
 .post .post-header .header-user {
   display: flex;
@@ -32,9 +67,53 @@
   width: 24px;
   top: -2px;
 }
+.post .post-input {
+  background-color: rgba(0, 0, 0, 0);
+  outline: none;
+  border: 0;
+  margin-bottom: 1px;
+  border-bottom: 1px solid #FF3D00;
+}
+.post .post-input-title {
+  font-size: 24px;
+  color: #FFFFFF;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.post .post-input-desc {
+  margin: 14px 0;
+  font-size: 16px;
+  word-break: break-word;
+  color: #c7c7c7;
+}
+.post #field__file-2 {
+  position: absolute;
+  display: none;
+}
+.post .field__file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.post .field__file .post-upload {
+  padding: 14px;
+  background-color: #151618;
+  border-radius: 14px;
+  width: 52px;
+  height: 52px;
+  margin: 10px 0 20px 0;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.post .field__file .post-upload:hover {
+  background-color: #FF3D00;
+}
+.post .field__file .post-name {
+  color: #FFFFFF;
+}
 .post .post-img {
   width: 100%;
-  max-height: 500px;
+  max-height: 600px;
   border-radius: 8px;
   margin-bottom: 14px;
   cursor: pointer;
