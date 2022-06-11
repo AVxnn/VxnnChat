@@ -11,6 +11,7 @@ import PrivateRoute from "./shared/privateroute/privateRoute";
 import {useEffect} from "react";
 import {doc, getFirestore, updateDoc} from "firebase/firestore";
 import {getAuth} from "firebase/auth";
+import Lenta from "./pages/lenta/lenta";
 
 const App = () => {
 
@@ -34,12 +35,13 @@ const App = () => {
                 <Route path="/" element={<Main />}/>
                 <Route path="login" element={<Login />}/>
                 <Route path="register" element={<Registration />}/>
+                <Route path="lenta" element={<Lenta />}/>
                 <Route path="chat" element={
                     <PrivateRoute>
                         <Chat />
                     </PrivateRoute>
                 }/>
-                <Route path="profile" element={
+                <Route path="profile/:userId" element={
                     <PrivateRoute>
                         <Profile />
                     </PrivateRoute>

@@ -48,7 +48,7 @@
 
   .navigation
     position: relative
-    width: 240px
+    width: 300px
     display: flex
     justify-content: space-between
 
@@ -77,9 +77,23 @@
     .profile-y
       transition: all 1s ease-in-out
 
+    .new
+      position: absolute
+      top: -30px
+      color: #FFFFFF
+      font-size: 12px
+      padding: 4px 8px
+      left: 83px
+      background-color: #FF3D00
+      border-radius: 12px
+
     .home-y.active
       position: relative
       color: #00FFB2
+
+    .lenta-y.active
+      position: relative
+      color: #FF3D00
 
     .chat-y.active
       position: relative
@@ -100,37 +114,47 @@
 
     .home-y:hover ~ .down-trip
       left: 0 !important
-      width: 48px !important
+      width: 52px !important
       background-color: #00e09c !important
 
     .home-y.active ~ .down-trip
       left: 0
-      width: 48px
+      width: 52px
       background-color: #00e09c
 
+    .lenta-y:hover ~ .down-trip
+      width: 55px !important
+      left: 78px !important
+      background-color: #FF3D00 !important
+
+    .lenta-y.active  ~ .down-trip
+      width: 55px
+      left: 78px
+      background-color: #FF3D00
+
     .chat-y:hover ~ .down-trip
-      width: 40px !important
-      left: 90px !important
+      width: 46px !important
+      left: 158px !important
       background-color: #e00086 !important
 
     .chat-y.active  ~ .down-trip
-      width: 40px
-      left: 90px
+      width: 46px
+      left: 158px
       background-color: #e00086
 
     .profile-y:hover ~ .down-trip
-      width: 68px !important
-      left: 172px !important
+      width: 73px !important
+      left: 228px !important
       background-color: #95e000 !important
 
-    .profile-y.active  ~ .down-trip
-      width: 68px
-      left: 172px
+    .profile-y.active ~ .down-trip
+      width: 73px
+      left: 228px
       background-color: #95e000
 
     .down-trip
       position: absolute
-      width: 48px
+      width: 52px
       left: 0
       bottom: -8px
       height: 3px

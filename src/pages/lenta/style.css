@@ -1,0 +1,150 @@
+@charset "UTF-8";
+.lenta-container {
+  height: 85vh;
+  overflow-y: scroll;
+  /* ползунок скроллбара */
+}
+.lenta-container::-webkit-scrollbar {
+  width: 12px;
+  height: 8px;
+}
+.lenta-container::-webkit-scrollbar-thumb {
+  background-color: #FF3D00;
+  border-radius: 9em;
+}
+.lenta-container::-webkit-scrollbar-thumb:hover {
+  background-color: #d73200;
+}
+.lenta-container .lenta-tools {
+  width: 560px;
+  height: 42px;
+  margin-right: 10px;
+  display: flex;
+  padding: 14px 20px;
+  background-color: #24272C;
+  border-radius: 14px;
+  justify-content: space-between;
+  align-items: center;
+}
+.lenta-container .lenta-tools .lenta-nav {
+  width: 225px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.lenta-container .lenta-tools .lenta-nav .lenta-nav_item {
+  font-size: 14px;
+  font-weight: 600;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.lenta-container .lenta-tools .lenta-nav .lenta-nav_item:hover {
+  background-color: #151618;
+  border-radius: 8px;
+  padding: 10px;
+  margin: -10px;
+}
+.lenta-container .lenta-tools .active {
+  background-color: #151618;
+  border-radius: 8px;
+  padding: 10px;
+  margin: -10px;
+}
+.lenta-container .lenta-tools .lenta-newpost {
+  width: 24px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.lenta-container .lenta-tools .lenta-newpost:hover {
+  background-color: #151618;
+  border-radius: 14px;
+  padding: 10px;
+  margin: -10px;
+}
+.lenta-container .addpost {
+  width: 560px;
+  height: 274px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 20px;
+  border-radius: 14px;
+  background-color: #24272C;
+  transition: all 0.1s ease-in-out;
+}
+.lenta-container .addpost #field__file-2 {
+  position: absolute;
+  display: none;
+}
+.lenta-container .addpost .field__file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lenta-container .addpost .addpost-upload {
+  padding: 14px;
+  background-color: #151618;
+  border-radius: 14px;
+  width: 52px;
+  height: 52px;
+  margin: 10px 0 20px 0;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.lenta-container .addpost .addpost-upload:hover {
+  background-color: #FF3D00;
+}
+.lenta-container .addpost .addpost-name {
+  color: #FFFFFF;
+}
+.lenta-container .addpost .title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.lenta-container .addpost .title .title-span {
+  color: #FFFFFF;
+}
+.lenta-container .addpost .title .title-input {
+  border: 0;
+  width: 100%;
+  margin-left: 10px;
+  padding: 10px;
+  color: #FFFFFF;
+  font-size: 16px;
+  border-bottom: 1px solid #FF3D00;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+.lenta-container .addpost .btn-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.lenta-container .addpost .btn-container .btn-send {
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0);
+  color: #FFFFFF;
+  border: 1px solid #FF3D00;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.lenta-container .addpost .btn-container .btn-send:hover {
+  border: 1px solid #151618;
+}
+.lenta-container .addpost .btn-container .error {
+  color: #FFFFFF;
+}
+
+.posts {
+  margin-top: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */

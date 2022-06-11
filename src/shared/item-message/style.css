@@ -24,6 +24,11 @@
   border-radius: 1000px;
   margin-right: 20px;
 }
+.member-item .member-avatar-info .member_avatar:hover {
+  width: 58px;
+  height: 58px;
+  border: 1px solid #00FFB2;
+}
 .member-item .member-avatar-info .member_active {
   position: absolute;
   color: #FFFFFF;

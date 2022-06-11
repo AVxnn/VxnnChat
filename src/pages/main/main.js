@@ -6,6 +6,7 @@ import bug from '../../img/bug.png'
 import './style.css'
 import Button from "../../shared/button/button";
 import {getAuth} from "firebase/auth";
+import Github from "../../features/github/github";
 
 const Main = () => {
 
@@ -23,13 +24,7 @@ const Main = () => {
                         {!auth ? <Button text={'Зарегистрироваться'} url={'register'}/> : <Button text={'Перейти в чат'} url={'chat'}/>}
                     </section>
                 </section>
-                <section className='github-info'>
-                    <a href="https://forms.gle/6L8ss6vvftnSFrym6" target='_blank'><img className='bug-icon' src={bug} alt="bug"/></a>
-                    <section className='github-container'>
-                        <img className='github-icon' src={github} alt="github"/>
-                        <a href='https://github.com/AVxnn/VxnnChat' target='_blank' className='github-title'>V1.73 - Vxnn</a>
-                    </section>
-                </section>
+                <Github />
             </main>
         </>
     );

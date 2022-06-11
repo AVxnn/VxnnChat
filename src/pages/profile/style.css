@@ -58,6 +58,16 @@
   margin-left: 20px;
   color: #BBBBBB;
 }
+.block-profile .info-block .info-name-input {
+  font-size: 24px;
+  margin-left: 20px;
+  color: #BBBBBB;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  border-bottom: 1px solid #00FFB2;
+  margin-bottom: -1px;
+  outline: none;
+}
 .block-profile .info-block .info-edit {
   position: absolute;
   cursor: pointer;
