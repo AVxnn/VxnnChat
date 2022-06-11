@@ -42,7 +42,6 @@ const Chat = () => {
                 users.push(doc.data());
             });
             setData(users)
-            console.log(data)
         });
         return () => unsub()
     }, [])
@@ -126,7 +125,6 @@ const Chat = () => {
         const user2 = chat.uid
         const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
         await deleteDoc(doc(db, 'messages', id, 'chat', e))
-        console.log('delete', e)
     }
 
     const onlineHandler = async () => {
@@ -134,8 +132,6 @@ const Chat = () => {
             await updateDoc(doc(db, "users", auth.currentUser.uid), {
                 isOnline: true,
             });
-        } else {
-            console.log('non')
         }
     }
 

@@ -4,7 +4,6 @@ import like from '../../img/like.png'
 import likefill from '../../img/likefill.png'
 import check from '../../img/check.png'
 import edit from '../../img/edit.png'
-import edit from '../../img/edit.png'
 import trash from '../../img/trash.png'
 import Popup from "../popup/popup";
 import Moment from "react-moment";
@@ -26,8 +25,6 @@ const Post = ({auth, post, postId}) => {
     const [isLike, setIsLike] = useState(true)
 
     const db = getFirestore()
-
-    console.log(postId)
 
     const isEditHandler = () => {
         setIsEditOpen(false)
