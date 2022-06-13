@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './style.css'
 import like from '../../img/like.png'
 import likefill from '../../img/likefill.png'
@@ -79,6 +79,22 @@ const Post = ({auth, post, postId}) => {
         }
     }
 
+    useEffect(() => {
+        let myArray = [...post.counterLikes]
+        console.log([...post.counterLikes])
+        if (myArray) {
+            console.log(myArray)
+        }
+        let myIndex = myArray.indexOf(auth.currentUser.uid)
+        console.log(myIndex)
+        if (myIndex !== -1) {
+            myArray.splice(myIndex, 1);
+            setIsLike(false)
+        } else if (myIndex === -1) {
+            setIsLike(true)
+        }
+    }, [])
+
     return post ? (
         <>
             <section className='post'>
@@ -86,6 +102,7 @@ const Post = ({auth, post, postId}) => {
                     <section className='header-user'>
                         <Link to={`/profile/${post.uid}`}><img className='header-img' src={post.uPhotoURL} alt="avatar"/></Link>
                         <span className='header-title'>{post.uName}{post.uid === "CmG7f8TGwDPEouwwNqnYUJmB5lr1" ? <img src={admin} className='header_admin' alt='Админ'></img> : null}</span>
+                        {/*<img onClick={() => deletePostHandler()} className='header-trash' src={trash} alt="trash"/>*/}
                     </section>
                     <section className='header-tools'>
                         {
@@ -121,7 +138,7 @@ const Post = ({auth, post, postId}) => {
                     isEditOpen ? <h2 className='post-title'>{post.title}</h2> : <input onChange={(e) => setData({...data, title: e.target.value})} className='post-input post-input-title' type="text" value={data.title}/>
                 }
 
-                <hr/>
+                <div className='header-desh'></div>
                 {
                     isEditOpen ? <p className='post-desc'>{post.desc}</p>  : <input onChange={(e) => setData({...data, desc: e.target.value})}  className='post-input post-input-desc' type="text" value={data.desc}/>
                 }

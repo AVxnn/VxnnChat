@@ -11,6 +11,7 @@ import {useEffect} from "react";
 import {doc, getFirestore, updateDoc} from "firebase/firestore";
 import {getAuth} from "firebase/auth";
 import Lenta from "./pages/lenta/lenta";
+import Music from "./pages/music/music";
 
 const App = () => {
 
@@ -28,6 +29,19 @@ const App = () => {
         window.addEventListener('beforeunload', leaveHandler);
     }, [])
 
+    if (window.innerWidth <= 822) {
+        return (
+            <>
+                <section className='mobile-info'>
+                    <h1 className='mobile-h1'>Сайт готов для пк версий Full HD и HD</h1>
+                    <p className='mobile-p'>Скоро будет доступна мобильная версия</p>
+                    <p className='mobile-p'>Предлагаю зайти с пк и оценить)</p>
+
+                </section>
+            </>
+        )
+    }
+
     return (
         <>
             <Routes>
@@ -42,6 +56,11 @@ const App = () => {
                 <Route path="chat" element={
                     <PrivateRoute>
                         <Chat />
+                    </PrivateRoute>
+                }/>
+                <Route path="music" element={
+                    <PrivateRoute>
+                        <Music />
                     </PrivateRoute>
                 }/>
                 <Route path="profile/:userId" element={

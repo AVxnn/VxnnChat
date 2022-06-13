@@ -21,6 +21,8 @@ const Header = () => {
                     <NavLink to='/lenta' className="nav-item lenta-y">LENTA</NavLink>
                     <span className='new'>new</span>
                     <NavLink to='/chat' className="nav-item chat-y">CHAT</NavLink>
+                    <NavLink to='/music' className="nav-item music-y">MUSIC</NavLink>
+                    <span className='new-music'>new</span>
                     <NavLink to={auth.currentUser ? `/profile/${auth.currentUser.uid}` : `/profile`} className="nav-item profile-y">PROFILE</NavLink>
                     <div className='down-trip'></div>
                 </nav>
