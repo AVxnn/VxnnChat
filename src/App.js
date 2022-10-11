@@ -1,4 +1,5 @@
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
+import React from 'react';
 import Main from "./pages/main/main";
 import Login from "./pages/login/login";
 import './style.css'
@@ -12,11 +13,21 @@ import {doc, getFirestore, updateDoc} from "firebase/firestore";
 import {getAuth} from "firebase/auth";
 import Lenta from "./pages/lenta/lenta";
 import Music from "./pages/music/music";
+import NewChat from "./pages/NewChat/newchat";
+import Todo from "./pages/todo/todo";
+import TodoCreate from "./pages/todoCreate/todocreate";
+
+import {
+    TransitionGroup,
+    CSSTransition
+} from "react-transition-group";
+import ProfileEdit from "./pages/profileEdit/profileEdit";
 
 const App = () => {
 
     const auth = getAuth();
     const db = getFirestore();
+    const location = useLocation()
 
     const leaveHandler = async (event) => {
         event.preventDefault()
@@ -36,7 +47,6 @@ const App = () => {
                     <h1 className='mobile-h1'>Сайт готов для пк версий Full HD и HD</h1>
                     <p className='mobile-p'>Скоро будет доступна мобильная версия</p>
                     <p className='mobile-p'>Предлагаю зайти с пк и оценить)</p>
-
                 </section>
             </>
         )
@@ -58,14 +68,39 @@ const App = () => {
                         <Chat />
                     </PrivateRoute>
                 }/>
+                <Route path="newchat" element={
+                    <PrivateRoute>
+                        <NewChat />
+                    </PrivateRoute>
+                }/>
                 <Route path="music" element={
                     <PrivateRoute>
                         <Music />
                     </PrivateRoute>
                 }/>
+                <Route path="todo" element={
+                    <PrivateRoute>
+                        <Todo />
+                    </PrivateRoute>
+                }/>
+                <Route path="todo/create" element={
+                    <PrivateRoute>
+                        <TodoCreate />
+                    </PrivateRoute>
+                }/>
+                <Route path="test" element={
+                    <PrivateRoute>
+                        <NewChat />
+                    </PrivateRoute>
+                }/>
                 <Route path="profile/:userId" element={
                     <PrivateRoute>
                         <Profile />
+                    </PrivateRoute>
+                }/>
+                <Route path="profile/:userId/edit" element={
+                    <PrivateRoute>
+                        <ProfileEdit />
                     </PrivateRoute>
                 }/>
                 <Route path="*" element={<Error />}/>

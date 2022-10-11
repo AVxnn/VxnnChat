@@ -1,47 +1,157 @@
 .main {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1160px;
-  height: 85vh;
+  flex-direction: column;
+  width: 1320px;
+  height: 740px;
 }
-.main .main_img {
-  margin-right: 85px;
-  margin-bottom: 100px;
-}
-.main .section-content {
-  margin-bottom: 100px;
-}
-.main .section-content .content-title {
+.main .main-title {
+  margin-top: 40px;
   color: #EEEEEE;
-  font-size: 72px;
+  font-size: 48px;
   margin-bottom: 15px;
 }
-.main .section-content .content-description {
-  font-size: 24px;
-  color: #EEEEEE;
-  margin-bottom: 56px;
-}
-.main .section-content .content-description .telegram {
-  position: relative;
-  text-decoration: none;
-  color: #00FFB2;
-}
-.main .section-content .content-description .telegram:after {
-  content: "";
-  position: absolute;
+.main .main-list {
+  display: flex;
   width: 100%;
-  bottom: 10px;
-  opacity: 0;
-  left: 0;
-  height: 3px;
-  background-color: #00FFB2;
-  border-radius: 14px;
-  transition: all 0.1s ease-in-out;
+  height: 380px;
+  margin-top: 40px;
 }
-.main .section-content .content-description .telegram:hover:after {
-  opacity: 1;
-  bottom: -8px;
+.main .main-list .main-item {
+  position: relative;
+  width: 310px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: #151618;
+  border-radius: 32px;
+  padding: 50px 30px;
+  box-sizing: border-box;
+  margin-right: 40px;
+  box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.2509803922);
+  background-position: center;
+  background-size: 105% 105%;
+  object-fit: cover;
+  transition: all 0.3s ease-in-out;
+}
+.main .main-list .main-item:hover {
+  background-size: 110% 110%;
+}
+.main .main-list .main-item .main-item_title {
+  font-size: 32px;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+.main .main-list .main-item .main-item_btn {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 14px 17px 14px 25px;
+  border-radius: 999px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  background-color: #1C1E21;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+.main .main-list .main-item .main-item_btn:hover {
+  background-color: #121215;
+}
+.main .main-list .main-item .main-item_btn:active {
+  background-color: #2e2e33;
+}
+.main .main-list .main-item:last-child {
+  margin-right: 0;
+}
+.main .main-list .main-item-big {
+  width: 620px;
+}
+.main .main-list .main-item-big .main-item_title {
+  font-size: 48px;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+.main .main-list .main-item-big .main-item_btn {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 14px 17px 14px 25px;
+  border-radius: 999px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  background-color: #1C1E21;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+.main .main-list .main-item-big .main-item_btn:hover {
+  background-color: #121215;
+}
+.main .main-list .main-item-big .main-item_btn:active {
+  background-color: #2e2e33;
+}
+.main .main-sublist {
+  display: flex;
+  width: 100%;
+  height: 160px;
+  margin-top: 40px;
+}
+.main .main-sublist .main-vote {
+  width: 620px;
+  box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.2509803922);
+  border-radius: 32px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.main .main-sublist .main-vote .vote-title {
+  font-size: 24px;
+  color: #FFFFFF;
+}
+.main .main-sublist .main-vote .vote-list {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.main .main-sublist .main-vote .vote-list .vote-item_btn {
+  font-weight: 600;
+  width: 170px;
+  background-color: #263245;
+  padding: 16px 12px;
+  box-sizing: border-box;
+  border: none;
+  color: #FFFFFF;
+  border-radius: 999px;
+  outline: none;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+.main .main-sublist .main-vote .vote-list .first {
+  background-color: #263245;
+}
+.main .main-sublist .main-vote .vote-list .first:hover {
+  background-color: #1c2433;
+}
+.main .main-sublist .main-vote .vote-list .second {
+  background-color: #302645;
+}
+.main .main-sublist .main-vote .vote-list .second:hover {
+  background-color: #1f192e;
+}
+.main .main-sublist .main-vote .vote-list .thirt {
+  background-color: #452637;
+}
+.main .main-sublist .main-vote .vote-list .thirt:hover {
+  background-color: #301a25;
 }
 
 .github-info {

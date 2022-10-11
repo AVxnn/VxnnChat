@@ -10,6 +10,7 @@ import {addDoc, collection, getFirestore, onSnapshot, orderBy, query, Timestamp}
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "../../shared/api/firebase";
 import Github from "../../features/github/github";
+import EmojiPicker from "emoji-picker-react";
 
 const Lenta = () => {
 

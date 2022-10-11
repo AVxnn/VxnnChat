@@ -7,7 +7,7 @@ import edit from '../../img/edit.png'
 import trash from '../../img/trash.png'
 import Popup from "../popup/popup";
 import Moment from "react-moment";
-import {deleteDoc, doc, getFirestore, updateDoc} from "firebase/firestore";
+import {collection, deleteDoc, doc, getFirestore, onSnapshot, query, updateDoc, where} from "firebase/firestore";
 import admin from "../../img/admin.png";
 import {Link} from "react-router-dom";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
@@ -23,6 +23,7 @@ const Post = ({auth, post, postId}) => {
     const [open, setOpen] = useState(false)
     const [isEditOpen, setIsEditOpen] = useState(true)
     const [isLike, setIsLike] = useState(true)
+    const [avatar, setAvatar] = useState('')
 
     const db = getFirestore()
 
@@ -95,12 +96,24 @@ const Post = ({auth, post, postId}) => {
         }
     }, [])
 
+    useEffect(() => {
+        const unsub = onSnapshot(query(collection(db, "users"), where('uid', 'in', [post.uid])), (querySnapshot) => {
+            const users = [];
+            querySnapshot.forEach((doc) => {
+                users.push(doc.data());
+                console.log(users)
+            });
+            setAvatar(users[0].avatar)
+        });
+        return () => unsub()
+    }, [])
+
     return post ? (
         <>
             <section className='post'>
                 <section className='post-header'>
                     <section className='header-user'>
-                        <Link to={`/profile/${post.uid}`}><img className='header-img' src={post.uPhotoURL} alt="avatar"/></Link>
+                        <Link to={`/profile/${post.uid}`}>{avatar ? <img className='header-img' src={avatar} alt="avatar"/> : <div className='clo'></div>}</Link>
                         <span className='header-title'>{post.uName}{post.uid === "CmG7f8TGwDPEouwwNqnYUJmB5lr1" ? <img src={admin} className='header_admin' alt='Админ'></img> : null}</span>
                         {/*<img onClick={() => deletePostHandler()} className='header-trash' src={trash} alt="trash"/>*/}
                     </section>

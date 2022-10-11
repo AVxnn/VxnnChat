@@ -1,7 +1,6 @@
 .post {
-  width: 560px;
+  width: 600px;
   display: flex;
-  padding: 20px 20px;
   margin-top: 40px;
   background-color: #24272C;
   border-radius: 14px;
@@ -17,6 +16,7 @@
   background-color: #FF3D00;
 }
 .post .post-header {
+  padding: 15px 20px 0 20px;
   display: flex;
   height: 40px;
   justify-content: space-between;
@@ -58,6 +58,11 @@
   display: flex;
   align-items: center;
 }
+.post .post-header .header-user .clo {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
 .post .post-header .header-user .header-img {
   width: 35px;
   border-radius: 50%;
@@ -79,6 +84,7 @@
   outline: none;
   border: 0;
   margin-bottom: 1px;
+  margin: 20px;
   border-bottom: 1px solid #FF3D00;
 }
 .post .post-input-title {
@@ -89,6 +95,7 @@
 }
 .post .post-input-desc {
   margin: 14px 0;
+  margin: 20px;
   font-size: 16px;
   word-break: break-word;
   color: #c7c7c7;
@@ -103,7 +110,6 @@
   align-items: center;
 }
 .post .field__file .post-upload {
-  padding: 14px;
   background-color: #151618;
   border-radius: 14px;
   width: 52px;
@@ -129,16 +135,19 @@
   color: #FFFFFF;
   word-break: break-word;
   margin-bottom: 14px;
+  padding: 0 20px 0 20px;
 }
 .post .post-desc {
   margin: 14px 0;
   word-break: break-word;
   color: #c7c7c7;
+  padding: 0 20px 0 20px;
 }
 .post .post-tools {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 20px 20px 20px;
 }
 .post .post-tools .post-like {
   display: flex;

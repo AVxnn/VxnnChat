@@ -94,7 +94,7 @@ const Login = () => {
                             <span className="form-title">Password</span>
                             <input onChange={(e) => {setData({
                                 ...data, password: e.currentTarget.value
-                            })}} className={`form-input ${error ? 'error': ''}`} value={data.password} id='Password' type="text"/>
+                            })}} className={`form-input ${error ? 'error': ''}`} value={data.password} id='Password' type="password"/>
                         </label>
                         <button onClick={() => login()} className="form-button">Let's Go</button>
                         <section className='form-login-container'>
