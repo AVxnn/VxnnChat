@@ -6,9 +6,10 @@ import edit from "../../img/edit.png";
 import Github from "../../features/github/github";
 import {doc, getDoc, getFirestore, updateDoc} from "firebase/firestore";
 import {getAuth, updateProfile} from "firebase/auth";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {deleteObject, getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "../../shared/api/firebase";
+import './style.css'
 
 const ProfileEdit = () => {
 
@@ -17,13 +18,17 @@ const ProfileEdit = () => {
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState()
   const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
   const [nameChanger, setNameChanger] = useState(true)
   const [img, setImg] = useState('')
+  const [imgBg, setImgBg] = useState('')
   const db = getFirestore()
   const auth = getAuth()
 
+  const navigate = useNavigate();
+
   const {userId} = useParams()
-  console.log(userId)
+
   const changeName = () => {
     setNameChanger(false)
     setName(auth.currentUser.displayName)
@@ -31,16 +36,19 @@ const ProfileEdit = () => {
 
   const changeNameHandler = async () => {
     await updateDoc(doc(db, "users", auth.currentUser.uid), {
-      name: name,
+      name: name ? name : user?.name,
+      description: description ? description : user?.description
     })
     setUs({
       ...us,
-      name: name
+      name: name,
+      description: description
     })
     await updateProfile(auth.currentUser, {
       displayName: name,
     })
     setNameChanger(true)
+    navigate(`/profile/${auth.currentUser.uid}`)
   }
 
   useEffect(() => {
@@ -71,7 +79,7 @@ const ProfileEdit = () => {
           `avatar/${new Date().getTime()} - ${img.name}`
         )
         try{
-          if (user.avatarPath) {
+          if (user?.avatarPath) {
             await deleteObject(ref(storage, user.avatarPath))
           }
           const snap = await uploadBytes(imgRef, img)
@@ -87,20 +95,63 @@ const ProfileEdit = () => {
           })
           setImg('')
         } catch (e) {
-          console.log(e.message)
+          console.log(e.message, e)
         }
       }
       uploadImg()
     }
   }, [img, userId])
 
+  useEffect(() => {
+    const gett = async () => {
+      await getDoc(doc(db, "users", userId))
+        .then((e) => {
+          return e.data()
+        })
+        .then((s) => {
+          setUs(s)
+          setLoading(true)
+          console.log(us)
+        })
+    }
+    gett()
+  }, [userId])
 
+  useEffect(() => {
+
+    if (imgBg) {
+      const uploadImg = async () => {
+        const imgRef = ref(
+          storage,
+          `background/${new Date().getTime()} - ${imgBg.name}`
+        )
+        try{
+          if (user?.backgroundPath) {
+            await deleteObject(ref(storage, user.backgroundPath))
+          }
+          const snap = await uploadBytes(imgRef, imgBg)
+          const url = await getDownloadURL(ref(storage, snap.ref.fullPath))
+
+          await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+            background: url,
+            backgroundPath: snap.ref.fullPath
+          })
+          setImgBg('')
+        } catch (e) {
+          console.log(e.message)
+        }
+      }
+      uploadImg()
+    }
+  }, [imgBg])
+
+  console.log(user)
   return (
     <>
       <main className="background">
         <Header />
         <section className="block-profile">
-          <div className='profile-background' style={{backgroundImage: `url(https://www.ixbt.com/img/n1/news/2022/8/3/minecraft-pervaya-igra-v-mire-s-trillionom-prosmotrov-na-youtube_1639557564843213899_large.jpg)`}}>
+          <div className='profile-background' style={{backgroundImage: `url(${user?.background})`}}>
           </div>
           <section className='profile-avatar-block'>
             {user ? (
@@ -123,36 +174,46 @@ const ProfileEdit = () => {
               </>
             ) : null}
           </section>
-          <section className='toolBar'>
+          {userId === auth.currentUser.uid ? (
+          <section className='toolBar-edit'>
             <button className='toolBar-btn'>
-              <img className='toolBar-btn_img' src={edit} alt="edit"/>
+              {user ? (
+                <>
+                  {userId === auth.currentUser.uid ? (
+                    <input id='file_bg'z
+                           accept='image/*'
+                           type="file"
+                           onChange={e => setImgBg(e.target.files[0])}/>) : null }
+                </>
+              ) : null}
+              <label className='toolBar-btn_label' htmlFor="file_bg">
+                <img className='toolBar-btn_img' src={edit} alt="edit"/>
+              </label>
             </button>
           </section>
-          <section className='profile-stats'>
-            <section className='stats-block'>
-              <h4 className='stats-title'>{user?.followers ? user.followers : 0}</h4>
-              <span className='stats-subtitle'>Followers</span>
-            </section>
-            <section className='stats-block'>
-              <h4 className='stats-title'>{user?.following ? user.following : 0}</h4>
-              <span className='stats-subtitle'>Following</span>
-            </section>
-          </section>
-          <section className='info-newBlock'>
-            <h4 className='info-title'>{loading && us.name}</h4>
+          ): ''}
+          <section className='info-newBlock-edit'>
             {
-              user?.isAdmin ? <span className='info-premium'>Premium</span> : <span className='info-premium'></span>
+              user && (
+                <>
+                  <section className='info-name'>
+                    <h2 className='info-name_title'>Name</h2>
+                    <input onChange={(e) => setName(e.currentTarget.value)} className='info-name_input' type="text" placeholder={`${user.name}...`}/>
+                  </section>
+                  <section className='info-desc'>
+                    <h2 className='info-desc_title'>Description</h2>
+                    <input onChange={(e) => setDescription(e.currentTarget.value)} className='info-desc_input' type="text" placeholder={`${user.description}...`}/>
+                  </section>
+                </>
+              )
             }
-            <span className='info-description'>{user?.description ? user.description : ''}</span>
-            <section className='info-stats-game'>
-              <section className='game-info'>
-                <span className='game-lvl'>9 lvl</span>
-                <span className='game-exp'>3000/8000 exp</span>
+            <section className='save'>
+              <section className='save-left'>
+                <button onClick={() => navigate(`/profile/${auth.currentUser.uid}`)} className='cancel-btn'>Cancel</button>
               </section>
-              <div className='game-bar'><div style={{width: '30%'}} className='game-bar_active'></div></div>
-            </section>
-            <section className='follow-block'>
-              <button className='follow-btn'>Follow</button>
+              <section className='save-right'>
+                <button onClick={() => changeNameHandler()} className='save-btn'>Create</button>
+              </section>
             </section>
           </section>
         </section>

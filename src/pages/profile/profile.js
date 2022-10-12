@@ -100,7 +100,7 @@ const Profile = () => {
             <main className="background">
                 <Header />
                 <section className="block-profile">
-                    <div className='profile-background' style={{backgroundImage: `url(https://www.ixbt.com/img/n1/news/2022/8/3/minecraft-pervaya-igra-v-mire-s-trillionom-prosmotrov-na-youtube_1639557564843213899_large.jpg)`}}>
+                    <div className='profile-background' style={{backgroundImage: `url(${user?.background ? user.background : ''})`}}>
                     </div>
                     <section className='profile-avatar-block'>
                         {user ? (
