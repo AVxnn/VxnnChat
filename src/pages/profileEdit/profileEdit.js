@@ -217,7 +217,6 @@ const ProfileEdit = () => {
             </section>
           </section>
         </section>
-        <Github />
       </main>
     </>
   )

@@ -46,7 +46,6 @@ const Chat = () => {
         return () => unsub()
     }, [])
 
-
     const selectUser = async (user) => {
         setChat(user)
 
@@ -134,7 +133,6 @@ const Chat = () => {
             });
         }
     }
-
 
     return (
         <>

@@ -1,7 +1,7 @@
 .block-profile {
   position: relative;
   width: 600px;
-  height: 800px;
+  height: 750px;
   background-color: #1C1E21;
   border-radius: 32px;
   color: #FFFFFF;
@@ -9,6 +9,7 @@
 .block-profile .profile-background {
   width: 100%;
   background-size: cover;
+  background-position: center;
   height: 240px;
   border-radius: 32px;
 }
@@ -163,7 +164,7 @@
 .block-profile .follow-block .follow-btn {
   width: 100%;
   height: 60px;
-  background-color: #437ED8;
+  background-color: #d84343;
   color: #FFFFFF;
   font-size: 20px;
   border: none;
@@ -173,9 +174,27 @@
   transition: all 0.1s ease-in-out;
 }
 .block-profile .follow-block .follow-btn:hover {
-  background-color: #3264AE;
+  background-color: #9a2f2f;
 }
 .block-profile .follow-block .follow-btn:active {
+  background-color: #dc5353;
+}
+.block-profile .follow-block .unfollow-btn {
+  width: 100%;
+  height: 60px;
+  background-color: #437ED8;
+  color: #FFFFFF;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.block-profile .follow-block .unfollow-btn:hover {
+  background-color: #3264AE;
+}
+.block-profile .follow-block .unfollow-btn:active {
   background-color: #3d71bf;
 }
 .block-profile .info-block {
@@ -230,10 +249,88 @@
   .block-profile {
     position: relative;
     width: 400px;
-    height: 800px;
+    height: 700px;
     background-color: #1C1E21;
     border-radius: 32px;
     color: #FFFFFF;
+  }
+
+  .info-stats-game {
+    width: 340px !important;
+  }
+
+  .profile-stats {
+    padding: 30px 46px !important;
+  }
+
+  .follow-block {
+    width: 340px !important;
+    height: 60px !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .block-profile {
+    position: relative;
+    width: 290px !important;
+    height: 600px;
+    background-color: #1C1E21;
+    border-radius: 32px;
+    color: #FFFFFF;
+  }
+  .block-profile .profile-background {
+    height: 170px !important;
+  }
+  .block-profile .profile-avatar-block {
+    position: absolute;
+    top: 140px !important;
+    margin-left: -55px !important;
+  }
+  .block-profile .profile-avatar {
+    width: 100px !important;
+    height: 100px !important;
+    border: 5px solid #1C1E21;
+    object-fit: cover;
+    border-radius: 5000%;
+    font-size: 16px;
+  }
+
+  .info-stats-game {
+    width: 230px !important;
+  }
+
+  .profile-stats {
+    padding: 15px 25px !important;
+  }
+
+  .stats-title {
+    font-size: 20px !important;
+  }
+
+  .stats-subtitle {
+    font-size: 10px !important;
+  }
+
+  .toolBar-btn {
+    width: 30px !important;
+    height: 30px !important;
+    margin-right: 20px !important;
+  }
+  .toolBar-btn .toolBar-btn_img {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .follow-block {
+    width: 230px !important;
+    height: 50px !important;
+  }
+  .follow-block .follow-btn {
+    font-size: 16px !important;
+    height: 50px !important;
+  }
+  .follow-block .unfollow-btn {
+    font-size: 16px !important;
+    height: 50px !important;
   }
 }
 

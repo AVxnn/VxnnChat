@@ -42,8 +42,8 @@ const Registration = () => {
                     isOnline: true,
                     isAdmin: false,
                     stats: 0,
-                    followers: 0,
-                    following: 0,
+                    followers: [],
+                    following: [],
                     bgPhoto: '',
                 });
                 console.log(data)

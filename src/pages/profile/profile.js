@@ -5,7 +5,7 @@ import avatar from '../../img/te.png'
 import camera from '../../img/camera.png'
 import edit from '../../img/edit.png'
 import cog from '../../img/cog.png'
-import {doc, getDoc, getFirestore, updateDoc} from "firebase/firestore";
+import {collection, doc, getDoc, getFirestore, onSnapshot, query, updateDoc, where} from "firebase/firestore";
 import {ref, getDownloadURL, uploadBytes, deleteObject} from "firebase/storage";
 import { storage } from '../../shared/api/firebase'
 import {getAuth, updateProfile} from "firebase/auth";
@@ -18,6 +18,7 @@ const Profile = () => {
     const [loading, setLoading] = useState(false)
     const [user, setUser] = useState()
     const [name, setName] = useState('')
+    const [follow, setFollow] = useState(false)
     const [nameChanger, setNameChanger] = useState(true)
     const [img, setImg] = useState('')
     const db = getFirestore()
@@ -25,38 +26,39 @@ const Profile = () => {
 
     const {userId} = useParams()
     console.log(userId)
-    const changeName = () => {
-        setNameChanger(false)
-        setName(auth.currentUser.displayName)
-    }
 
-    const changeNameHandler = async () => {
-        await updateDoc(doc(db, "users", auth.currentUser.uid), {
-            name: name,
+    const followUser = async () => {
+        await updateDoc(doc(db, 'users', userId), {
+            followers: [...us?.followers, auth.currentUser.uid]
         })
-        setUs({
-            ...us,
-            name: name
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+            following: [...user?.following, userId]
         })
-        await updateProfile(auth.currentUser, {
-            displayName: name,
+        setUs({...us, followers: [...us?.followers, auth.currentUser.uid]})
+    }
+    const unFollowUser = async () => {
+        await updateDoc(doc(db, 'users', userId), {
+            followers: us?.followers.filter((i) => i !== auth.currentUser.uid)
         })
-        setNameChanger(true)
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+            following: user?.following.filter((i) => i !== userId)
+        })
+        setUs({...us, followers: us?.followers.filter((i) => i !== auth.currentUser.uid)})
     }
 
     useEffect(() => {
-        const gett = async () => {
-            await getDoc(doc(db, "users", userId))
-                .then((e) => {
-                    return e.data()
-                })
-                .then((s) => {
-                    setUs(s)
-                    setLoading(true)
-                    console.log(us)
-                })
-        }
-        gett()
+        const unsub = onSnapshot(query(collection(db, "users"), where('uid', 'in', [userId])), (querySnapshot) => {
+            const users = [];
+            querySnapshot.forEach((doc) => {
+                users.push(doc.data());
+            });
+            setUs(users[0])
+            setLoading(true)
+            console.log(us)
+            console.log(users[0]?.followers.filter((i) => i === auth.currentUser.uid).length >= 1)
+            setFollow(users[0]?.followers.filter((i) => i === auth.currentUser.uid).length >= 1)
+        });
+        return () => unsub()
     }, [userId])
 
     useEffect(() => {
@@ -124,17 +126,20 @@ const Profile = () => {
                         ) : null}
                     </section>
                     <section className='toolBar'>
-                        <button className='toolBar-btn'>
-                            <NavLink to={`/profile/${auth.currentUser.uid}/edit`}><img className='toolBar-btn_img' src={edit} alt="edit"/></NavLink>
-                        </button>
+                        {userId === auth.currentUser.uid ? (
+                                <button className='toolBar-btn'>
+                                    <NavLink to={`/profile/${auth.currentUser.uid}/edit`}><img className='toolBar-btn_img' src={edit} alt="edit"/></NavLink>
+                                </button>
+                            ) : ''
+                        }
                     </section>
                     <section className='profile-stats'>
                         <section className='stats-block'>
-                            <h4 className='stats-title'>{user?.followers ? user.followers : 0}</h4>
+                            <h4 className='stats-title'>{user?.followers.length > 0 ? us?.followers.length : 0}</h4>
                             <span className='stats-subtitle'>Followers</span>
                         </section>
                         <section className='stats-block'>
-                            <h4 className='stats-title'>{user?.following ? user.following : 0}</h4>
+                            <h4 className='stats-title'>{user?.following.length > 0 ? us?.following.length : 0}</h4>
                             <span className='stats-subtitle'>Following</span>
                         </section>
                     </section>
@@ -151,51 +156,22 @@ const Profile = () => {
                             </section>
                             <div className='game-bar'><div style={{width: '30%'}} className='game-bar_active'></div></div>
                         </section>
-                        <section className='follow-block'>
-                            <button className='follow-btn'>Follow</button>
-                        </section>
-                    </section>
+                        {
+                            userId !== auth.currentUser.uid ? (
+                              <section className='follow-block'>
+                                  {
+                                      !follow ? (
+                                        <button onClick={() => followUser()} className='follow-btn'>Subscribe</button>
+                                      ) : (
+                                        <button onClick={() => unFollowUser()} className='unfollow-btn'>Unsubscribe</button>
+                                      )
+                                  }
 
-                    {/*{loading && us ? (*/}
-                    {/*    <>*/}
-                    {/*        <section className='info-block'>*/}
-                    {/*            {nameChanger ? (*/}
-                    {/*                <>*/}
-                    {/*                    <span className='info-name-title'>Имя: </span>*/}
-                    {/*                    <span className='info-name-description'>{us.name}</span>*/}
-                    {/*                    {userId === auth.currentUser.uid ? (*/}
-                    {/*                        <img onClick={() => changeName()} className='info-edit' src={edit} alt="edit"/>*/}
-                    {/*                    ) : null}*/}
-                    {/*                </>*/}
-                    {/*            ) : (*/}
-                    {/*                <>*/}
-                    {/*                    <span className='info-name-title'>Имя: </span>*/}
-                    {/*                    <input onChange={(e) => setName(e.target.value)} value={name} className='info-name-input' />*/}
-                    {/*                    <img onClick={() => changeNameHandler()} className='info-edit' src={check} alt="check"/>*/}
-                    {/*                </>*/}
-                    {/*            )}*/}
-                    {/*        </section>*/}
-                    {/*        <section className='info-block'>*/}
-                    {/*            <span className='info-name-title'>Email: </span>*/}
-                    {/*            <span className='info-name-description'>{us.email}</span>*/}
-                    {/*        </section>*/}
-                    {/*        <section className='info-block'>*/}
-                    {/*            <span className='info-name-title'>Joined on: </span>*/}
-                    {/*            <span className='info-name-description'>{user.createdAt.toDate().toDateString()}</span>*/}
-                    {/*        </section>*/}
-                    {/*        <section className='info-block'>*/}
-                    {/*            <span className='info-name-title'>Admin: </span>*/}
-                    {/*            <span className='info-name-description'>{us.isAdmin ? 'True': 'False'}</span>*/}
-                    {/*            <a href="https://t.me/romashkog" target='_blank'><img className='info-admin' src={lock} alt="lock"/></a>*/}
-                    {/*        </section>*/}
-                    {/*        <section className='info-block'>*/}
-                    {/*        <span className='info-name-title'>ID: </span>*/}
-                    {/*        <span className='info-name-description'>{us.uid}</span>*/}
-                    {/*        </section>*/}
-                    {/*    </>*/}
-                    {/*    ) : null}*/}
+                              </section>
+                            ) : ''
+                        }
+                    </section>
                 </section>
-                <Github />
             </main>
         </>
     )
