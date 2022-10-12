@@ -57,9 +57,9 @@ const Main = () => {
                               <h3 className='main-item_title'>{item.title}</h3>
                               {
                                 item.link_format === 1 ? (
-                                  <NavLink to={item.link} className='main-item_btn'>{item.btntext}<img src={arrowRight} alt="arrowRight"/></NavLink>
+                                  <NavLink to={item.link} className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></NavLink>
                                 ) : (
-                                  <a href={item.link} target='_blank'  className='main-item_btn'>{item.btntext}<img src={arrowRight} alt="arrowRight"/></a>
+                                  <a href={item.link} target='_blank'  className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></a>
                                 )
                               }
                             </section>
@@ -71,9 +71,9 @@ const Main = () => {
                               <h3 className='main-item_title'>{item.title}</h3>
                               {
                                 item.link_format === 1 ? (
-                                  <NavLink to={item.link} className='main-item_btn'>{item.btntext}<img src={arrowRight} alt="arrowRight"/></NavLink>
+                                  <NavLink to={item.link} className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></NavLink>
                                 ) : (
-                                  <a href={item.link} target='_blank' className='main-item_btn'>{item.btntext}<img src={arrowRight} alt="arrowRight"/></a>
+                                  <a href={item.link} target='_blank' className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></a>
                                 )
                               }
                             </section>

@@ -40,7 +40,7 @@ const App = () => {
         window.addEventListener('beforeunload', leaveHandler);
     }, [])
 
-    if (window.innerWidth <= 822) {
+    if (window.innerWidth <= 320) {
         return (
             <>
                 <section className='mobile-info'>
