@@ -40,8 +40,8 @@ const TodoCreate = () => {
       date: data.date,
       time: data.time,
       archived: false,
-      open: true,
-      closed: false
+      closed: false,
+      color: '#' + Math.floor(Math.random()*16777215).toString(16)
     })
     navigate('/todo')
   }
@@ -96,7 +96,6 @@ const TodoCreate = () => {
           </section>
         </section>
       </section>
-      <Github />
     </main>
   );
 };

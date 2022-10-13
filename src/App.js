@@ -22,6 +22,7 @@ import {
     CSSTransition
 } from "react-transition-group";
 import ProfileEdit from "./pages/profileEdit/profileEdit";
+import TodoOpen from "./pages/todoOpen/todoOpen";
 
 const App = () => {
 
@@ -81,6 +82,11 @@ const App = () => {
                 <Route path="todo" element={
                     <PrivateRoute>
                         <Todo />
+                    </PrivateRoute>
+                }/>
+                <Route path="todo/:tid" element={
+                    <PrivateRoute>
+                        <TodoOpen />
                     </PrivateRoute>
                 }/>
                 <Route path="todo/create" element={

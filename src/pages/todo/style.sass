@@ -28,15 +28,20 @@
     .title-block_btn
       display: flex
       align-items: center
-      background-color: #CDDCF8
-      padding: 2px 14px
-      height: 32px
-      color: #437ED8
+      background-color: #437ED8
+      padding: 13px 28px
+      box-sizing: border-box
+      height: 40px
+      color: #FFFFFF
       text-decoration: none
       font-weight: 700
-      font-size: 10px
+      font-size: 12px
       border-radius: 8px
       cursor: pointer
+      transition: all 0.1s ease
+
+      &:hover
+        background-color: #376bb8
 
   .todo-filter
     margin-top: 35px
@@ -92,13 +97,20 @@
   .todo-item
     width: 600px
     box-sizing: border-box
-    padding: 20px 17px
+    padding: 20px 20px
     background-color: #1C1E21
     margin-top: 30px
-    border-radius: 12px
+    border-radius: 12px 12px 12px 12px
+    border-left: 10px solid #437ED8
+    cursor: pointer
+    transition: all 0.2s ease-in-out
+
+    &:hover
+      border-left: 20px solid #437ED8 !important
 
     .item-top
       display: flex
+      position: relative
       padding-bottom: 17px
       align-items: center
       justify-content: space-between
@@ -110,23 +122,62 @@
           font-weight: 500
           color: #FFFFFF
 
+        .closed
+          text-decoration: line-through
+
         .item-top-subtitle
-          margin-top: 4px
-          font-size: 10px
+          margin-top: 9px
+          margin-bottom: 4px
+          font-size: 12px
           color: #BDBDBD
 
       .item-top_check
+        position: absolute
+        opacity: 0
+
+      .item-top_check + .item-top_check-div
+        width: 40px
+        height: 40px
+        border: 1px solid #FFFFFF
+        display: inline-flex
+        align-items: center
+        user-select: none
+
+      .item-top_check+label::before
+        content: ''
+        display: inline-block
+        width: 30px
+        height: 30px
+        flex-shrink: 0
+        flex-grow: 0
+        border: 1px solid #adb5bd
+        border-radius: 999px
+        background-repeat: no-repeat
+        background-position: center center
+        background-size: 50% 50%
+        cursor: pointer
+
+      .item-top_check:checked+label::before
+        border-color: #0b76ef
+        background-color: #0b76ef
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e")
+
+
+
 
     .item-bottom
-      padding-top: 17px
+      padding-top: 20px
       display: flex
       align-items: center
       justify-content: space-between
 
       .item-bottom_title
         color: #FFFFFF
-        font-size: 14px
+        font-size: 12px
         font-weight: 500
+
+        span
+          margin-left: 16px
 
       .item-bottom_list
 
@@ -134,3 +185,73 @@
           width: 25px
           height: 25px
           border-radius: 9999px
+
+
+
+@media screen and (max-width: 720px)
+  .todo-container
+    width: 400px !important
+
+  .title-block
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 400px !important
+
+  .todo-item
+    width: 400px !important
+
+@media screen and (max-width: 450px)
+  .todo-container
+    width: 280px !important
+
+  .title-block
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 280px !important
+
+  .todo-item
+    padding: 15px !important
+    margin-top: 20px !important
+    width: 280px !important
+
+  .list-item
+    display: flex
+    align-items: center
+    font-size: 12px !important
+    margin-right: 10px !important
+
+  .list-item:nth-child(1)
+    padding-right: 10px !important
+
+  .item-bottom
+    padding-top: 15px !important
+
+  .item-top
+    padding-bottom: 15px !important
+
+    .item-top_left
+
+      .item-top-title
+        font-size: 14px !important
+
+      .item-top-subtitle
+        font-size: 12px !important
+
+    .item-top_check+label::before
+      width: 20px !important
+      height: 20px !important
+
+  .title-text
+    font-size: 18px !important
+
+    .title-data
+      font-size: 10px !important
+
+      .title-data_span
+        font-size: 10px !important
+
+  .title-block_btn
+    padding: 8px 12px !important
+    height: 30px !important
