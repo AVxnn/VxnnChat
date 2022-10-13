@@ -176,36 +176,30 @@
 
 @media screen and (max-width: 720px) {
   .todo-container {
-    width: 400px !important;
+    width: 90% !important;
   }
 
   .title-block {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 400px !important;
+    width: 100% !important;
   }
 
   .todo-item {
-    width: 400px !important;
+    width: 100% !important;
   }
 }
 @media screen and (max-width: 450px) {
-  .todo-container {
-    width: 280px !important;
-  }
-
   .title-block {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 280px !important;
   }
 
   .todo-item {
     padding: 15px !important;
     margin-top: 20px !important;
-    width: 280px !important;
   }
 
   .list-item {

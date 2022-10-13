@@ -49,6 +49,18 @@ const Main = () => {
                   <h1 className='main-title'>Welcome to the VxnnChat</h1>
                   <section className='main-list'>
                     {
+                      !auth?.uid ? (
+                        <section className='main-item-auth-container'>
+                          <section className='main-item-auth'>
+                            <NavLink to={'/login'} className='main-item_btn'>Sign In<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></NavLink>
+                          </section>
+                          <section className='main-item-auth'>
+                            <NavLink to={'/registration'} className='main-item_btn'>Sign Up<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></NavLink>
+                          </section>
+                        </section>
+                      ) : ''
+                    }
+                    {
                       data.map((item, index) => {
                         if (item.format === 1) {
                           return (
