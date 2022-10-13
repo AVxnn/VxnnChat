@@ -14,18 +14,22 @@ const Todo = () => {
 
   const [activeLink, setActiveLink] = useState(0)
   const [todos, setTodos] = useState([])
+  const [todosFilter, setTodosFilter] = useState([])
   const [closed, setClosed] = useState(false)
   const dateToFormat = new Date();
   const changeActiveLink = (i) => {
     switch (i) {
       case 'l':
         setActiveLink(0)
+        setTodosFilter(todos)
         break
       case 'o':
         setActiveLink(1)
+        setTodosFilter(todos.filter(i => !i.closed))
         break
       case 'c':
         setActiveLink(2)
+        setTodosFilter(todos.filter(i => i.closed))
         break
       case 'a':
         setActiveLink(3)
@@ -61,6 +65,8 @@ const Todo = () => {
         todos.unshift({...doc.data(), tid: doc._document.key.path.segments[8]})
       });
       setTodos(todos)
+      setTodosFilter(todos)
+      setActiveLink(0)
     });
     return () => unsub()
   }, [])
@@ -86,7 +92,7 @@ const Todo = () => {
         </section>
         <section className='todo-list'>
           {
-            todos.map((i, index) => (
+            todosFilter.map((i, index) => (
               <section key={index} className='todo-item' style={{borderLeft: `10px solid ${i.color ? i.color : '#FFFFFF'}`}}>
                 <section className='item-top'>
                   {/*onClick={() => openTodo(i)}*/}
