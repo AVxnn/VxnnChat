@@ -1,0 +1,24 @@
+.message-container-m-f {
+  max-width: 100%;
+  display: flex;
+  margin-top: 0;
+}
+.message-container-m-f .message-second {
+  margin: 0 20px;
+}
+.message-container-m-f .message-second .message-text-container {
+  margin-top: 12px;
+  max-width: 600px;
+}
+.message-container-m-f .message-second .message-text-container .message-text {
+  background-color: #1C1E21;
+  padding: 19px;
+  border-radius: 0 14px 14px 14px;
+  color: #FFFFFF;
+}
+
+.message-field {
+  width: 42px;
+}
+
+/*# sourceMappingURL=style.css.map */

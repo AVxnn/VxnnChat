@@ -19,6 +19,7 @@
 }
 .member-item .member-avatar-info .member_avatar {
   position: relative;
+  object-fit: cover;
   width: 60px;
   height: 60px;
   border-radius: 1000px;

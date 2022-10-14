@@ -53,8 +53,8 @@
   height: 70px;
   display: flex;
   border-radius: 14px;
-  box-shadow: 0 0 12px 0 #151618;
-  background-color: #151618;
+  box-shadow: 0 0 12px 0 #1C1E21;
+  background-color: #1C1E21;
 }
 .chat .send-bar .btn {
   background-color: rgba(255, 255, 255, 0);

@@ -5,6 +5,7 @@ import clip from './img/clip.png'
 import MessageItem from "../message-item/messageItem";
 import {getAuth} from "firebase/auth";
 import {collection} from "firebase/firestore";
+import SecondMessageItem from "../secondMessageItem/secondMessageItem";
 
 const Messenger = ({chat, handleSubmit, deleteHandler, text, setText, setImg, img, msgs, chatImg, msgIds}) => {
 
@@ -16,8 +17,22 @@ const Messenger = ({chat, handleSubmit, deleteHandler, text, setText, setImg, im
         <>
             <section className="chat">
                 <section className='message-list'>
-                    {msgs.length ? msgs.map((msg, i) =>
-                        <MessageItem msgIds={msgIds[i]} deleteHandler={deleteHandler} msgIds={msgIds[i]} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>)
+                    {msgs.length ? msgs.map((msg, i) => {
+                        if (i < 1) {
+                            console.log('true')
+                        } else {
+                            if (msg.from === msgs[i - 1].from) {
+                                return (
+                                  <SecondMessageItem msgIds={msgIds[i]} deleteHandler={deleteHandler} name={chat.name} msgIds={msgIds[i]} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
+                                )
+                            } else {
+                                return (
+                                  <MessageItem msgIds={msgIds[i]} deleteHandler={deleteHandler} name={chat.name} msgIds={msgIds[i]} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
+                                )
+                            }
+                        }
+
+                      })
                         :
                         <section className='message-container'>
                             <h1 className='message-title'>Write a message to start chatting</h1>
