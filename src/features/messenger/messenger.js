@@ -6,6 +6,8 @@ import MessageItem from "../message-item/messageItem";
 import {getAuth} from "firebase/auth";
 import {collection} from "firebase/firestore";
 import SecondMessageItem from "../secondMessageItem/secondMessageItem";
+import logo from "../../img/te.png";
+import {Link} from "react-router-dom";
 
 const Messenger = ({chat, handleSubmit, deleteHandler, text, setText, setImg, img, msgs, chatImg, msgIds}) => {
 
@@ -16,6 +18,12 @@ const Messenger = ({chat, handleSubmit, deleteHandler, text, setText, setImg, im
     return (
         <>
             <section className="chat">
+                <section className='user-bar'>
+                    <section className='user-avatar'>
+                        <Link to={`/profile/`}><img className="user-avatar-img" src={chat.avatar ? chat.avatar : logo} alt="avatar"/></Link>
+                        <span className={`user-avatar-icon ${chat.isOnline ? 'online' : 'offline'}`}></span>
+                    </section>
+                </section>
                 <section className='message-list'>
                     {msgs.length ? msgs.map((msg, i) => {
                         if (i < 1) {

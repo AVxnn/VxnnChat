@@ -18,6 +18,8 @@ import {
     doc,
     setDoc, getDoc, updateDoc, deleteDoc
 } from "firebase/firestore";
+import pin from '../../img/pin.png'
+import message from '../../img/messageItem.png'
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import {getAuth} from "firebase/auth";
 
@@ -26,6 +28,7 @@ const Chat = () => {
     const [activeTab, setActiveTab] = useState('')
     let clickEventHandler = (id) => { setActiveTab(id) }
     const [data, setData] = useState([])
+    const [pinned, setPinned] = useState(false)
     const [chat, setChat] = useState('')
     const [img, setImg] = useState('')
     const [msgs, setMsgs] = useState([])
@@ -140,6 +143,22 @@ const Chat = () => {
                 <Header />
                 <section className="section-chat" onClick={() => onlineHandler()}>
                     <section className="members">
+                        <section className='members-top'>
+                            <h3 className='members-title'>Message</h3>
+                            <span className='members-subtitle'>({data.length})</span>
+                        </section>
+                        {
+                            pinned ? (
+                              <section className='members-pinned'>
+                                  <img className='pinned-img' src={pin} alt="pin"/>
+                                  <span className='pinned-title'>PINNED</span>
+                              </section>
+                            ) : ''
+                        }
+                        <section className='members-all'>
+                            <img className='all-img' src={message} alt="message"/>
+                            <span className='all-title'>MESSAGE</span>
+                        </section>
                         <section className='members-container'>
                             {
                                 data && msgIds ? data.map((user, i) => {

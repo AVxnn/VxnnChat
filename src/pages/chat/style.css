@@ -26,14 +26,59 @@
   width: 23vw;
   max-width: 400px;
   min-width: 300px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  align-items: center;
   height: 94%;
-  background-color: #24272C;
+  background-color: #1C1E21;
   border-radius: 14px;
   margin-right: 40px;
+}
+.section-chat .members .members-pinned {
+  width: 100%;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+.section-chat .members .members-pinned .pinned-img {
+  margin-right: 4px;
+}
+.section-chat .members .members-pinned .pinned-title {
+  font-size: 12px;
+  color: #6C6C6C;
+}
+.section-chat .members .members-all {
+  width: 100%;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+.section-chat .members .members-all .all-img {
+  margin-right: 4px;
+}
+.section-chat .members .members-all .all-title {
+  font-size: 12px;
+  color: #6C6C6C;
+}
+.section-chat .members .members-top {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+.section-chat .members .members-top .members-title {
+  font-size: 24px;
+  margin-left: 20px;
+  color: #EEEEEE;
+}
+.section-chat .members .members-top .members-subtitle {
+  margin-left: 6px;
+  font-size: 20px;
+  color: #E00086;
 }
 .section-chat .members .members-container {
   display: flex;
