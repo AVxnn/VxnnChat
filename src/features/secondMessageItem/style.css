@@ -13,12 +13,11 @@
 .message-container-m-f .message-second .message-text-container .message-text {
   background-color: #1C1E21;
   padding: 19px;
-  border-radius: 0 14px 14px 14px;
   color: #FFFFFF;
 }
 
 .message-field {
-  width: 42px;
+  min-width: 42px;
 }
 
 /*# sourceMappingURL=style.css.map */

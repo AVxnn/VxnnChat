@@ -32,7 +32,6 @@ const MessageItem = ({keyу, msg, name, chatImg, user2Avatar, deleteHandler, msg
                     <Link to={`/profile/${msg.from !== auth.currentUser.uid ? msg.from : auth.currentUser.uid}`}>
                         <img className='message-avatar' src={`${msg.from === auth.currentUser.uid ? (auth.currentUser.photoURL ? auth.currentUser.photoURL : avatar) : (user2Avatar ? user2Avatar : avatar)}`} alt="avatar"/>
                     </Link>
-                    <img className='message-dots' src={dots} alt="dots"/>
                 </section>
                 <section className='message-second'>
                     <section className={`message-second-info ${msg.from === auth.currentUser.uid ? 'mey' : 'youy'}`}>
@@ -47,7 +46,7 @@ const MessageItem = ({keyу, msg, name, chatImg, user2Avatar, deleteHandler, msg
                     }
                     {
                         msg.text ? (
-                          <span className='message-text' style={msg.media ? {borderRadius: '0 0 14px 14px !important'} : null}>{msg.text}</span>
+                          <span className='message-text' style={msg.media ? (msg.from === auth.currentUser.uid ? {borderRadius: '14px 0 0 0'} : {borderRadius: '0 14px 0 0'}) : (msg.from === auth.currentUser.uid ? {borderRadius: '14px 0 14px 14px'} : {borderRadius: '0 14px 14px 14px'})}>{msg.text}</span>
                         ) : ''
                     }
                     </section>

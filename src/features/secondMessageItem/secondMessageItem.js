@@ -34,7 +34,7 @@ const SecondMessageItem = ({keyу, msg, name, chatImg, user2Avatar, deleteHandle
             }
             {
               msg.text ? (
-                <span className='message-text' style={msg.media ? {borderRadius: '0 0 14px 14px'} : null} >{msg.text}</span>
+                <span className='message-text' style={msg.media ? (msg.from === auth.currentUser.uid ? {borderRadius: '0 0 14px 14px'} : {borderRadius: '0 0 14px 14px'}) : null} >{msg.text}</span>
               ) : ''
             }
           </section>

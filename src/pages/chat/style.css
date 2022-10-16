@@ -59,10 +59,8 @@
 }
 .section-chat .members .members-container .active {
   box-sizing: border-box;
-  height: 90px;
-  padding: 0 19px;
+  background-color: #151618;
   border-radius: 14px;
-  border: 1px solid #e00086;
 }
 .section-chat .block {
   width: 400px;
@@ -73,7 +71,6 @@
 @media screen and (max-width: 1280px) {
   .member-item {
     width: 97%;
-    margin: 15px 10px 10px 10px !important;
   }
 
   .members-container {
