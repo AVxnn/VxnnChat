@@ -22,10 +22,10 @@ const SectionProfile = () => {
     const {user} = useContext(AuthContext)
     const db = getFirestore();
     const navigate = useNavigate()
-
+    console.log(user)
     const handleSignOut = async () => {
         if (auth.currentUser.uid) {
-            await updateDoc(doc(db, "users", auth.currentUser.uid), {
+            await updateDoc(doc(db, "users", user.uid), {
                 isOnline: false,
             })
             await signOut(auth);
@@ -38,12 +38,14 @@ const SectionProfile = () => {
     }
 
     useEffect(() => {
-        let unsub = onSnapshot(doc(db, 'users', auth.currentUser.uid), (doc) => {
-            setData(doc.data())
-        })
-        console.log(data)
-        return () => unsub()
-    }, [])
+        if (user) {
+            let unsub = onSnapshot(doc(db, 'users', user.uid), (doc) => {
+                setData(doc.data())
+            })
+            console.log(data)
+            return () => unsub()
+        }
+    }, [user])
 
     return !user ? (
         <>
