@@ -6,12 +6,13 @@ import {onSnapshot, doc, getFirestore} from "firebase/firestore";
 import Moment from "react-moment";
 import {Link} from "react-router-dom";
 
-const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
+const ChatItem = ({user, user1, active, addedName, selectUser, rightClick, chat}) => {
 
     const db = getFirestore();
     const user2 = user?.uid
     const [data, setData] = useState('')
-    console.log(user)
+    const [openContext, setOpenContext] = useState(false)
+
     useEffect(() => {
         const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
         let unsub = onSnapshot(doc(db, 'lastMsg', id), (doc) => {
@@ -20,14 +21,13 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
         return () => unsub();
     }, [])
 
-
-
     return (
         <>
             <section onClick={() => {
                         selectUser(user)
                         active(user.id)
                      }}
+                     onContextMenu={(e) => rightClick(e, 'open', )}
                      id={user.id}
                      className={`member-item ${addedName}`} >
                 <section className='member-avatar-info'>
@@ -50,6 +50,7 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
                         ) : <p style={{color: '#FFFFFF'}}> </p> }
                     </section>
                 </section>
+
             </section>
         </>
     )

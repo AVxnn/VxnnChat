@@ -43,6 +43,7 @@ const Registration = () => {
                     isAdmin: false,
                     stats: 0,
                     followers: [],
+                    notifications: [],
                     following: [],
                     bgPhoto: '',
                 });

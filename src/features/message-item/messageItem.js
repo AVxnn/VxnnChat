@@ -5,7 +5,6 @@ import avatar from './img/avatar.png'
 import {getAuth} from "firebase/auth";
 import Moment from "react-moment";
 import Popup from "../popup/popup";
-import dots from '../../img/dots.png'
 import {doc, query, deleteDoc, getFirestore} from "firebase/firestore";
 import {Link} from "react-router-dom";
 

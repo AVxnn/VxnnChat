@@ -124,6 +124,101 @@
     background-color: rgba(0, 0, 0, 0)
     border: 2px solid #437ED8
 
+  .profile-bell-container
+    position: relative
+
+    .profile-bell
+      margin-right: 30px
+      width: 24px
+      height: 24px
+      padding: 10px
+      border-radius: 14px
+      cursor: pointer
+      transition: all 0.1s ease-in-out
+
+      &:hover
+        background-color: #24272C
+
+    .profile-bell-span
+      position: absolute
+      top: 10px
+      left: 20px
+      display: flex
+      align-items: center
+      justify-content: center
+      color: #FFFFFF
+      width: 13px
+      height: 13px
+      font-size: 10px
+      border-radius: 99px
+      background-color: #E00086
+      user-select: none
+
+  .profile-bell-list
+    width: 360px
+    top: 70px
+    border-radius: 14px
+    border: 1px solid #333333
+    background-color: #202326
+    position: absolute
+
+    .bell-item
+      padding: 20px
+      display: flex
+      align-items: center
+      justify-content: space-between
+
+      .bell-item-container
+        display: flex
+
+
+        .bell-item-avatar
+          object-fit: cover
+          border-radius: 99px
+          width: 40px
+          height: 40px
+
+        .bell-info
+          display: flex
+          flex-direction: column
+          justify-content: space-between
+          margin-left: 10px
+
+
+          .bell-item-name
+            color: #FFFFFF
+            font-size: 16px
+
+
+          .bell-item-subtitle
+            color: #FFFFFF
+            font-size: 12px
+
+      .bell-btn-list
+
+        .bell-item-btn
+          padding: 7px 12px
+          border: none
+          border-radius: 99px
+          color: #FFFFFF
+          cursor: pointer
+          z-index: 10000
+
+        .accept
+          background-color: #E00086
+          margin-right: 6px
+
+          &:hover
+            background-color: #b6006e
+
+        .reject
+          background-color: #151618
+
+          &:hover
+            background-color: #0c0e0e
+
+
+
   .profile_img
     position: relative
     width: 50px

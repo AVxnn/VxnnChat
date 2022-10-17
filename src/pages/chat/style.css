@@ -35,6 +35,36 @@
   border-radius: 14px;
   margin-right: 40px;
 }
+.section-chat .members .contextMenu {
+  position: absolute;
+  background-color: #1C1E21;
+  border: 1px solid #333333;
+  border-radius: 0 32px 32px 32px;
+  width: 180px;
+  height: 100px;
+}
+.section-chat .members .contextMenu .contextMenu-btn {
+  border-radius: 32px 32px 32px 32px;
+  height: 50px;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  width: 100%;
+}
+.section-chat .members .contextMenu .contextMenu-btn:hover {
+  background-color: #151618;
+}
+.section-chat .members .contextMenu .contextMenu-btn .contextMenu-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.section-chat .members .contextMenu .contextMenu-btn .contextMenu-btn-container .contextMenu-btn-pin {
+  width: 18px;
+  height: 18px;
+}
 .section-chat .members .members-pinned {
   width: 100%;
   margin-bottom: 12px;
@@ -63,24 +93,118 @@
   font-size: 12px;
   color: #6C6C6C;
 }
+.section-chat .members .members-subtop {
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.section-chat .members .members-subtop .members-find {
+  width: 90%;
+  height: 40px;
+  background-color: #202326;
+  color: #FFFFFF;
+  padding: 11px 20px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  outline: none;
+  border: none;
+}
+.section-chat .members .members-subtop .members-find-list {
+  position: absolute;
+  top: 50px;
+  overflow-y: scroll;
+  max-height: 200px;
+  width: 90%;
+  border-radius: 14px;
+  background-color: #202326;
+  z-index: 2299;
+  /* ползунок скроллбара */
+}
+.section-chat .members .members-subtop .members-find-list::-webkit-scrollbar {
+  width: 2px;
+  height: 8px;
+  background-color: #202326;
+}
+.section-chat .members .members-subtop .members-find-list::-webkit-scrollbar-thumb {
+  background-color: #e00086;
+  border-radius: 9em;
+  box-shadow: inset 1px 1px 4px #000000;
+}
+.section-chat .members .members-subtop .members-find-list::-webkit-scrollbar-thumb:hover {
+  background-color: #c90077;
+}
+.section-chat .members .members-subtop .members-find-list .find-item {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.section-chat .members .members-subtop .members-find-list .find-item .find-item-container {
+  display: flex;
+  align-items: center;
+}
+.section-chat .members .members-subtop .members-find-list .find-item .find-item-container .find-item-avatar {
+  object-fit: cover;
+  border-radius: 99px;
+  width: 30px;
+  height: 30px;
+}
+.section-chat .members .members-subtop .members-find-list .find-item .find-item-container .find-item-name {
+  margin-left: 10px;
+  color: #FFFFFF;
+}
+.section-chat .members .members-subtop .members-find-list .find-item .find-item-btn {
+  padding: 7px 20px;
+  border: none;
+  border-radius: 99px;
+  color: #FFFFFF;
+  background-color: #E00086;
+  cursor: pointer;
+}
 .section-chat .members .members-top {
   width: 100%;
   margin-top: 20px;
   margin-bottom: 30px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
-.section-chat .members .members-top .members-title {
+.section-chat .members .members-top .members-container-info {
+  display: flex;
+  align-items: center;
+}
+.section-chat .members .members-top .members-container-info .members-title {
   font-size: 24px;
   margin-left: 20px;
   color: #EEEEEE;
 }
-.section-chat .members .members-top .members-subtitle {
+.section-chat .members .members-top .members-container-info .members-subtitle {
   margin-left: 6px;
   font-size: 20px;
   color: #E00086;
 }
+.section-chat .members .members-top .members-btn {
+  background-color: #E00086;
+  border-radius: 99px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: #FFFFFF;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+.section-chat .members .members-top .members-btn .members-icon {
+  width: 16px;
+  margin-right: 4px;
+  height: 16px;
+}
 .section-chat .members .members-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
