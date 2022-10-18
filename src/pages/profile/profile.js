@@ -133,10 +133,12 @@ const Profile = () => {
                         }
                     </section>
                     <section className='profile-stats'>
-                        <section className='stats-block'>
-                            <h4 className='stats-title'>{user?.friends ? us?.friends.length : 0}</h4>
-                            <span className='stats-subtitle'>Friends</span>
-                        </section>
+                        <NavLink to={`/friends`}>
+                            <section className='stats-block'>
+                                <h4 className='stats-title'>{user?.friends ? us?.friends.length : 0}</h4>
+                                <span className='stats-subtitle'>Friends</span>
+                            </section>
+                        </NavLink>
                         <section className='stats-block'>
                             <h4 className='stats-title'>0</h4>
                             <span className='stats-subtitle'>Posts</span>

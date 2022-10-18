@@ -15,7 +15,7 @@ import {
     query,
     collection,
     where,
-    getDoc
+    getDoc, Timestamp
 } from "firebase/firestore"
 import settings from "../../img/cog.png";
 import exit from "../../img/exit.png";
@@ -36,6 +36,7 @@ const SectionProfile = () => {
         if (auth.currentUser.uid) {
             await updateDoc(doc(db, "users", user.uid), {
                 isOnline: false,
+                lastOnline: Timestamp.fromDate(new Date())
             })
             await signOut(auth);
             navigate('/login')

@@ -165,6 +165,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 99999999;
 }
 .section-profile-log .profile-bell-list .bell-item .bell-item-container {
   display: flex;

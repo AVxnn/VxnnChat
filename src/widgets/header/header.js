@@ -13,6 +13,7 @@ import logo_chat from '../../img/lchat.png'
 import logo_music from '../../img/lmusic.png'
 import logo_profile from '../../img/lprofile.png'
 import logo_todo from '../../img/ltodo.png'
+import logo_friends from '../../img/lfriends.png'
 import cat from '../../img/cat.png'
 
 
@@ -52,6 +53,9 @@ const Header = () => {
             break
             case 'test':
                 setLogo(logo_todo)
+            break
+            case 'friends':
+                setLogo(logo_friends)
             break
 
         }

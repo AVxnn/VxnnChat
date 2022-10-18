@@ -22,7 +22,6 @@ const MessageItem = ({keyу, msg, name, chatImg, user2Avatar, deleteHandler, msg
     const openHandler = () => {
         open ? setOpen(false) : setOpen(true)
     }
-    console.log(msg)
     return (
         <>
             {open ? <Popup src={msg.media} text={msg.text} open={setOpen}/> : null}

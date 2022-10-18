@@ -41,6 +41,8 @@ const Registration = () => {
                     createdAt: Timestamp.fromDate(new Date()),
                     isOnline: true,
                     isAdmin: false,
+                    typing: false,
+                    lastOnline: Timestamp.fromDate(new Date()),
                     stats: 0,
                     friends: [],
                     notifications: [],

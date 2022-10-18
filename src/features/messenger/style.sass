@@ -3,7 +3,6 @@
 .chat
   width: 77vw
   height: 94%
-  padding: 20px 20px
   background-color: #151618
   border-radius: 14px
   box-sizing: border-box
@@ -14,20 +13,80 @@
   .user-bar
     height: 70px
     width: 100%
+    padding: 15px 20px
     display: flex
+    box-sizing: border-box
     border-radius: 14px
     box-shadow: 0 0 12px 0 #1C1E21
     background-color: #1C1E21
 
-    .user-avatar
+    .user-container
+      display: flex
+
+      .user-info
+        display: flex
+        margin-left: 20px
+        flex-direction: column
+        justify-content: space-between
+
+        .user-name
+          color: #FFFFFF
+
+        .user-typing
+          color: #BDBDBD
+          display: flex
+          align-items: center
+
+          .user-typing-logo
+            color: #BDBDBD
+            width: 12px
+            margin-right: 4px
+            justify-content: space-between
+            align-items: center
+            display: flex
+
+            div:nth-child(1)
+              width: 2px
+              height: 2px
+              border-radius: 92px
+              background-color: #D9D9D9
+              animation: sized 0.6s ease-in-out infinite
+            div:nth-child(2)
+              width: 2px
+              height: 2px
+              border-radius: 92px
+              background-color: #D9D9D9
+              animation: sized 0.6s ease-in-out infinite
+              animation-delay: 0.15s
+            div:nth-child(3)
+              width: 2px
+              height: 2px
+              border-radius: 92px
+              background-color: #D9D9D9
+              animation: sized 0.6s ease-in-out infinite
+              animation-delay: 0.20s
+
+              @keyframes sized
+                0%
+                  transform: scale(1)
+                50%
+                  transform: scale(2)
+                80%
+                  transform: scale(1)
+                100%
+                  transform: scale(1)
 
 
-    .user-avatar-img
-      width: 40px
-      height: 40px
+      .user-avatar
 
 
-    .user-avatar-icon
+        .user-avatar-img
+          width: 40px
+          border-radius: 99px
+          height: 40px
+
+
+        .user-avatar-icon
 
 
   .message-list

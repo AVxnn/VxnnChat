@@ -9,7 +9,7 @@ import Error from "./pages/error/error";
 import Registration from "./pages/registration/registration";
 import PrivateRoute from "./shared/privateroute/privateRoute";
 import {useEffect} from "react";
-import {doc, getFirestore, updateDoc} from "firebase/firestore";
+import {doc, getFirestore, Timestamp, updateDoc} from "firebase/firestore";
 import {getAuth} from "firebase/auth";
 import Lenta from "./pages/lenta/lenta";
 import Music from "./pages/music/music";
@@ -23,6 +23,7 @@ import {
 } from "react-transition-group";
 import ProfileEdit from "./pages/profileEdit/profileEdit";
 import TodoOpen from "./pages/todoOpen/todoOpen";
+import Friends from "./pages/friends/friends";
 
 const App = () => {
 
@@ -34,6 +35,7 @@ const App = () => {
         event.preventDefault()
         await updateDoc(doc(db, "users", auth.currentUser.uid), {
             isOnline: false,
+            lastOnline: Timestamp.fromDate(new Date())
         });
     }
 
@@ -102,6 +104,11 @@ const App = () => {
                 <Route path="profile/:userId" element={
                     <PrivateRoute>
                         <Profile />
+                    </PrivateRoute>
+                }/>
+                <Route path="friends" element={
+                    <PrivateRoute>
+                        <Friends />
                     </PrivateRoute>
                 }/>
                 <Route path="profile/:userId/edit" element={
