@@ -7,7 +7,16 @@ import signIn from '../../img/signin.png'
 import {AuthContext} from '../../shared/contextauth/auth'
 import {NavLink, useNavigate} from "react-router-dom";
 import {signOut} from "firebase/auth"
-import {updateDoc, doc, getFirestore, onSnapshot, query, collection, where} from "firebase/firestore"
+import {
+    updateDoc,
+    doc,
+    getFirestore,
+    onSnapshot,
+    query,
+    collection,
+    where,
+    getDoc
+} from "firebase/firestore"
 import settings from "../../img/cog.png";
 import exit from "../../img/exit.png";
 import bell from "../../img/bell.png";
@@ -17,12 +26,12 @@ const SectionProfile = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenNotifications, setIsOpenNotifications] = useState(false)
     const [data, setData] = useState(false)
+    const [users, setUsers] = useState([])
 
     const auth = getAuth()
     const {user} = useContext(AuthContext)
     const db = getFirestore();
     const navigate = useNavigate()
-    console.log(user)
     const handleSignOut = async () => {
         if (auth.currentUser.uid) {
             await updateDoc(doc(db, "users", user.uid), {
@@ -37,6 +46,27 @@ const SectionProfile = () => {
 
     }
 
+    const acceptFriend = async (e, type) => {
+        const user2 = users.filter(i => i.uid === e.uid)
+        if (type === 0) {
+            console.log(data, user2)
+            let result1 = data.notifications.filter(i => i.uid !== user2[0].uid)
+            let result2 = user2[0].notifications.filter(i => i.uid !== data.uid)
+            console.log(result1, result2)
+            await updateDoc(doc(db, "users", data.uid), {
+                notifications: result1,
+                friends: [...data.friends, {name: user2[0].name ? user2[0].name : 'anonymous', uid: user2[0].uid, avatar: user2[0].avatar ? user2[0].avatar : avatar}]
+            });
+            await updateDoc(doc(db, "users", user2[0].uid), {
+                notifications: result2,
+                friends: [...user2[0].friends, {name: data.name ? data.name : 'anonymous', uid: data.uid, avatar: data.avatar ? data.avatar : avatar}]
+            });
+        } else {
+
+        }
+    }
+
+
     useEffect(() => {
         if (user) {
             let unsub = onSnapshot(doc(db, 'users', user.uid), (doc) => {
@@ -46,6 +76,27 @@ const SectionProfile = () => {
             return () => unsub()
         }
     }, [user])
+
+    useEffect(() => {
+        if (user) {
+            let unsub = onSnapshot(doc(db, 'users', user.uid), (doc) => {
+                setData(doc.data())
+            })
+            console.log(data)
+            return () => unsub()
+        }
+    }, [user])
+
+    useEffect(() => {
+        const unsub = onSnapshot(query(collection(db, "users")), (querySnapshot) => {
+            const users = [];
+            querySnapshot.forEach((doc) => {
+                users.push(doc.data());
+            });
+            setUsers(users)
+        });
+        return () => unsub()
+    }, [])
 
     return !user ? (
         <>
@@ -61,7 +112,7 @@ const SectionProfile = () => {
                     <img className='profile-bell' src={bell} alt="bell"/>
                     {
                         data.notifications ? (
-                          <div className='profile-bell-span'>{data.notifications.length}</div>
+                          <div className='profile-bell-span'>{data.notifications.filter(i => i.type === 'reqFriend').length}</div>
                         ) : ''
                     }
                 </section>
@@ -69,23 +120,26 @@ const SectionProfile = () => {
                     <section className='profile-bell-list'>
                         {
                             data.notifications ? data.notifications.map((e) => {
-                                console.log(data.notifications)
-                                return (
-                                  <section className='bell-item'>
-                                      <section className='bell-item-container'>
-                                          <img className='bell-item-avatar' src={e.avatar ? e.avatar : avatar} alt="avatar"/>
-                                          <section className='bell-info'>
-                                              <span className='bell-item-name'>{e.name}</span>
-                                              <span className='bell-item-subtitle'>Wants to be friends</span>
-                                          </section>
-                                      </section>
-                                      <section className='bell-btn-list'>
-                                          <button className='bell-item-btn accept'>Accept</button>
-                                          <button className='bell-item-btn reject'>Reject</button>
-                                      </section>
-                                  </section>
-                                )
-                            }) : null
+                                if (e.type === 'reqFriend') {
+                                    return (
+                                        <section className='bell-item'>
+                                            <section className='bell-item-container'>
+                                                <img className='bell-item-avatar' src={e.avatar ? e.avatar : avatar} alt="avatar"/>
+                                                <section className='bell-info'>
+                                                    <span className='bell-item-name'>{e.name}</span>
+                                                    <span className='bell-item-subtitle'>Wants to be friends</span>
+                                                </section>
+                                            </section>
+                                            <section className='bell-btn-list'>
+                                                <button onClick={() => acceptFriend(e, 0)} className='bell-item-btn accept'>Accept</button>
+                                                <button onClick={() => acceptFriend(e, 1)} className='bell-item-btn reject'>Reject</button>
+                                            </section>
+                                        </section>
+                                    )
+                                }
+                            }) : (
+                                <section className='bell-item'>Empty</section>
+                            )
                         }
                     </section>
                     ) : null

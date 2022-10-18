@@ -55,8 +55,7 @@ const Profile = () => {
             setUs(users[0])
             setLoading(true)
             console.log(us)
-            console.log(users[0]?.followers.filter((i) => i === auth.currentUser.uid).length >= 1)
-            setFollow(users[0]?.followers.filter((i) => i === auth.currentUser.uid).length >= 1)
+            // setFollow(users[0]?.followers.filter((i) => i === auth.currentUser.uid).length >= 1)
         });
         return () => unsub()
     }, [userId])
@@ -135,12 +134,12 @@ const Profile = () => {
                     </section>
                     <section className='profile-stats'>
                         <section className='stats-block'>
-                            <h4 className='stats-title'>{user?.followers.length > 0 ? us?.followers.length : 0}</h4>
-                            <span className='stats-subtitle'>Followers</span>
+                            <h4 className='stats-title'>{user?.friends ? us?.friends.length : 0}</h4>
+                            <span className='stats-subtitle'>Friends</span>
                         </section>
                         <section className='stats-block'>
-                            <h4 className='stats-title'>{user?.following.length > 0 ? us?.following.length : 0}</h4>
-                            <span className='stats-subtitle'>Following</span>
+                            <h4 className='stats-title'>0</h4>
+                            <span className='stats-subtitle'>Posts</span>
                         </section>
                     </section>
                     <section className='info-newBlock'>
@@ -161,9 +160,9 @@ const Profile = () => {
                               <section className='follow-block'>
                                   {
                                       !follow ? (
-                                        <button onClick={() => followUser()} className='follow-btn'>Subscribe</button>
+                                        <button onClick={() => followUser()} className='follow-btn'>Add as Friend</button>
                                       ) : (
-                                        <button onClick={() => unFollowUser()} className='unfollow-btn'>Unsubscribe</button>
+                                        <button onClick={() => unFollowUser()} className='unfollow-btn'>Delete Friend</button>
                                       )
                                   }
 

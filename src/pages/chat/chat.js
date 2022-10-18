@@ -31,6 +31,8 @@ const Chat = () => {
     const [activeTab, setActiveTab] = useState('')
     let clickEventHandler = (id) => { setActiveTab(id) }
     const [data, setData] = useState([])
+    const [allData, setAllData] = useState([])
+    const [localUser, setLocalUser] = useState([])
     const [filterData, setFilterData] = useState([])
     const [openContext, setOpenContext] = useState({
         status: false,
@@ -48,11 +50,42 @@ const Chat = () => {
     const [chat, setChat] = useState('')
     const [img, setImg] = useState('')
     const [msgs, setMsgs] = useState([])
+    const [user, setUser] = useState([])
     const [msgIds, setMsgIds] = useState([])
     const [text, setText] = useState('')
     const auth = getAuth()
 
+    const user1 = auth.currentUser.uid
+
     const db = getFirestore()
+
+    useEffect(() => {
+        if (user1) {
+            let unsub = onSnapshot(doc(db, 'users', user1), (doc) => {
+                setLocalUser(doc.data())
+            })
+            console.log(localUser)
+            return () => unsub()
+        }
+    }, [])
+
+    useEffect(() => {
+        const unsub = onSnapshot(query(collection(db, "users"), where('uid', 'not-in', [auth.currentUser.uid])), (querySnapshot) => {
+            const users = [];
+            querySnapshot.forEach((doc) => {
+                if (localUser.uid && user1) {
+                    localUser.friends.map(async (i)  => {
+                        if (i.uid === doc.data().uid) {
+                            users.push(doc.data());
+                        }
+                    })
+                }
+            });
+
+            setData(users)
+        });
+        return () => unsub()
+    }, [localUser])
 
     useEffect(() => {
         const unsub = onSnapshot(query(collection(db, "users"), where('uid', 'not-in', [auth.currentUser.uid])), (querySnapshot) => {
@@ -60,7 +93,8 @@ const Chat = () => {
             querySnapshot.forEach((doc) => {
                 users.push(doc.data());
             });
-            setData(users)
+
+            setAllData(users)
         });
         return () => unsub()
     }, [])
@@ -91,8 +125,6 @@ const Chat = () => {
         }
 
     }
-
-    const user1 = auth.currentUser.uid
 
     const handleSubmit = async (e, text) => {
         e.preventDefault();
@@ -147,30 +179,32 @@ const Chat = () => {
             let y = e.clientY;
             let g = e;
             setOpenContextCords({x: x, y: y})
-            console.log(x, y, g)
             return false
         } else {
             setOpenContext(false)
         }
     }
 
-    const filterFriends = (item) => {
-        console.log(item)
+    const filterFriends = async (item) => {
         setTimeout(() => {
-            let filterData = data.filter((e) => e.name.includes(item.target.value) === true)
+            let filterData = allData.filter((e) => e.name.includes(item.target.value) === true)
             setFilterData(filterData)
             setOpenFriend({status: openFriend.status})
         }, 1000)
     }
 
     const requestFriend = async (item) => {
-        console.log(item)
-        await updateDoc(doc(db, "users", item.uid), {
-            notifications: [...item?.notifications, {uid: auth.currentUser.uid, name: auth.currentUser.displayName, avatar: auth.currentUser.photoURL, type: 'reqFriend'}]
-        });
-        await updateDoc(doc(db, "users", auth.currentUser.uid), {
-            notifications: [...item?.notifications, {uid: item.uid, name: item.name, avatar: item.avatar, type: 'resFriend'}]
-        });
+        localUser.friends.map(async (i)  => {
+            console.log(i, item)
+            if (i.uid !== item.uid) {
+                await updateDoc(doc(db, "users", item.uid), {
+                    notifications: [...item?.notifications, {uid: localUser.uid, name: localUser.name ? localUser.name : 'anonymous', avatar: localUser.avatar ? localUser.avatar : avatar, type: 'reqFriend'}]
+                });
+                await updateDoc(doc(db, "users", localUser.uid), {
+                    notifications: [...localUser?.notifications, {uid: item.uid, name: item.name ? item.name : 'anonymous', avatar: item.avatar ? item.avatar : avatar, type: 'resFriend'}]
+                });
+            }
+        })
     }
 
     const pinnedMessage = (e) => {
@@ -190,7 +224,6 @@ const Chat = () => {
             });
         }
     }
-
     return (
         <>
             <main onClick={() => rightClick('', 'close')} className="background">
@@ -265,7 +298,6 @@ const Chat = () => {
                         {
                             openContext.status ? (
                               <section style={{left: `${openContextCords.x}px`, top: `${openContextCords.y}px`}} className='contextMenu'>
-
                                   <button onClick={() => pinnedMessage()} className='contextMenu-btn'><section className='contextMenu-btn-container'><img className='contextMenu-btn-pin' src={pin} alt="pin"/>Pinned</section></button>
                               </section>
                             ) : null
