@@ -111,8 +111,8 @@ const SectionProfile = () => {
                 <section onClick={() => setIsOpenNotifications(!isOpenNotifications)} className='profile-bell-container'>
                     <img className='profile-bell' src={bell} alt="bell"/>
                     {
-                        data.notifications ? (
-                          <div className='profile-bell-span'>{data.notifications.filter(i => i.type === 'reqFriend').length}</div>
+                        data.notifications && data.notifications.length >= 1 ? (
+                          <div className='profile-bell-span'>{data.notifications.length}</div>
                         ) : ''
                     }
                 </section>
@@ -132,6 +132,21 @@ const SectionProfile = () => {
                                             </section>
                                             <section className='bell-btn-list'>
                                                 <button onClick={() => acceptFriend(e, 0)} className='bell-item-btn accept'>Accept</button>
+                                                <button onClick={() => acceptFriend(e, 1)} className='bell-item-btn reject'>Reject</button>
+                                            </section>
+                                        </section>
+                                    )
+                                } else if (e.type === 'resFriend') {
+                                    return (
+                                        <section className='bell-item'>
+                                            <section className='bell-item-container'>
+                                                <img className='bell-item-avatar' src={avatar} alt="avatar"/>
+                                                <section className='bell-info'>
+                                                    <span className='bell-item-name'>{e.name}</span>
+                                                    <span className='bell-item-subtitle'>You sent a friend request</span>
+                                                </section>
+                                            </section>
+                                            <section className='bell-btn-list'>
                                                 <button onClick={() => acceptFriend(e, 1)} className='bell-item-btn reject'>Reject</button>
                                             </section>
                                         </section>

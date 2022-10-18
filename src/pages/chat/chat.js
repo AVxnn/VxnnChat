@@ -195,8 +195,12 @@ const Chat = () => {
 
     const requestFriend = async (item) => {
         localUser.friends.map(async (i)  => {
-            console.log(i, item)
+            console.log(i.uid !== item.uid)
+            let res = 0
             if (i.uid !== item.uid) {
+                res++
+            }
+            if (res === localUser.friends.length) {
                 await updateDoc(doc(db, "users", item.uid), {
                     notifications: [...item?.notifications, {uid: localUser.uid, name: localUser.name ? localUser.name : 'anonymous', avatar: localUser.avatar ? localUser.avatar : avatar, type: 'reqFriend'}]
                 });
@@ -204,6 +208,7 @@ const Chat = () => {
                     notifications: [...localUser?.notifications, {uid: item.uid, name: item.name ? item.name : 'anonymous', avatar: item.avatar ? item.avatar : avatar, type: 'resFriend'}]
                 });
             }
+            setOpenFriend({...openFriend, status: false})
         })
     }
 
