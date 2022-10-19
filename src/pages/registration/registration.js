@@ -46,7 +46,8 @@ const Registration = () => {
                     stats: 0,
                     friends: [],
                     notifications: [],
-                    bgPhoto: '',
+                    background: '',
+                    backgroundPath: '',
                 });
                 console.log(data)
             })

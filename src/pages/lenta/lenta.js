@@ -162,7 +162,6 @@ const Lenta = () => {
 
                     </section>
                 </section>
-                <Github />
             </main>
         </>
     )

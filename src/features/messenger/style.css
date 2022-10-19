@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .chat {
-  width: 77vw;
+  width: 75vw;
   height: 94%;
   background-color: #151618;
   border-radius: 14px;
@@ -12,12 +12,46 @@
 .chat .user-bar {
   height: 70px;
   width: 100%;
+  justify-content: space-between;
   padding: 15px 20px;
   display: flex;
   box-sizing: border-box;
   border-radius: 14px;
   box-shadow: 0 0 12px 0 #1C1E21;
   background-color: #1C1E21;
+}
+.chat .user-bar .user-right {
+  z-index: 3;
+}
+.chat .user-bar .user-right .item-list-p {
+  margin-top: 20px;
+}
+.chat .user-bar .user-right .item-list-p .user-item {
+  background-color: #1C1E21;
+  width: 24px;
+  height: 24px;
+  padding: 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.chat .user-bar .user-right .item-list-p .user-item:hover {
+  background-color: #24272C;
+}
+.chat .user-bar .user-right .item-list-p .user-item .user-item_img-pin {
+  width: 24px;
+  height: 24px;
+}
+.chat .user-bar .user-right .user-item {
+  width: 24px;
+  height: 24px;
+  padding: 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.chat .user-bar .user-right .user-item:hover {
+  background-color: #24272C;
 }
 .chat .user-bar .user-container {
   display: flex;
@@ -83,6 +117,7 @@
 }
 .chat .user-bar .user-container .user-avatar .user-avatar-img {
   width: 40px;
+  object-fit: cover;
   border-radius: 99px;
   height: 40px;
 }
@@ -95,7 +130,7 @@
   overflow-x: hidden;
   justify-content: flex-start;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin: 10px 0;
   /* полоса прокрутки (скроллбар) */
   /* ползунок скроллбара */
 }
@@ -130,7 +165,25 @@
   display: flex;
   border-radius: 14px;
   box-shadow: 0 0 12px 0 #1C1E21;
+  align-items: center;
   background-color: #1C1E21;
+}
+.chat .send-bar .smile-picker {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+}
+.chat .send-bar .send-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20px;
+}
+.chat .send-bar .send-avatar img {
+  width: 40px;
+  border-radius: 99px;
+  height: 40px;
+  object-fit: cover;
 }
 .chat .send-bar .btn {
   background-color: rgba(255, 255, 255, 0);
@@ -141,19 +194,28 @@
   padding: 19px;
   cursor: pointer;
 }
+.chat .send-bar .field_img {
+  width: 30px;
+  margin-right: 13px;
+  height: 30px;
+  border-radius: 12px;
+  object-fit: cover;
+  transition: all 0.1s ease-in-out;
+}
+.chat .send-bar .emoji {
+  padding: 0;
+}
 .chat .send-bar .file-btn {
   opacity: 0;
   visibility: hidden;
   position: absolute;
 }
 .chat .send-bar .field__file {
-  padding: 19px;
-}
-.chat .send-bar .field__file .apply {
-  transform: rotate(90deg);
+  display: flex;
+  align-items: center;
+  padding: 8px;
 }
 .chat .send-bar .field__file .field__file-img {
-  background-image: url(./img/clip.png);
   background-repeat: no-repeat;
   background-position: 50%;
   cursor: pointer;
@@ -166,6 +228,11 @@
   width: 100%;
   outline: none;
 }
+.chat .send-bar .send-btn {
+  height: 20px;
+  border-left: 2px solid #6C6C6C;
+}
+
 @media screen and (max-width: 1280px) {
   .send-bar {
     height: 60px !important;

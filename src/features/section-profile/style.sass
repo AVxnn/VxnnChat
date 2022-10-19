@@ -41,6 +41,7 @@
   background-color: #1C1E21
   top: 65px
   right: -5px
+  z-index: -20
   padding: 10px
   display: flex
   justify-content: space-between
@@ -63,6 +64,7 @@
   transition: all 0.2s ease-in-out
 
 .active
+  z-index: 222
   opacity: 1
 
   .profile-item
@@ -154,6 +156,21 @@
       background-color: #E00086
       user-select: none
 
+  .empty
+    width: 360px
+    top: 70px
+    height: 50px
+    display: flex
+    align-items: center
+    border-radius: 14px
+    border: 1px solid #333333
+    background-color: #202326
+    position: absolute
+
+    .profile-bell-empty
+      padding: 0 20px
+      color: #FFFFFF
+
   .profile-bell-list
     width: 360px
     top: 70px
@@ -229,8 +246,7 @@
     cursor: pointer
 
     &:hover
-      filter: contrast(75%)
-
+      background-image: linear-gradient(45deg, darken(#13abdb,5%), #B10DC9)
 
 @media screen and (max-width: 935px)
 

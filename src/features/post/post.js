@@ -23,6 +23,8 @@ const Post = ({auth, post, postId}) => {
     const [open, setOpen] = useState(false)
     const [isEditOpen, setIsEditOpen] = useState(true)
     const [isLike, setIsLike] = useState(true)
+    const [animation, setAnimation] = useState(!isLike)
+    const [delay, setDelay] = useState(0)
     const [avatar, setAvatar] = useState('')
 
     const db = getFirestore()
@@ -60,24 +62,38 @@ const Post = ({auth, post, postId}) => {
 
     const likeHandler = async (e) => {
         let myArray = [...post.counterLikes]
-        console.log([...post.counterLikes])
-        if (myArray) {
-            console.log(myArray)
+        setAnimation(false)
+        if (animation ) {
+            setAnimation(false)
+            setDelay(1000)
+        } else {
+            setAnimation(true)
+            setDelay(0)
         }
         let myIndex = myArray.indexOf(auth.currentUser.uid)
-        console.log(myIndex)
-        if (myIndex !== -1) {
-            myArray.splice(myIndex, 1);
-            setIsLike(true)
-            await updateDoc(doc(db, 'posts', postId), {
-                counterLikes: [...myArray]
-            })
-        } else if (myIndex === -1) {
-            setIsLike(false)
-            await updateDoc(doc(db, 'posts', postId), {
-                counterLikes: [...post.counterLikes, auth.currentUser.uid]
-            })
-        }
+        setTimeout(async () => {
+            setAnimation(true)
+            if (!animation) {
+                setAnimation(false)
+                setDelay(1000)
+            } else {
+                setAnimation(true)
+                setDelay(0)
+            }
+            if (myIndex !== -1) {
+                setIsLike(true)
+                myArray.splice(myIndex, 1);
+                await updateDoc(doc(db, 'posts', postId), {
+                    counterLikes: [...myArray]
+                })
+            } else if (myIndex === -1) {
+                setIsLike(false)
+                await updateDoc(doc(db, 'posts', postId), {
+                    counterLikes: [...post.counterLikes, auth.currentUser.uid]
+                })
+            }
+        }, delay)
+
     }
 
     useEffect(() => {
@@ -91,8 +107,10 @@ const Post = ({auth, post, postId}) => {
         if (myIndex !== -1) {
             myArray.splice(myIndex, 1);
             setIsLike(false)
+            setDelay(0)
         } else if (myIndex === -1) {
             setIsLike(true)
+            setDelay(1000)
         }
     }, [])
 
@@ -160,9 +178,9 @@ const Post = ({auth, post, postId}) => {
                         {
                             isLike
                                 ?
-                                <img onClick={(e) => likeHandler()} className='post-like-img' src={like} alt="like"/>
+                                <span onClick={(e) => likeHandler(e)} className={`post-like-img ${animation ? 'animation' : ''}`}/>
                                 :
-                                <img onClick={(e) => likeHandler()} className='post-like-img' src={likefill} alt="like"/>
+                                <span onClick={(e) => animation ? '' : likeHandler(e)} className='post-like-img active'/>
                         }
                         {
                             post.counterLikes.length ? <span className='post-like-counter'>{post.counterLikes.length}</span> : null

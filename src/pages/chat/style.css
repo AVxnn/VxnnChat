@@ -23,7 +23,7 @@
   background-color: #24272C;
 }
 .section-chat .members {
-  width: 23vw;
+  width: 25vw;
   max-width: 400px;
   min-width: 300px;
   padding: 20px;
@@ -73,6 +73,8 @@
   margin-left: 20px;
 }
 .section-chat .members .members-pinned .pinned-img {
+  width: 14px;
+  height: 14px;
   margin-right: 4px;
 }
 .section-chat .members .members-pinned .pinned-title {
@@ -187,7 +189,7 @@
   color: #E00086;
 }
 .section-chat .members .members-top .members-btn {
-  background-color: #E00086;
+  background: linear-gradient(95.66deg, #802276 3.37%, #861954 100%);
   border-radius: 99px;
   margin-right: 20px;
   display: flex;
@@ -211,7 +213,6 @@
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 1080px;
   /* ползунок скроллбара */
 }
 .section-chat .members .members-container::-webkit-scrollbar {
@@ -230,6 +231,9 @@
   box-sizing: border-box;
   background-color: #151618;
   border-radius: 14px;
+}
+.section-chat .pinned {
+  margin: 0 0 10px 0;
 }
 .section-chat .block {
   width: 400px;

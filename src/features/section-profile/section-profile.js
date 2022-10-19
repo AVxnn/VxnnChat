@@ -67,6 +67,13 @@ const SectionProfile = () => {
         }
     }
 
+    const closeNotification = async (e) => {
+        const user2 = data.notifications.filter(i => i.uid !== e.uid)
+        await updateDoc(doc(db, "users", user.uid), {
+            notifications: [...user2],
+        });
+    }
+
 
     useEffect(() => {
         if (user) {
@@ -118,9 +125,9 @@ const SectionProfile = () => {
                     }
                 </section>
                 { isOpenNotifications ? (
-                    <section className='profile-bell-list'>
+                    <section className={`profile-bell-list ${data.notifications.length > 0 ? '' : 'empty'}`}>
                         {
-                            data.notifications ? data.notifications.map((e) => {
+                            data.notifications.length > 0 ? data.notifications.map((e) => {
                                 if (e.type === 'reqFriend') {
                                     return (
                                         <section className='bell-item'>
@@ -152,10 +159,24 @@ const SectionProfile = () => {
                                             </section>
                                         </section>
                                     )
+                                } else if (e.type === 'delete') {
+                                    return (
+                                      <section className='bell-item'>
+                                          <section className='bell-item-container'>
+                                              <img className='bell-item-avatar' src={avatar} alt="avatar"/>
+                                              <section className='bell-info'>
+                                                  <span className='bell-item-name'>{e.name}</span>
+                                                  <span className='bell-item-subtitle'>Removed you from friends</span>
+                                              </section>
+                                          </section>
+                                          <section className='bell-btn-list'>
+                                              <button onClick={() => closeNotification(e)} className='bell-item-btn reject'>Close</button>
+                                          </section>
+                                      </section>
+                                    )
                                 }
-                            }) : (
-                                <section className='bell-item'>Empty</section>
-                            )
+                            }) : <span className='profile-bell-empty'>Empty</span>
+
                         }
                     </section>
                     ) : null

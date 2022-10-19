@@ -80,7 +80,12 @@
 }
 .me .message-text {
   border-radius: 14px 0 14px 14px;
-  background-color: #AD0068 !important;
+  background: linear-gradient(95.66deg, #802276 3.37%, #861954 100%);
+}
+.me .message-notlook {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 .me .message-text-container {
   display: flex;
@@ -107,12 +112,25 @@
 .me .message-media {
   border-radius: 10px 0 10px 10px;
 }
+.me .second-data {
+  top: 47%;
+  left: 60px;
+  position: absolute;
+}
 
+.you .message-notlook {
+  display: none;
+}
 .you .message-text-container {
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   border-radius: 0 14px 14px 14px;
+}
+.you .second-data {
+  top: 47%;
+  right: 60px;
+  position: absolute;
 }
 .you .message-second {
   display: flex;

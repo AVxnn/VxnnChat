@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Header from "../../widgets/header/header";
 import './style.css'
 import avatar from '../../img/te.png'
-import camera from '../../img/camera.png'
+import camera from '../../img/camerab.png'
 import edit from '../../img/edit.png'
 import cog from '../../img/cog.png'
 import {collection, doc, getDoc, getFirestore, onSnapshot, query, updateDoc, where} from "firebase/firestore";
@@ -17,7 +17,8 @@ const Profile = () => {
     const [us, setUs] = useState(null)
     const [loading, setLoading] = useState(false)
     const [user, setUser] = useState()
-    const [name, setName] = useState('')
+    const [curUser, setCurUser] = useState({})
+    const [friend, setFriend] = useState(false)
     const [follow, setFollow] = useState(false)
     const [nameChanger, setNameChanger] = useState(true)
     const [img, setImg] = useState('')
@@ -27,23 +28,34 @@ const Profile = () => {
     const {userId} = useParams()
     console.log(userId)
 
-    const followUser = async () => {
-        await updateDoc(doc(db, 'users', userId), {
-            followers: [...us?.followers, auth.currentUser.uid]
+    const requestFriend = async (item, type) => {
+        let res = 0
+        curUser.friends.map(async (i)  => {
+            if (type === 'add') {
+                setFriend(true)
+                await updateDoc(doc(db, "users", item.uid), {
+                    notifications: [...item?.notifications, {uid: curUser.uid, name: curUser.name ? curUser.name : 'anonymous', avatar: curUser.avatar ? curUser.avatar : avatar, type: 'reqFriend'}]
+                });
+                await updateDoc(doc(db, "users", curUser.uid), {
+                    notifications: [...curUser?.notifications, {uid: item.uid, name: item.name ? item.name : 'anonymous', avatar: item.avatar ? item.avatar : avatar, type: 'resFriend'}]
+                });
+            }
+            if (type === 'del') {
+                setFriend(false)
+                let resF = item.friends.filter(i => i.uid !== curUser.uid)
+                await updateDoc(doc(db, "users", item.uid), {
+                    notifications: [...item?.notifications, {uid: curUser.uid, name: curUser.name ? curUser.name : 'anonymous', avatar: curUser.avatar ? curUser.avatar : avatar, type: 'delete'}]
+                });
+                await updateDoc(doc(db, "users", item.uid), {
+                    friends: [...resF]
+                });
+                let resC = curUser.friends.filter(i => i.uid !== item.uid)
+                await updateDoc(doc(db, "users", curUser.uid), {
+                    friends: [...resC]
+                });
+            }
+
         })
-        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-            following: [...user?.following, userId]
-        })
-        setUs({...us, followers: [...us?.followers, auth.currentUser.uid]})
-    }
-    const unFollowUser = async () => {
-        await updateDoc(doc(db, 'users', userId), {
-            followers: us?.followers.filter((i) => i !== auth.currentUser.uid)
-        })
-        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-            following: user?.following.filter((i) => i !== userId)
-        })
-        setUs({...us, followers: us?.followers.filter((i) => i !== auth.currentUser.uid)})
     }
 
     useEffect(() => {
@@ -61,11 +73,6 @@ const Profile = () => {
     }, [userId])
 
     useEffect(() => {
-        getDoc(doc(db, 'users' , userId)).then(docSnap => {
-            if (docSnap.exists) {
-                setUser(docSnap.data())
-            }
-        })
         if (img) {
             const uploadImg = async () => {
                 const imgRef = ref(
@@ -95,6 +102,30 @@ const Profile = () => {
             uploadImg()
         }
     }, [img, userId])
+
+    useEffect(() => {
+        getDoc(doc(db, 'users' , userId)).then(docSnap => {
+            if (docSnap.exists) {
+                setUser(docSnap.data())
+            }
+        })
+
+        getDoc(doc(db, 'users' , auth.currentUser.uid)).then(docSnap => {
+            if (docSnap.exists) {
+                setCurUser(docSnap.data())
+
+            }
+        })
+    }, [userId])
+
+    useEffect(() => {
+        console.log(curUser)
+        curUser?.friends?.map(i => {
+            if (i.uid === userId) {
+                setFriend(true)
+            }
+        })
+    }, [curUser])
 
     return (
         <>
@@ -161,10 +192,10 @@ const Profile = () => {
                             userId !== auth.currentUser.uid ? (
                               <section className='follow-block'>
                                   {
-                                      !follow ? (
-                                        <button onClick={() => followUser()} className='follow-btn'>Add as Friend</button>
+                                      !friend ? (
+                                        <button onClick={() => requestFriend(user, 'add')} className='follow-btn'>Add as Friend</button>
                                       ) : (
-                                        <button onClick={() => unFollowUser()} className='unfollow-btn'>Delete Friend</button>
+                                        <button onClick={() => requestFriend(user, 'del')} className='unfollow-btn'>Delete Friend</button>
                                       )
                                   }
 

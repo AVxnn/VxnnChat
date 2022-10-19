@@ -6,7 +6,7 @@ import {onSnapshot, doc, getFirestore} from "firebase/firestore";
 import Moment from "react-moment";
 import {Link} from "react-router-dom";
 
-const ChatItem = ({user, user1, active, addedName, selectUser, rightClick, chat}) => {
+const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
 
     const db = getFirestore();
     const user2 = user?.uid
@@ -27,11 +27,10 @@ const ChatItem = ({user, user1, active, addedName, selectUser, rightClick, chat}
                         selectUser(user)
                         active(user.id)
                      }}
-                     onContextMenu={(e) => rightClick(e, 'open', )}
                      id={user.id}
                      className={`member-item ${addedName}`} >
                 <section className='member-avatar-info'>
-                    <Link to={`/profile/${user2}`}><img className="member_avatar" src={user.avatar ? user.avatar : logo} alt="avatar"/></Link>
+                    <img className="member_avatar" src={user.avatar ? user.avatar : logo} alt="avatar"/>
                     <span className={`member_active ${user.isOnline ? 'online' : 'offline'}`}></span>
                 </section>
                 <section className="member-content">

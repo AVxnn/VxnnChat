@@ -25,12 +25,14 @@ import message from '../../img/messageItem.png'
 import close from '../../img/x.png'
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import {getAuth} from "firebase/auth";
+import {NavLink} from "react-router-dom";
 
 const Chat = () => {
 
     const [activeTab, setActiveTab] = useState('')
     let clickEventHandler = (id) => { setActiveTab(id) }
     const [data, setData] = useState([])
+    const [dataPinned, setDataPinned] = useState([])
     const [allData, setAllData] = useState([])
     const [localUser, setLocalUser] = useState([])
     const [filterData, setFilterData] = useState([])
@@ -42,7 +44,6 @@ const Chat = () => {
         x: 0,
         y: 0
     })
-    const [pinned, setPinned] = useState(false)
     const [openFriend, setOpenFriend] = useState({
         status: false,
         currentTarget: ''
@@ -64,7 +65,6 @@ const Chat = () => {
             let unsub = onSnapshot(doc(db, 'users', user1), (doc) => {
                 setLocalUser(doc.data())
             })
-            console.log(localUser)
             return () => unsub()
         }
     }, [])
@@ -72,16 +72,20 @@ const Chat = () => {
     useEffect(() => {
         const unsub = onSnapshot(query(collection(db, "users"), where('uid', 'not-in', [auth.currentUser.uid])), (querySnapshot) => {
             const users = [];
+            const usersPinned = [];
             querySnapshot.forEach((doc) => {
                 if (localUser.uid && user1) {
                     localUser.friends.map(async (i)  => {
-                        if (i.uid === doc.data().uid) {
+                        if (i.uid === doc.data().uid && !i.pinned) {
                             users.push(doc.data());
+                        }
+                        if (i.uid === doc.data().uid && i.pinned) {
+                            usersPinned.push(doc.data());
                         }
                     })
                 }
             });
-
+            setDataPinned(usersPinned)
             setData(users)
         });
         return () => unsub()
@@ -127,7 +131,9 @@ const Chat = () => {
     }
 
     const handleSubmit = async (e, text) => {
-        e.preventDefault();
+        if (e) {
+            e.preventDefault();
+        }
 
         if (!text && img) {
         } else if (!text) {
@@ -171,20 +177,6 @@ const Chat = () => {
 
     }
 
-    const rightClick = (e, type) => {
-        if (type === 'open') {
-            e.preventDefault()
-            setOpenContext({status: !openContext.status, currentTarget: {}})
-            let x = e.clientX;
-            let y = e.clientY;
-            let g = e;
-            setOpenContextCords({x: x, y: y})
-            return false
-        } else {
-            setOpenContext(false)
-        }
-    }
-
     const filterFriends = async (item) => {
         setTimeout(() => {
             let filterData = allData.filter((e) => e.name.includes(item.target.value) === true)
@@ -194,9 +186,9 @@ const Chat = () => {
     }
 
     const requestFriend = async (item) => {
+        let res = 0
         localUser.friends.map(async (i)  => {
             console.log(i.uid !== item.uid)
-            let res = 0
             if (i.uid !== item.uid) {
                 res++
             }
@@ -210,10 +202,6 @@ const Chat = () => {
             }
             setOpenFriend({...openFriend, status: false})
         })
-    }
-
-    const pinnedMessage = (e) => {
-
     }
 
     const deleteHandler = async (e, u2) => {
@@ -231,14 +219,14 @@ const Chat = () => {
     }
     return (
         <>
-            <main onClick={() => rightClick('', 'close')} className="background">
+            <main className="background">
                 <Header />
                 <section className="section-chat" onClick={() => onlineHandler()}>
                     <section className="members">
                         <section className='members-top'>
                             <section className='members-container-info'>
                                 <h3 className='members-title'>Message</h3>
-                                <span className='members-subtitle'>({data.length})</span>
+                                <span className='members-subtitle'>({data.length + dataPinned.length})</span>
                             </section>
                             {
                                 !openFriend.status ? (
@@ -258,7 +246,9 @@ const Chat = () => {
                                                 return (
                                                     <section className='find-item'>
                                                         <section className='find-item-container'>
-                                                            <img className='find-item-avatar' src={e.avatar ? e.avatar : avatar} alt="avatar"/>
+                                                            <NavLink to={`/profile/${e.uid}`}>
+                                                                <img className='find-item-avatar' src={e.avatar ? e.avatar : avatar} alt="avatar"/>
+                                                            </NavLink>
                                                             <span className='find-item-name'>{e.name}</span>
                                                         </section>
                                                         <button onClick={() => requestFriend(e)} className='find-item-btn'>Add</button>
@@ -275,11 +265,26 @@ const Chat = () => {
                             ) : null
                         }
                         {
-                            pinned ? (
-                              <section className='members-pinned'>
-                                  <img className='pinned-img' src={pin} alt="pin"/>
-                                  <span className='pinned-title'>PINNED</span>
-                              </section>
+                            dataPinned.length >= 1 ? (
+                             <>
+                                 <section className='members-pinned'>
+                                     <img className='pinned-img' src={pin} alt="pin"/>
+                                     <span className='pinned-title'>PINNED</span>
+                                 </section>
+                                 <section className='members-container pinned'>
+                                     {
+                                         dataPinned && msgIds ? dataPinned.map((user, i) => {
+                                             return <ItemMessage active={() => clickEventHandler(user.uid)}
+                                                                 key={i}
+                                                                 selectUser={selectUser}
+                                                                 user={user}
+                                                                 chat={chat}
+                                                                 user1={user1}
+                                                                 addedName={activeTab === user.uid ? "active" : ''}/>
+                                         }) : null
+                                     }
+                                 </section>
+                             </>
                             ) : ''
                         }
                         <section className='members-all'>
@@ -291,7 +296,6 @@ const Chat = () => {
                                 data && msgIds ? data.map((user, i) => {
                                     return <ItemMessage active={() => clickEventHandler(user.uid)}
                                                         key={i}
-                                                        rightClick={rightClick}
                                                         selectUser={selectUser}
                                                         user={user}
                                                         chat={chat}
@@ -300,13 +304,6 @@ const Chat = () => {
                                 }) : null
                             }
                         </section>
-                        {
-                            openContext.status ? (
-                              <section style={{left: `${openContextCords.x}px`, top: `${openContextCords.y}px`}} className='contextMenu'>
-                                  <button onClick={() => pinnedMessage()} className='contextMenu-btn'><section className='contextMenu-btn-container'><img className='contextMenu-btn-pin' src={pin} alt="pin"/>Pinned</section></button>
-                              </section>
-                            ) : null
-                        }
                     </section>
                     {chat ? (
                         <>
@@ -316,6 +313,7 @@ const Chat = () => {
                                        text={text}
                                        deleteHandler={deleteHandler}
                                        msgIds={msgIds}
+                                       localUser={localUser}
                                        setText={setText}
                                        chat={chat}
                                        setImg={setImg}

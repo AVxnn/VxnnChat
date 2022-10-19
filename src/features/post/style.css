@@ -147,18 +147,37 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px 20px 20px;
+  padding: 0 20px 10px 10px;
 }
 .post .post-tools .post-like {
   display: flex;
+  position: relative;
+  width: 60px;
+  height: 60px;
   align-items: center;
 }
 .post .post-tools .post-like .post-like-img {
   cursor: pointer;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(0, 0);
+  background: url(../../img/heart.png) no-repeat;
+  background-position: 0 0;
 }
-.post .post-tools .post-like .post-like-counter {
+.post .post-tools .post-like .post-like-img.animation {
+  background-position: -1686px 0;
+  transition: background 1s steps(28);
+}
+.post .post-tools .post-like .post-like-img.active {
+  background-position: -1686px 0;
+}
+.post .post-tools .post-like-counter {
   color: #FFFFFF;
-  margin-left: 10px;
+  margin-top: 2px;
+  margin-left: 50px;
 }
 .post .post-tools .post-date {
   font-size: 12px;
