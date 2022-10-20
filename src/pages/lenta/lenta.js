@@ -1,25 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import Header from "../../widgets/header/header";
 import './style.css'
-import newPost from '../../img/pencil.png'
-import check from '../../img/check.png'
+import TextareaAutosize from 'react-textarea-autosize';
+import pen from '../../img/pencil.png'
+import avatar from "../../features/message-item/img/avatar.png";
 import uploadimage from '../../img/uploadimage.png'
 import Post from "../../features/post/post";
 import {getAuth} from "firebase/auth";
 import {addDoc, collection, getFirestore, onSnapshot, orderBy, query, Timestamp} from "firebase/firestore";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "../../shared/api/firebase";
-import Github from "../../features/github/github";
-import EmojiPicker from "emoji-picker-react";
+import {AuthContext} from "../../shared/contextauth/auth";
+import addImage from "../../img/addImage.png";
 
 const Lenta = () => {
 
     const auth = getAuth()
     const db = getFirestore()
 
+    const {user} = useContext(AuthContext)
+
     const [open, setOpen] = useState(true)
     const [error, setError] = useState('')
     const [isAll, setIsAll] = useState(true)
+    const [iImgMessenger, setImgMessenger] = useState()
     const [data, setData] = useState({
         img: '',
         title: '',
@@ -33,6 +37,17 @@ const Lenta = () => {
 
     const openPostHandler = () => {
         setOpen(false)
+    }
+
+    const changeImg = (e) => {
+        setData({...data, img: e})
+        var fileReader = new FileReader();
+        fileReader.onload = function() {
+            let res = fileReader.result;
+            setImgMessenger(res)
+        }
+
+        fileReader.readAsDataURL(e);
     }
 
     const changleFilter = (e) => {
@@ -85,7 +100,6 @@ const Lenta = () => {
         setData({
             img: '',
             title: '',
-            desc: '',
             uid: '',
             createdAt: ''
         })
@@ -114,41 +128,37 @@ const Lenta = () => {
                 <Header />
                 <section className='lenta-container'>
                     <section className='lenta-tools'>
-                        <nav className='lenta-nav'>
-                            <span onClick={() => changleFilter()} className={`lenta-nav_item ${isAll ? 'active' : ''}`}>All posts</span>
-                            <span onClick={() => changleFilter('rec')} className={`lenta-nav_item ${isAll ? '' : 'active'}`}>Recommendations</span>
-                        </nav>
+                        <section className='lenta-tools-top'>
+                            <img className='lenta-avatar' src={user?.photoURL ? user?.photoURL : avatar} alt="Avatar"/>
+                            <TextareaAutosize onChange={e => setData({...data, title: e.target.value})}
+                                              className='lenta-form'
+                                              maxRows={10}
+                                              value={data.title}
+                                              placeholder='Type a message'/>
+                            <button
+                              onClick={(e) => sendPostHandler(e)}
+                              className='lenta-send-btn'>
+                                <img className='lenta-btn' src={pen} alt=""/>
+                                <span>Post In</span>
+                            </button>
+                        </section>
                         {
-                            open ? <img
-                                className='lenta-newpost'
-                                onClick={() => openPostHandler()}
-                                src={newPost}
-                                alt="pencil"/> : <img onClick={() => setOpen(true)} className='lenta-newpost' src={check} alt="check"/>
+                            data?.title?.length >= 1 && (
+                              <section className='lenta-tools-bottom'>
+                                  <input onChange={(e) => changeImg(e.target.files[0])} id='field__file-2' className='btn file-btn' type='file'/>
+                                  <div className='empty'></div>
+                                  <label className="lenta-image-btn" htmlFor="field__file-2">
+                                      <img className='lenta-btn' src={addImage} alt=""/>
+                                  </label>
+                                  {
+                                      iImgMessenger && (
+                                      <img className='added-img' src={iImgMessenger} alt=""/>
+                                    )
+                                  }
+                              </section>
+                          )
                         }
                     </section>
-                    {
-                        !open ? (
-                            <section className="addpost">
-                                <input onChange={(e) => setData({...data, img: e.target.files[0]})} id='field__file-2' className='btn file-btn' type='file'/>
-                                <label className="field__file" htmlFor="field__file-2">
-                                    <img className="addpost-upload" src={uploadimage} alt="uploadimage"/>
-                                    <span className='addpost-name'>{data.img.name}</span>
-                                </label>
-                                <label className='title' htmlFor="title">
-                                    <span className='title-span'>Title:</span>
-                                    <input onChange={(e) => setData({...data, title: e.target.value})} value={data.title} className='title-input' id='title' type="text"/>
-                                </label>
-                                <label className='title' htmlFor="title">
-                                    <span className='title-span'>Desc:</span>
-                                    <input onChange={(e) => setData({...data, desc: e.target.value})} value={data.desc}  className='title-input' id='title' type="text"/>
-                                </label>
-                                <section className='btn-container'>
-                                    <span className='error'>{error}</span>
-                                    <button onClick={(e) => sendPostHandler(e)} className='btn-send'>Send</button>
-                                </section>
-                            </section>
-                        ) : null
-                    }
                     <section className="posts">
                         {
                             postsFilter ? postsFilter.map((e, i) => {

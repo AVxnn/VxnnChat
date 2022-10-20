@@ -1,12 +1,13 @@
 @charset "UTF-8";
 .lenta-container {
   height: 85vh;
+  max-width: 600px;
+  width: 100%;
   overflow-y: scroll;
   /* ползунок скроллбара */
 }
 .lenta-container::-webkit-scrollbar {
-  width: 12px;
-  height: 8px;
+  display: none;
 }
 .lenta-container::-webkit-scrollbar-thumb {
   background-color: #FF3D00;
@@ -16,15 +17,101 @@
   background-color: #d73200;
 }
 .lenta-container .lenta-tools {
-  width: 560px;
-  height: 42px;
-  margin-right: 10px;
   display: flex;
   padding: 14px 20px;
   background-color: #24272C;
   border-radius: 14px;
+  flex-direction: column;
+}
+.lenta-container .lenta-tools .lenta-tools-top {
+  display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.lenta-container .lenta-tools .lenta-tools-bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.lenta-container .lenta-tools .lenta-tools-bottom .added-img {
+  width: 18px;
+  height: 18px;
+  margin-top: 8px;
+  margin-left: 10px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+.lenta-container .lenta-tools .lenta-tools-bottom .file-btn {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+}
+.lenta-container .lenta-tools .lenta-tools-bottom .lenta-image-btn {
+  background-color: rgba(0, 0, 0, 0);
+  color: #FFFFFF;
+  box-sizing: border-box;
+  justify-content: space-between;
+  border: none;
+  border-radius: 14px;
+  font-size: 12px;
+  margin: 10px 0 0 52px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.lenta-container .lenta-tools .lenta-tools-bottom .lenta-image-btn .lenta-btn {
+  width: 18px;
+  height: 18px;
+}
+.lenta-container .lenta-tools .lenta-avatar {
+  border-radius: 99px;
+  object-fit: cover;
+  width: 35px;
+  height: 35px;
+}
+.lenta-container .lenta-tools .lenta-form {
+  width: 100%;
+  margin: 0 20px;
+  max-height: 200px;
+  background-color: rgba(0, 0, 0, 0);
+  outline: none;
+  border: none;
+  overflow: auto;
+  resize: none;
+  white-space: pre-wrap;
+  font-size: 14px;
+  color: #FFFFFF;
+  /* ползунок скроллбара */
+}
+.lenta-container .lenta-tools .lenta-form::-webkit-scrollbar {
+  width: 1px;
+  height: 8px;
+}
+.lenta-container .lenta-tools .lenta-form::-webkit-scrollbar-thumb {
+  background-color: #FF3D00;
+  border-radius: 9em;
+}
+.lenta-container .lenta-tools .lenta-form::-webkit-scrollbar-thumb:hover {
+  background-color: #d73200;
+}
+.lenta-container .lenta-tools .lenta-send-btn {
+  background-color: #437ED8;
+  color: #FFFFFF;
+  box-sizing: border-box;
+  height: 34px;
+  justify-content: space-between;
+  min-width: 100px;
+  border: none;
+  border-radius: 14px;
+  font-size: 12px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.lenta-container .lenta-tools .lenta-send-btn .lenta-btn {
+  width: 18px;
+  height: 18px;
 }
 .lenta-container .lenta-tools .lenta-nav {
   width: 225px;

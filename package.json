@@ -16,6 +16,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^4.0.1",
     "react-spring": "^9.5.5",
+    "react-textarea-autosize": "^8.3.4",
     "react-time-picker": "^5.0.0",
     "react-transition-group": "^4.4.5",
     "web-vitals": "^2.1.4"
