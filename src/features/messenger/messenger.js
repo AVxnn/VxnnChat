@@ -1,10 +1,9 @@
-import React, {useEffect, useState, useContext, Suspense} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import './style.css'
 import send from './img/send.png'
-import clip from './img/clip.png'
 import MessageItem from "../message-item/messageItem";
 import {getAuth} from "firebase/auth";
-import {collection, doc, onSnapshot, updateDoc} from "firebase/firestore";
+import {doc, onSnapshot, updateDoc} from "firebase/firestore";
 import SecondMessageItem from "../secondMessageItem/secondMessageItem";
 import logo from "../../img/te.png";
 import addImage from "../../img/addImage.png";
@@ -15,9 +14,7 @@ import {db} from "../../shared/api/firebase";
 import avatar from "../message-item/img/avatar.png";
 import {AuthContext} from "../../shared/contextauth/auth";
 import Moment from "react-moment";
-import Emoji from "../../widgets/emoji/emoji";
 import EmojiPicker from 'emoji-picker-react';
-import Popup from "../popup/popup";
 import img from "../../img/te.png";
 import settings from "../../img/cog.png";
 

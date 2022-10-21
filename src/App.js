@@ -1,4 +1,4 @@
-import {Route, Routes, useLocation} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import React from 'react';
 import Main from "./pages/main/main";
 import Login from "./pages/login/login";
@@ -16,11 +16,6 @@ import Music from "./pages/music/music";
 import NewChat from "./pages/NewChat/newchat";
 import Todo from "./pages/todo/todo";
 import TodoCreate from "./pages/todoCreate/todocreate";
-
-import {
-    TransitionGroup,
-    CSSTransition
-} from "react-transition-group";
 import ProfileEdit from "./pages/profileEdit/profileEdit";
 import TodoOpen from "./pages/todoOpen/todoOpen";
 import Friends from "./pages/friends/friends";
@@ -29,7 +24,6 @@ const App = () => {
 
     const auth = getAuth();
     const db = getFirestore();
-    const location = useLocation()
 
     const leaveHandler = async (event) => {
         event.preventDefault()
@@ -42,6 +36,12 @@ const App = () => {
     useEffect(() => {
         window.addEventListener('beforeunload', leaveHandler);
     }, [])
+
+    useEffect(() => {
+        if (window.closed) {
+            leaveHandler()
+        }
+    }, [window])
 
     if (window.innerWidth <= 320) {
         return (

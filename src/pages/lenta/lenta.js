@@ -1,10 +1,10 @@
 import React, {useEffect, useState, useContext} from 'react';
 import Header from "../../widgets/header/header";
-import './style.css'
+import './style.sass'
 import TextareaAutosize from 'react-textarea-autosize';
 import pen from '../../img/pencil.png'
 import avatar from "../../features/message-item/img/avatar.png";
-import uploadimage from '../../img/uploadimage.png'
+import video from '../../img/video.png'
 import Post from "../../features/post/post";
 import {getAuth} from "firebase/auth";
 import {addDoc, collection, getFirestore, onSnapshot, orderBy, query, Timestamp} from "firebase/firestore";
@@ -21,11 +21,11 @@ const Lenta = () => {
     const {user} = useContext(AuthContext)
 
     const [open, setOpen] = useState(true)
-    const [error, setError] = useState('')
-    const [isAll, setIsAll] = useState(true)
     const [iImgMessenger, setImgMessenger] = useState()
+    const [VideoMessenger, setVideoMessenger] = useState('')
     const [data, setData] = useState({
         img: '',
+        video: '',
         title: '',
         desc: '',
         uid: '',
@@ -35,31 +35,25 @@ const Lenta = () => {
     const [postsFilter, setPostsFilter] = useState([])
     const [postId, setPostId] = useState([])
 
-    const openPostHandler = () => {
-        setOpen(false)
-    }
+    const changeImg = (e, type) => {
+        if (type === 'image') {
+            setData({...data, img: e})
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                let res = fileReader.result;
+                setImgMessenger(res)
+            }
 
-    const changeImg = (e) => {
-        setData({...data, img: e})
-        var fileReader = new FileReader();
-        fileReader.onload = function() {
-            let res = fileReader.result;
-            setImgMessenger(res)
-        }
-
-        fileReader.readAsDataURL(e);
-    }
-
-    const changleFilter = (e) => {
-        if (isAll) {
-            setPostsFilter(posts.filter(e => e.recommendation === true))
+            fileReader.readAsDataURL(e);
         } else {
-            setPostsFilter(posts)
-        }
-        if (e === 'rec') {
-            setIsAll(false)
-        } else {
-            setIsAll(true)
+            setData({...data, video: e})
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                let res = fileReader.result;
+                setVideoMessenger(res)
+            }
+
+            fileReader.readAsDataURL(e);
         }
     }
 
@@ -83,10 +77,21 @@ const Lenta = () => {
             data.img = dlUrl
         }
 
+        if (data.video) {
+            const imgRef = ref(
+                storage,
+                `posts/${new Date().getTime()} - ${data.video.name}`
+            )
+            const snap = await uploadBytes(imgRef, data.video)
+            const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))
+            data.video = dlUrl
+        }
+
         setOpen(false)
 
         await addDoc(collection(db, "posts"), {
             img: data.img || '',
+            video: data.video || '',
             title: data.title,
             desc: data.desc,
             createdAt: Timestamp.fromDate(new Date()),
@@ -139,13 +144,13 @@ const Lenta = () => {
                               onClick={(e) => sendPostHandler(e)}
                               className='lenta-send-btn'>
                                 <img className='lenta-btn' src={pen} alt=""/>
-                                <span>Post In</span>
+                                <span className='lenta-span'>Post In</span>
                             </button>
                         </section>
                         {
                             data?.title?.length >= 1 && (
                               <section className='lenta-tools-bottom'>
-                                  <input onChange={(e) => changeImg(e.target.files[0])} id='field__file-2' className='btn file-btn' type='file'/>
+                                  <input onChange={(e) => changeImg(e.target.files[0], 'image')} id='field__file-2' className='btn file-btn' type='file'/>
                                   <div className='empty'></div>
                                   <label className="lenta-image-btn" htmlFor="field__file-2">
                                       <img className='lenta-btn' src={addImage} alt=""/>
@@ -154,6 +159,18 @@ const Lenta = () => {
                                       iImgMessenger && (
                                       <img className='added-img' src={iImgMessenger} alt=""/>
                                     )
+                                  }
+                                  <input onChange={(e) => changeImg(e.target.files[0], 'video')} id='field__file-3' className='btn file-btn' type='file'/>
+                                  <label className="lenta-video-btn" htmlFor="field__file-3">
+                                      <img className='lenta-btn-video' src={video} alt=""/>
+                                  </label>
+                                  {
+                                      VideoMessenger && (
+                                          <>
+                                              <video src={VideoMessenger} width="750" height="500" className='added-img'>
+                                              </video>
+                                          </>
+                                      )
                                   }
                               </section>
                           )

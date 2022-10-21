@@ -14,8 +14,7 @@ import {
     onSnapshot,
     query,
     collection,
-    where,
-    getDoc, Timestamp
+    Timestamp
 } from "firebase/firestore"
 import settings from "../../img/cog.png";
 import exit from "../../img/exit.png";

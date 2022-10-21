@@ -19,7 +19,7 @@
   .lenta-tools
     display: flex
     padding: 14px 20px
-    background-color: #24272C
+    background-color: #1C1E21
     border-radius: 14px
     flex-direction: column
 
@@ -46,8 +46,6 @@
         visibility: hidden
         position: absolute
 
-      .empty
-
       .lenta-image-btn
         background-color: rgba(0, 0, 0, 0)
         color: #FFFFFF
@@ -57,6 +55,23 @@
         border-radius: 14px
         font-size: 12px
         margin: 10px 0 0 52px
+        display: flex
+        align-items: center
+        cursor: pointer
+
+        .lenta-btn
+          width: 18px
+          height: 18px
+
+      .lenta-video-btn
+        color: #FFFFFF
+        box-sizing: border-box
+        justify-content: space-between
+        border: none
+        font-size: 12px
+        padding: 0 0 0 10px
+        margin: 10px 0 0 10px
+        border-left: 1px solid #6C6C6C
         display: flex
         align-items: center
         cursor: pointer
@@ -113,9 +128,17 @@
       align-items: center
       cursor: pointer
 
+      @media screen and (max-width: 450px)
+        padding: 8px
+        min-width: 34px
+
       .lenta-btn
         width: 18px
         height: 18px
+
+      .lenta-span
+        @media screen and (max-width: 450px)
+          display: none
 
 
     .lenta-nav
@@ -172,6 +195,10 @@
     transition: all 0.1s ease-in-out
 
     #field__file-2
+      position: absolute
+      display: none
+
+    #field__file-3
       position: absolute
       display: none
 

@@ -6,10 +6,9 @@ import arrowLook from '../../img/arrowLook.png'
 import {getAuth} from "firebase/auth";
 import Moment from "react-moment";
 import Popup from "../popup/popup";
-import {doc, query, deleteDoc, getFirestore} from "firebase/firestore";
 import {Link} from "react-router-dom";
 
-const MessageItem = ({keyу, lastMsg, msg, name, chatImg, user2Avatar, deleteHandler, msgIds}) => {
+const MessageItem = ({keyу, lastMsg, msg, name, user2Avatar}) => {
     const scrollRef = useRef()
 
     const [open, setOpen] = useState(false)

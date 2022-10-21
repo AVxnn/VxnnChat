@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import Header from "../../widgets/header/header";
 import './style.css'
-
 import ItemMessage from "../../shared/item-message/itemMessage";
 import Messenger from "../../features/messenger/messenger";
 import {useState} from "react";
@@ -36,14 +35,6 @@ const Chat = () => {
     const [allData, setAllData] = useState([])
     const [localUser, setLocalUser] = useState([])
     const [filterData, setFilterData] = useState([])
-    const [openContext, setOpenContext] = useState({
-        status: false,
-        currentTarget : {}
-    })
-    const [openContextCords, setOpenContextCords] = useState({
-        x: 0,
-        y: 0
-    })
     const [openFriend, setOpenFriend] = useState({
         status: false,
         currentTarget: ''
@@ -51,7 +42,6 @@ const Chat = () => {
     const [chat, setChat] = useState('')
     const [img, setImg] = useState('')
     const [msgs, setMsgs] = useState([])
-    const [user, setUser] = useState([])
     const [msgIds, setMsgIds] = useState([])
     const [text, setText] = useState('')
     const auth = getAuth()

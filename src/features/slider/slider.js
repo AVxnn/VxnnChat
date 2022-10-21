@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './style.css'
-import play from '../../img/play.png'
 
 const Slider = ({onChange, percentage}) => {
     const [position, setPosition] = useState(0)
