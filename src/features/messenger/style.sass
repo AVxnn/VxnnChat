@@ -1,15 +1,133 @@
 
 
 .chat
-  width: 77vw
+  width: 75vw
   height: 94%
-  padding: 30px 20px
-  background-color: #24272C
+  background-color: #151618
   border-radius: 14px
   box-sizing: border-box
   display: flex
   flex-direction: column
   justify-content: space-between
+
+  .user-bar
+    height: 70px
+    width: 100%
+    justify-content: space-between
+    padding: 15px 20px
+    display: flex
+    box-sizing: border-box
+    border-radius: 14px
+    box-shadow: 0 0 12px 0 #1C1E21
+    background-color: #1C1E21
+
+    .user-right
+      z-index: 3
+
+      .item-list-p
+        margin-top: 20px
+
+        .user-item
+          background-color: #1C1E21
+          width: 24px
+          height: 24px
+          padding: 10px
+          border-radius: 14px
+          cursor: pointer
+          transition: all 0.1s ease-in-out
+
+          &:hover
+            background-color: #24272C
+
+          .user-item_img-pin
+            width: 24px
+            height: 24px
+
+
+      .user-item
+        width: 24px
+        height: 24px
+        padding: 10px
+        border-radius: 14px
+        cursor: pointer
+        transition: all 0.1s ease-in-out
+
+        &:hover
+          background-color: #24272C
+
+        .user-item_img
+
+
+
+    .user-container
+      display: flex
+
+      .user-info
+        display: flex
+        margin-left: 20px
+        flex-direction: column
+        justify-content: space-between
+
+        .user-name
+          color: #FFFFFF
+
+        .user-typing
+          color: #BDBDBD
+          display: flex
+          align-items: center
+
+          .user-typing-logo
+            color: #BDBDBD
+            width: 12px
+            margin-right: 4px
+            justify-content: space-between
+            align-items: center
+            display: flex
+
+            div:nth-child(1)
+              width: 2px
+              height: 2px
+              border-radius: 92px
+              background-color: #D9D9D9
+              animation: sized 0.6s ease-in-out infinite
+            div:nth-child(2)
+              width: 2px
+              height: 2px
+              border-radius: 92px
+              background-color: #D9D9D9
+              animation: sized 0.6s ease-in-out infinite
+              animation-delay: 0.15s
+            div:nth-child(3)
+              width: 2px
+              height: 2px
+              border-radius: 92px
+              background-color: #D9D9D9
+              animation: sized 0.6s ease-in-out infinite
+              animation-delay: 0.20s
+
+              @keyframes sized
+                0%
+                  transform: scale(1)
+                50%
+                  transform: scale(2)
+                80%
+                  transform: scale(1)
+                100%
+                  transform: scale(1)
+
+
+      .user-avatar
+
+
+        .user-avatar-img
+          width: 40px
+          object-fit: cover
+          border-radius: 99px
+          height: 40px
+
+
+        .user-avatar-icon
+
 
   .message-list
     width: 100%
@@ -20,7 +138,7 @@
     overflow-x: hidden
     justify-content: flex-start
     flex-direction: column
-    margin-bottom: 10px
+    margin: 10px 0
 
     /* полоса прокрутки (скроллбар) */
     &::-webkit-scrollbar
@@ -55,8 +173,26 @@
     height: 70px
     display: flex
     border-radius: 14px
-    box-shadow: 0 0 12px 0 #151618
-    background-color: #151618
+    box-shadow: 0 0 12px 0 #1C1E21
+    align-items: center
+    background-color: #1C1E21
+    
+    .smile-picker
+      position: absolute
+      bottom: 70px
+      right: 0
+
+    .send-avatar
+      display: flex
+      align-items: center
+      justify-content: center
+      margin: 0 20px
+
+      img
+        width: 40px
+        border-radius: 99px
+        height: 40px
+        object-fit: cover
 
     .btn
       background-color: rgba(255, 255, 255, 0)
@@ -67,19 +203,32 @@
       padding: 19px
       cursor: pointer
 
+    .field_img
+      width: 30px
+      margin-right: 13px
+      height: 30px
+      border-radius: 12px
+      object-fit: cover
+      transition: all 0.1s ease-in-out
+
+      &:hover
+
+    .emoji
+      padding: 0
+
     .file-btn
       opacity: 0
       visibility: hidden
       position: absolute
 
     .field__file
-      padding: 19px
+      display: flex
+      align-items: center
+      padding: 8px
 
       .apply
-        transform: rotate(90deg)
 
       .field__file-img
-        background-image: url(./img/clip.png)
         background-repeat: no-repeat
         background-position: 50%
         cursor: pointer
@@ -93,6 +242,9 @@
       outline: none
 
     .send-btn
+      height: 20px
+      border-left: 2px solid #6C6C6C
+
 
 @media screen and (max-width: 1280px)
   .send-bar

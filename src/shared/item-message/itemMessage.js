@@ -11,7 +11,8 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
     const db = getFirestore();
     const user2 = user?.uid
     const [data, setData] = useState('')
-    console.log(user)
+    const [openContext, setOpenContext] = useState(false)
+
     useEffect(() => {
         const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
         let unsub = onSnapshot(doc(db, 'lastMsg', id), (doc) => {
@@ -19,8 +20,6 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
         })
         return () => unsub();
     }, [])
-
-
 
     return (
         <>
@@ -31,7 +30,7 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
                      id={user.id}
                      className={`member-item ${addedName}`} >
                 <section className='member-avatar-info'>
-                    <Link to={`/profile/${user2}`}><img className="member_avatar online" src={user.avatar ? user.avatar : logo} alt="avatar"/></Link>
+                    <img className="member_avatar" src={user.avatar ? user.avatar : logo} alt="avatar"/>
                     <span className={`member_active ${user.isOnline ? 'online' : 'offline'}`}></span>
                 </section>
                 <section className="member-content">
@@ -44,12 +43,13 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
                     <section className='member-new-info'>
                         {data ? (
                             <>
-                                <p className="member_description">{data.from === user1 ? '' : 'he: '}{data.text}</p>
+                                <p className="member_description"><span className='member-status-span'>{data.from === user1 ? 'Me: ' : 'You: '}</span>{data.text}</p>
                                 {data?.from !== user1 && data?.unread ? <span className='member-new-msg'>1</span> : null}
                             </>
                         ) : <p style={{color: '#FFFFFF'}}> </p> }
                     </section>
                 </section>
+
             </section>
         </>
     )

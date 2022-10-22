@@ -1,0 +1,30 @@
+.message-container-m-f {
+  max-width: 100%;
+  display: flex;
+  margin-top: 0;
+  position: relative;
+}
+.message-container-m-f .message-second {
+  margin: 0 20px;
+}
+.message-container-m-f .message-second .second-data {
+  top: 47%;
+  color: #6C6C6C;
+  font-size: 12px;
+  position: absolute;
+}
+.message-container-m-f .message-second .message-text-container {
+  margin-top: 12px;
+  max-width: 600px;
+}
+.message-container-m-f .message-second .message-text-container .message-text {
+  background-color: #1C1E21;
+  padding: 19px;
+  color: #FFFFFF;
+}
+
+.message-field {
+  min-width: 42px;
+}
+
+/*# sourceMappingURL=style.css.map */

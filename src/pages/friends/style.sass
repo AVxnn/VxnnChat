@@ -1,0 +1,128 @@
+
+
+.section-friends
+  width: 600px
+  display: flex
+  flex-direction: column
+
+  .friends-top
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+    .friends-top-left
+      display: flex
+      align-items: center
+
+      .friends-top-title
+        font-size: 48px
+        color: #FFFFFF
+
+      .friends-top-subtitle
+        font-size: 24px
+        margin-top: 10px
+        margin-left: 8px
+        color: #E00086
+
+    .friends-top-btn
+      display: flex
+      align-items: center
+      justify-content: center
+      background-color: #E00086
+      color: #FFFFFF
+      height: 34px
+      font-size: 12px
+      width: 121px
+      box-sizing: border-box
+      border: none
+      outline: none
+      border-radius: 14px
+      padding: 8px 20px
+
+      .friends-top-btn-img
+        margin-top: -2px
+        margin-right: 6px
+        width: 16px
+        height: 16px
+
+  .friends-list
+    margin-top: 30px
+    display: flex
+    height: 600px
+    overflow-y: scroll
+    width: 100%
+    flex-direction: column
+
+    &::-webkit-scrollbar
+      width: 0 /* ширина для вертикального скролла */
+      height: 8px /* высота для горизонтального скролла */
+      background-color: #202326
+
+    &::-webkit-scrollbar-thumb
+      background-color: #e00086
+      border-radius: 9em
+      box-shadow: inset 1px 1px 4px #000000
+
+    &::-webkit-scrollbar-thumb:hover
+      background-color: #c90077
+
+    .friends-item
+      display: flex
+      width: 100%
+      height: 100px
+      margin-bottom: 10px
+      box-sizing: border-box
+      background-color: #202326
+      border-radius: 14px
+      padding: 20px
+      justify-content: space-between
+
+      .friends-info
+        display: flex
+        align-items: center
+
+        .friends-img
+          width: 60px
+          height: 60px
+          border-radius: 999px
+          margin-right: 20px
+
+        .friends-name
+          font-size: 18px
+          color: #FFFFFF
+
+    .friends-list-btn
+      display: flex
+      align-items: center
+
+      .friends-btn
+        padding: 11px 20px
+        display: flex
+        color: #FFFFFF
+        border: none
+        outline: none
+        border-radius: 14px
+        align-items: center
+        background-color: #437ED8
+        margin-right: 20px
+        cursor: pointer
+
+        .friends-btn-img
+          width: 16px
+          height: 16px
+          margin-right: 8px
+
+      .friends-btn-dots
+        width: 40px
+        height: 40px
+        display: flex
+        justify-content: center
+        color: #FFFFFF
+        border: 2px solid #437ED8
+        background-color: rgba(0, 0, 0, 0)
+        outline: none
+        border-radius: 14px
+        align-items: center
+        cursor: pointer
+
+        .friends-btn-img

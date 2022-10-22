@@ -2,63 +2,259 @@
 
 .btn
   color: #FFFFFF
-  background: none
+  background: #437ED8
   font-size: 16px
   cursor: pointer
   margin: 10px
   border: 0
+  transition: all 0.1s ease
+
+  &:hover
+    background: #3264AE
+
+  &:active
+    background: #3d71bf
 
 .profile-login
-  padding: 10px 20px
-  border: 1px solid #151618
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 10px 14px
   border-radius: 14px
   transition: all 0.1s ease-in-out
 
-  &:hover
-    margin: 9px
-    border: 2px solid #24272C
+  img
+    margin-right: 10px
 
+  span
+    width: 70px
 
 .profile-register
-  padding: 10px 20px
-  border: 2px solid #00FFB2
+  padding: 12.5px 14px
   border-radius: 14px
   transition: all 0.1s ease-in-out
 
-  &:hover
-    margin: 10px
-    border: 2px solid #24272C
+.profile-dropMenu
+  opacity: 0
+  width: 60px
+  height: 110px
+  background-color: #1C1E21
+  top: 65px
+  right: -5px
+  z-index: -20
+  padding: 10px
+  display: flex
+  justify-content: space-between
+  box-sizing: border-box
+  flex-direction: column
+  border-radius: 14px
+  align-items: center
+  position: absolute
+  transition: all 0.1s ease
+
+.down-trip
+  position: absolute
+  width: 40px
+  height: 40px
+  left: 10px
+  top: 10px
+  border-radius: 14px
+  background-color: #437ED8
+  z-index: 0
+  transition: all 0.2s ease-in-out
+
+.active
+  z-index: 222
+  opacity: 1
+
+  .profile-item
+    width: 40px
+    height: 40px
+    display: flex
+    border-radius: 14px
+    justify-content: center
+    align-items: center
+    cursor: pointer
+    z-index: 2
+
+    .profile-item_img
+      width: 24px
+      height: 24px
+
+  .settings-y.active
+
+
+  .exit-y.active
+
+  .settings-y:hover ~ .down-trip
+    left: 10px !important
+
+  .settings-y.active ~ .down-trip
+    left: 10px
+
+  .exit-y:hover ~ .down-trip
+    top: 60px !important
+    left: 10px !important
+    background-color: #437ED8 !important
+
+  .exit-y.active ~ .down-trip
+    top: 60px
+    left: 10px
+    background-color: #437ED8
 
 
 
 .section-profile
   display: flex
-  justify-content: space-between
+  justify-content: flex-end
   align-items: center
 
+.section-profile-log
+  position: relative
+  width: 250px
+  display: flex
+  justify-content: flex-end
+  align-items: center
+
+  &:before
+    content: ""
+    position: absolute
+    width: 54px
+    right: -4px
+    border-radius: 9999px
+    height: 54px
+    background-color: rgba(0, 0, 0, 0)
+    border: 2px solid #437ED8
+
+  .profile-bell-container
+    position: relative
+
+    .profile-bell
+      margin-right: 30px
+      width: 24px
+      height: 24px
+      padding: 10px
+      border-radius: 14px
+      cursor: pointer
+      transition: all 0.1s ease-in-out
+
+      &:hover
+        background-color: #24272C
+
+    .profile-bell-span
+      position: absolute
+      top: 10px
+      left: 20px
+      display: flex
+      align-items: center
+      justify-content: center
+      color: #FFFFFF
+      width: 13px
+      height: 13px
+      font-size: 10px
+      border-radius: 99px
+      background-color: #E00086
+      user-select: none
+
+  .empty
+    width: 360px
+    top: 70px
+    height: 50px
+    display: flex
+    align-items: center
+    border-radius: 14px
+    border: 1px solid #333333
+    background-color: #202326
+    position: absolute
+
+    .profile-bell-empty
+      padding: 0 20px
+      color: #FFFFFF
+
+  .profile-bell-list
+    width: 360px
+    top: 70px
+    border-radius: 14px
+    border: 1px solid #333333
+    background-color: #202326
+    position: absolute
+
+    .bell-item
+      padding: 20px
+      display: flex
+      align-items: center
+      justify-content: space-between
+      z-index: 99999999
+
+      .bell-item-container
+        display: flex
+
+
+        .bell-item-avatar
+          object-fit: cover
+          border-radius: 99px
+          width: 40px
+          height: 40px
+
+        .bell-info
+          display: flex
+          flex-direction: column
+          justify-content: space-between
+          margin-left: 10px
+
+
+          .bell-item-name
+            color: #FFFFFF
+            font-size: 16px
+
+
+          .bell-item-subtitle
+            color: #FFFFFF
+            font-size: 12px
+
+      .bell-btn-list
+
+        .bell-item-btn
+          padding: 7px 12px
+          border: none
+          border-radius: 99px
+          color: #FFFFFF
+          cursor: pointer
+          z-index: 10000
+
+        .accept
+          background-color: #E00086
+          margin-right: 6px
+
+          &:hover
+            background-color: #b6006e
+
+        .reject
+          background-color: #151618
+
+          &:hover
+            background-color: #0c0e0e
+
+
+
   .profile_img
+    position: relative
     width: 50px
     height: 50px
     object-fit: cover
     border-radius: 500%
-    margin-right: 20px
-
-
-  .profile_name
-    color: #EEEEEE
-    margin-right: 20px
-
-  .profile_icon
-    padding: 10px
-    border-radius: 14px
-
-  .icon
-    transition: all 0.1s ease-in-out
     cursor: pointer
 
     &:hover
-      background-color: #24272C
+      background-image: linear-gradient(45deg, darken(#13abdb,5%), #B10DC9)
 
-@media screen and (max-width: 900px)
+@media screen and (max-width: 935px)
+
   .section-profile
-    display: none
+    display: none !important
+
+  .section-profile-log
+    display: none !important
+
+    .logotype_title
+      display: none

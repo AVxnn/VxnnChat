@@ -1,50 +1,211 @@
 .block-profile {
-  width: 520px;
-  background-color: #24272C;
-  padding: 40px;
-  border-radius: 14px;
+  position: relative;
+  width: 600px;
+  height: 750px;
+  background-color: #1C1E21;
+  border-radius: 32px;
   color: #FFFFFF;
 }
-.block-profile .block-title {
-  font-size: 32px;
-  margin-bottom: 40px;
+.block-profile .profile-background {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  height: 240px;
+  border-radius: 32px;
 }
 .block-profile #file {
   display: none;
 }
-.block-profile .section-upload_avatar {
+.block-profile .profile-avatar-block {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  margin-left: -72.5px;
+}
+.block-profile .profile-avatar-block .section-upload_avatar {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #151618;
-  height: 240px;
   border-radius: 14px;
   cursor: pointer;
-  margin-bottom: 40px;
 }
-.block-profile .section-upload_avatar .profile-avatar_add {
+.block-profile .profile-avatar-block .section-upload_avatar .profile-avatar_add {
   position: absolute;
-  top: 36px;
+  top: 5px;
   width: 40px;
   height: 40px;
   opacity: 0;
-  padding: 45px;
+  padding: 50px;
   border-radius: 5000%;
   transition: all 0.2s ease-in-out;
 }
-.block-profile .section-upload_avatar .profile-avatar_add:hover {
+.block-profile .profile-avatar-block .section-upload_avatar .profile-avatar_add:hover {
   opacity: 1;
-  background-color: rgba(255, 255, 255, 0.7);
+  background: linear-gradient(95.66deg, rgba(128, 34, 118, 0.7) 3.37%, rgba(134, 25, 84, 0.7) 100%);
 }
-.block-profile .section-upload_avatar .profile-avatar {
-  width: 130px;
-  height: 130px;
+.block-profile .profile-avatar-block .section-upload_avatar .profile-avatar {
+  width: 140px;
+  height: 140px;
+  border: 5px solid #1C1E21;
   object-fit: cover;
-  margin-bottom: 20px;
   border-radius: 5000%;
   font-size: 16px;
+}
+.block-profile .toolBar {
+  top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+}
+.block-profile .toolBar .toolBar-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #282A2D;
+  border-radius: 999px;
+  border: none;
+  margin-right: 30px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.block-profile .toolBar .toolBar-btn:hover {
+  background-color: #1E2022;
+}
+.block-profile .toolBar .toolBar-btn:active {
+  background-color: #2b2e30;
+}
+.block-profile .toolBar .toolBar-btn .toolBar-btn_img {
+  width: 24px;
+  height: 24px;
+}
+.block-profile .profile-stats {
+  padding: 30px 87px;
+  display: flex;
+  justify-content: space-between;
+}
+.block-profile .profile-stats a {
+  text-decoration: none;
+}
+.block-profile .profile-stats .stats-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.block-profile .profile-stats .stats-block:hover .stats-title, .block-profile .profile-stats .stats-block:hover .stats-subtitle {
+  color: #6e96d5;
+}
+.block-profile .profile-stats .stats-block .stats-title {
+  font-size: 24px;
+  color: #FFFFFF;
+  transition: all 0.1s ease-in-out;
+}
+.block-profile .profile-stats .stats-block .stats-subtitle {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #FFFFFF;
+  transition: all 0.1s ease-in-out;
+}
+.block-profile .info-newBlock {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.block-profile .info-newBlock .info-title {
+  font-size: 24px;
+}
+.block-profile .info-newBlock .info-premium {
+  font-size: 12px;
+  color: transparent;
+  font-weight: 700;
+  margin-top: 6px;
+  background-image: linear-gradient(93.17deg, #FF0A0A 1.08%, #FF5F05 48.91%, #FF0099 98.77%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.block-profile .info-newBlock .info-description {
+  width: 230px;
+  font-size: 12px;
+  margin-top: 12px;
+  color: #BDBDBD;
+  text-align: center;
+}
+.block-profile .info-newBlock .info-stats-game {
+  width: 530px;
+  margin-top: 15px;
+}
+.block-profile .info-newBlock .info-stats-game .game-info {
+  display: flex;
+  justify-content: space-between;
+}
+.block-profile .info-newBlock .info-stats-game .game-info .game-lvl {
+  font-size: 10px;
+  color: #FFFFFF;
+}
+.block-profile .info-newBlock .info-stats-game .game-info .game-exp {
+  font-size: 10px;
+  color: #FFFFFF;
+}
+.block-profile .info-newBlock .info-stats-game .game-bar {
+  margin-top: 6px;
+  width: 100%;
+  height: 5px;
+  background-color: #333333;
+  border-radius: 99px;
+}
+.block-profile .info-newBlock .info-stats-game .game-bar .game-bar_active {
+  margin-top: 6px;
+  width: 35%;
+  height: 5px;
+  background-color: #437ED8;
+  border-radius: 99px;
+}
+.block-profile .follow-block {
+  width: 530px;
+  margin-top: 20px;
+}
+.block-profile .follow-block .follow-btn {
+  width: 100%;
+  height: 60px;
+  background-color: #d84343;
+  color: #FFFFFF;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.block-profile .follow-block .follow-btn:hover {
+  background-color: #9a2f2f;
+}
+.block-profile .follow-block .follow-btn:active {
+  background-color: #dc5353;
+}
+.block-profile .follow-block .unfollow-btn {
+  width: 100%;
+  height: 60px;
+  background-color: #437ED8;
+  color: #FFFFFF;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.block-profile .follow-block .unfollow-btn:hover {
+  background-color: #3264AE;
+}
+.block-profile .follow-block .unfollow-btn:active {
+  background-color: #3d71bf;
 }
 .block-profile .info-block {
   position: relative;
@@ -94,42 +255,91 @@
   background-color: #151618;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 720px) {
   .block-profile {
-    padding: 30px;
-    width: 460px !important;
+    position: relative;
+    width: 90% !important;
+    height: 700px;
+    background-color: #1C1E21;
+    border-radius: 32px;
+    color: #FFFFFF;
   }
 
-  .block-title {
-    margin-bottom: 20px !important;
+  .info-newBlock {
+    width: 100% !important;
   }
 
-  .info-block {
-    margin-bottom: 20px !important;
+  .info-stats-game {
+    width: 85% !important;
   }
-  .info-block .info-name-title {
+
+  .profile-stats {
+    padding: 30px 10% !important;
+  }
+
+  .follow-block {
+    width: 340px !important;
+    height: 60px !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .block-profile {
+    position: relative;
+    height: 600px;
+    background-color: #1C1E21;
+    border-radius: 32px;
+    color: #FFFFFF;
+  }
+  .block-profile .profile-background {
+    height: 170px !important;
+  }
+  .block-profile .profile-avatar-block {
+    position: absolute;
+    top: 140px !important;
+    margin-left: -55px !important;
+  }
+  .block-profile .profile-avatar {
+    width: 100px !important;
+    height: 100px !important;
+    border: 5px solid #1C1E21;
+    object-fit: cover;
+    border-radius: 5000%;
+    font-size: 16px;
+  }
+
+  .profile-stats {
+    padding: 15px 12% !important;
+  }
+
+  .stats-title {
     font-size: 20px !important;
   }
-  .info-block .info-name-description {
-    font-size: 20px !important;
+
+  .stats-subtitle {
+    font-size: 10px !important;
   }
 
-  .info-admin {
-    width: 24px !important;
-    height: 24px !important;
+  .toolBar-btn {
+    width: 30px !important;
+    height: 30px !important;
+    margin-right: 20px !important;
+  }
+  .toolBar-btn .toolBar-btn_img {
+    width: 18px !important;
+    height: 18px !important;
   }
 
-  .info-edit {
-    width: 24px !important;
-    height: 24px !important;
+  .follow-block {
+    width: 230px !important;
+    height: 50px !important;
   }
-
-  .section-upload_avatar {
-    height: 200px !important;
+  .follow-block .follow-btn {
+    font-size: 16px !important;
+    height: 50px !important;
   }
-
-  .profile-avatar_add {
-    top: 16px !important;
+  .follow-block .unfollow-btn {
+    font-size: 16px !important;
+    height: 50px !important;
   }
 }
 

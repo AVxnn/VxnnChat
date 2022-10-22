@@ -203,16 +203,16 @@
 }
 @keyframes topDown2 {
   0% {
-    top: 40%;
+    top: 10px;
   }
   90% {
-    top: 40%;
+    top: 10px;
   }
   95% {
-    top: 48%;
+    top: 22px;
   }
   100% {
-    top: 40%;
+    top: 10px;
   }
 }
 @keyframes topDownLogo {

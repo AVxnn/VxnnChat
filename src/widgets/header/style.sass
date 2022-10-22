@@ -10,7 +10,7 @@
 
   .section-logo
     position: relative
-    width: 218px
+    width: 240px
     height: 60px
     display: flex
     justify-content: space-between
@@ -19,16 +19,16 @@
     &:before
       content: ""
       position: absolute
-      width: 20px
-      height: 14px
-      left: 46px
+      width: 10px
+      height: 10px
+      left: 28px
       opacity: 1
-      top: 20px
+      top: 34px
       background-color: #151618
       z-index: 1
       border-radius: 50%
       transition: all 0.3s ease-in-out
-      animation: topDown2 6s ease-in-out infinite
+      animation: topDown6 6s ease-in-out infinite
 
     &:hover:after
       top: 36px
@@ -45,15 +45,29 @@
       font-size: 36px
 
   .navigation
-    position: relative
-    width: 385px
     display: flex
     justify-content: space-between
+    align-items: center
+    position: relative
+    width: 350px
+    height: 60px
+    padding: 10px 20px
+    box-sizing: border-box
+    border-radius: 14px
+    background-color: #1C1E21
 
     .nav-item
+      display: flex
+      justify-content: center
+      align-items: center
+      border-radius: 14px
       color: #EEEEEE
+      width: 40px
+      height: 40px
       font-weight: 700
       text-decoration: none
+      z-index: 2
+      cursor: pointer
       transition: all .1s ease-in-out
 
       &:hover
@@ -61,6 +75,10 @@
 
       &:hover ~ .down-trip
         left: 50px
+
+        .nav-item_img
+          width: 24px
+          height: 24px
 
     .active
       position: relative
@@ -72,7 +90,8 @@
 
     .home-y,
     .chat-y,
-    .profile-y
+    .profile-y,
+    .todo-y
       transition: all 1s ease-in-out
 
     .new
@@ -115,6 +134,10 @@
       position: relative
       color: #95e000
 
+    .todo-y.active
+      position: relative
+      color: #E00086
+
       //&::before
       //  position: absolute
       //  content: ''
@@ -125,108 +148,144 @@
       //  top: 24px
 
     .home-y:hover ~ .down-trip
-      left: 0 !important
-      width: 52px !important
+      left: 20px !important
       background-color: #00e09c !important
 
     .home-y.active ~ .down-trip
-      left: 0
-      width: 52px
+      left: 20px
       background-color: #00e09c
 
     .lenta-y:hover ~ .down-trip
-      width: 55px !important
-      left: 78px !important
+      left: 74px !important
       background-color: #FF3D00 !important
 
     .lenta-y.active  ~ .down-trip
-      width: 55px
-      left: 78px
+      left: 74px
       background-color: #FF3D00
 
     .chat-y:hover ~ .down-trip
-      width: 46px !important
-      left: 158px !important
+      left: 128px !important
       background-color: #e00086 !important
 
     .chat-y.active  ~ .down-trip
-      width: 46px
-      left: 158px
+      left: 128px
       background-color: #e00086
 
     .music-y:hover ~ .down-trip
-      width: 54px !important
-      left: 231px !important
+      left: 182px !important
       background-color: #00C2FF !important
 
     .music-y.active  ~ .down-trip
-      width: 54px
-      left: 231px
+      left: 182px
       background-color: #00C2FF
 
     .profile-y:hover ~ .down-trip
-      width: 73px !important
-      left: 312px !important
+      left: 236px !important
       background-color: #95e000 !important
 
     .profile-y.active ~ .down-trip
-      width: 73px
-      left: 312px
+      left: 236px
       background-color: #95e000
+
+    .todo-y:hover ~ .down-trip
+      left: 290px !important
+      background-color: #E00086 !important
+
+    .todo-y.active ~ .down-trip
+      left: 290px
+      background-color: #E00086
 
     .down-trip
       position: absolute
-      width: 52px
-      left: 0
-      bottom: -8px
-      height: 3px
+      width: 40px
+      height: 40px
+      left: 20px
+      border-radius: 14px
       background-color: #00e09c
+      z-index: 0
       transition: all 0.2s ease-in-out
 
-@media screen and (max-width: 1280px)
-
+@media screen and (max-width: 935px)
   .section-logo
-    width: 150px !important
+    display: none !important
 
-    &:before
-      content: ""
-      position: absolute
-      width: 10px !important
-      height: 8px !important
-      left: 26px !important
-      opacity: 1
-      top: 24px
-      background-color: #151618
-      z-index: 1
-      border-radius: 50%
-      transition: all 0.3s ease-in-out
-      animation: topDown3 6s ease-in-out infinite !important
+    .logotype_title
+      display: none
 
-    &:hover:after
-      top: 24px !important
-      transition: all 0.3s ease-in-out
-      animation: none
-
-  .logotype_img
+  .container
+    justify-content: center
 
 
-@media screen and (max-width: 900px)
+@media screen and (max-width: 720px)
+
+
+  .navigation
+    width: 290px !important
+    padding: 10px !important
+
+  .home-y:hover ~ .down-trip
+    left: 10px !important
+    background-color: #00e09c !important
+
+  .home-y.active ~ .down-trip
+    left: 10px !important
+    background-color: #00e09c !important
+
+  .lenta-y:hover ~ .down-trip
+    left: 56px !important
+    background-color: #FF3D00 !important
+
+  .lenta-y.active  ~ .down-trip
+    left: 56px !important
+    background-color: #FF3D00 !important
+
+  .chat-y:hover ~ .down-trip
+    left: 102px !important
+    background-color: #e00086 !important
+
+  .chat-y.active  ~ .down-trip
+    left: 102px !important
+    background-color: #e00086 !important
+
+  .music-y:hover ~ .down-trip
+    left: 148px !important
+    background-color: #00C2FF !important
+
+  .music-y.active  ~ .down-trip
+    left: 148px !important
+    background-color: #00C2FF !important
+
+  .profile-y:hover ~ .down-trip
+    left: 194px !important
+    background-color: #95e000 !important
+
+  .profile-y.active ~ .down-trip
+    left: 194px !important
+    background-color: #95e000 !important
+
+  .todo-y:hover ~ .down-trip
+    left: 240px !important
+    background-color: #E00086 !important
+
+  .todo-y.active ~ .down-trip
+    left: 240px !important
+    background-color: #E00086 !important
 
 
 
 
-@keyframes topDown2
+@keyframes topDown6
   0%
-    top: 20px
+    top: 24px
 
   90%
-    top: 20px
+    top: 24px
 
   95%
-    top: 36px
+    top: 32px
 
   100%
-    top: 20px
+    top: 24px
 
 @keyframes topDown3
   0%

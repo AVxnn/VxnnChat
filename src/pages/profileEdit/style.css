@@ -1,0 +1,202 @@
+.toolBar-edit {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  top: 95px;
+}
+.toolBar-edit #file_bg {
+  display: none;
+}
+.toolBar-edit .toolBar-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: #282A2D;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.toolBar-edit .toolBar-btn:hover {
+  background-color: #1E2022;
+}
+.toolBar-edit .toolBar-btn:active {
+  background-color: #2b2e30;
+}
+.toolBar-edit .toolBar-btn .toolBar-btn_label {
+  cursor: pointer;
+}
+.toolBar-edit .toolBar-btn .toolBar-btn_label .toolBar-btn_img {
+  width: 32px;
+  height: 32px;
+}
+
+.info-newBlock-edit {
+  margin: 110px 30px 30px 30px;
+}
+.info-newBlock-edit .info-name .info-name_title {
+  color: #FFFFFF;
+}
+.info-newBlock-edit .info-name .info-name_input {
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-top: 16px;
+  outline: none;
+  width: 100%;
+  height: 60px;
+  padding: 25px 22px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  border: 2px solid #437ED8;
+  background-color: #1C1E21;
+}
+.info-newBlock-edit .info-desc {
+  margin-top: 30px;
+}
+.info-newBlock-edit .info-desc .info-desc_title {
+  color: #FFFFFF;
+}
+.info-newBlock-edit .info-desc .info-desc_input {
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-top: 16px;
+  outline: none;
+  width: 100%;
+  height: 60px;
+  padding: 25px 22px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  border: 2px solid #437ED8;
+  background-color: #1C1E21;
+}
+
+.save {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.save .save-left .cancel-btn {
+  color: #437ED8;
+  width: 260px;
+  height: 60px;
+  border-radius: 14px;
+  font-size: 20px;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid #437ED8;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+.save .save-left .cancel-btn:hover {
+  background-color: #24272C;
+}
+.save .save-right .save-btn {
+  color: #FFFFFF;
+  width: 260px;
+  height: 60px;
+  font-size: 20px;
+  outline: none;
+  border-radius: 14px;
+  background-color: #437ED8;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+.save .save-right .save-btn:hover {
+  background-color: #376bb8;
+}
+
+@media screen and (max-width: 720px) {
+  .info-newBlock-edit {
+    margin: 120px 20px 30px 20px !important;
+  }
+
+  .toolBar-edit {
+    top: 95px !important;
+  }
+  .toolBar-edit .toolBar-btn {
+    margin-right: 0px !important;
+  }
+
+  .info-name .info-name_title {
+    font-size: 18px;
+  }
+  .info-name .info-name_input {
+    padding: 15px !important;
+  }
+
+  .info-desc .info-desc_title {
+    font-size: 18px;
+  }
+  .info-desc .info-desc_input {
+    padding: 15px !important;
+  }
+
+  .save {
+    left: 20px !important;
+    right: 20px !important;
+  }
+  .save .save-left .cancel-btn {
+    width: 170px !important;
+    padding: 10px !important;
+    height: 50px !important;
+    font-size: 16px !important;
+  }
+  .save .save-right .save-btn {
+    width: 170px !important;
+    padding: 10px !important;
+    height: 50px !important;
+    font-size: 16px !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .info-newBlock-edit {
+    margin: 90px 20px 30px 20px !important;
+  }
+
+  .toolBar-edit {
+    top: 70px !important;
+  }
+  .toolBar-edit .toolBar-btn {
+    margin-right: 0px !important;
+  }
+
+  .info-name .info-name_title {
+    font-size: 18px;
+  }
+  .info-name .info-name_input {
+    padding: 15px !important;
+  }
+
+  .info-desc .info-desc_title {
+    font-size: 18px;
+  }
+  .info-desc .info-desc_input {
+    padding: 15px !important;
+  }
+
+  .save {
+    left: 20px !important;
+    right: 20px !important;
+  }
+  .save .save-left .cancel-btn {
+    width: 120px !important;
+    padding: 10px !important;
+    height: 50px !important;
+    font-size: 16px !important;
+  }
+  .save .save-right .save-btn {
+    width: 120px !important;
+    padding: 10px !important;
+    height: 50px !important;
+    font-size: 16px !important;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

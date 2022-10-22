@@ -1,26 +1,31 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import Header from "../../widgets/header/header";
-import './style.css'
-import newPost from '../../img/pencil.png'
-import check from '../../img/check.png'
-import uploadimage from '../../img/uploadimage.png'
+import './style.sass'
+import TextareaAutosize from 'react-textarea-autosize';
+import pen from '../../img/pencil.png'
+import avatar from "../../features/message-item/img/avatar.png";
+import video from '../../img/video.png'
 import Post from "../../features/post/post";
 import {getAuth} from "firebase/auth";
 import {addDoc, collection, getFirestore, onSnapshot, orderBy, query, Timestamp} from "firebase/firestore";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "../../shared/api/firebase";
-import Github from "../../features/github/github";
+import {AuthContext} from "../../shared/contextauth/auth";
+import addImage from "../../img/addImage.png";
 
 const Lenta = () => {
 
     const auth = getAuth()
     const db = getFirestore()
 
+    const {user} = useContext(AuthContext)
+
     const [open, setOpen] = useState(true)
-    const [error, setError] = useState('')
-    const [isAll, setIsAll] = useState(true)
+    const [iImgMessenger, setImgMessenger] = useState()
+    const [VideoMessenger, setVideoMessenger] = useState('')
     const [data, setData] = useState({
         img: '',
+        video: '',
         title: '',
         desc: '',
         uid: '',
@@ -30,20 +35,25 @@ const Lenta = () => {
     const [postsFilter, setPostsFilter] = useState([])
     const [postId, setPostId] = useState([])
 
-    const openPostHandler = () => {
-        setOpen(false)
-    }
+    const changeImg = (e, type) => {
+        if (type === 'image') {
+            setData({...data, img: e})
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                let res = fileReader.result;
+                setImgMessenger(res)
+            }
 
-    const changleFilter = (e) => {
-        if (isAll) {
-            setPostsFilter(posts.filter(e => e.recommendation === true))
+            fileReader.readAsDataURL(e);
         } else {
-            setPostsFilter(posts)
-        }
-        if (e === 'rec') {
-            setIsAll(false)
-        } else {
-            setIsAll(true)
+            setData({...data, video: e})
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                let res = fileReader.result;
+                setVideoMessenger(res)
+            }
+
+            fileReader.readAsDataURL(e);
         }
     }
 
@@ -67,10 +77,21 @@ const Lenta = () => {
             data.img = dlUrl
         }
 
+        if (data.video) {
+            const imgRef = ref(
+                storage,
+                `posts/${new Date().getTime()} - ${data.video.name}`
+            )
+            const snap = await uploadBytes(imgRef, data.video)
+            const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))
+            data.video = dlUrl
+        }
+
         setOpen(false)
 
         await addDoc(collection(db, "posts"), {
             img: data.img || '',
+            video: data.video || '',
             title: data.title,
             desc: data.desc,
             createdAt: Timestamp.fromDate(new Date()),
@@ -84,7 +105,6 @@ const Lenta = () => {
         setData({
             img: '',
             title: '',
-            desc: '',
             uid: '',
             createdAt: ''
         })
@@ -113,41 +133,49 @@ const Lenta = () => {
                 <Header />
                 <section className='lenta-container'>
                     <section className='lenta-tools'>
-                        <nav className='lenta-nav'>
-                            <span onClick={() => changleFilter()} className={`lenta-nav_item ${isAll ? 'active' : ''}`}>All posts</span>
-                            <span onClick={() => changleFilter('rec')} className={`lenta-nav_item ${isAll ? '' : 'active'}`}>Recommendations</span>
-                        </nav>
+                        <section className='lenta-tools-top'>
+                            <img className='lenta-avatar' src={user?.photoURL ? user?.photoURL : avatar} alt="Avatar"/>
+                            <TextareaAutosize onChange={e => setData({...data, title: e.target.value})}
+                                              className='lenta-form'
+                                              maxRows={10}
+                                              value={data.title}
+                                              placeholder='Type a message'/>
+                            <button
+                              onClick={(e) => sendPostHandler(e)}
+                              className='lenta-send-btn'>
+                                <img className='lenta-btn' src={pen} alt=""/>
+                                <span className='lenta-span'>Post In</span>
+                            </button>
+                        </section>
                         {
-                            open ? <img
-                                className='lenta-newpost'
-                                onClick={() => openPostHandler()}
-                                src={newPost}
-                                alt="pencil"/> : <img onClick={() => setOpen(true)} className='lenta-newpost' src={check} alt="check"/>
+                            data?.title?.length >= 1 && (
+                              <section className='lenta-tools-bottom'>
+                                  <input onChange={(e) => changeImg(e.target.files[0], 'image')} id='field__file-2' className='btn file-btn' type='file'/>
+                                  <div className='empty'></div>
+                                  <label className="lenta-image-btn" htmlFor="field__file-2">
+                                      <img className='lenta-btn' src={addImage} alt=""/>
+                                  </label>
+                                  {
+                                      iImgMessenger && (
+                                      <img className='added-img' src={iImgMessenger} alt=""/>
+                                    )
+                                  }
+                                  <input onChange={(e) => changeImg(e.target.files[0], 'video')} id='field__file-3' className='btn file-btn' type='file'/>
+                                  <label className="lenta-video-btn" htmlFor="field__file-3">
+                                      <img className='lenta-btn-video' src={video} alt=""/>
+                                  </label>
+                                  {
+                                      VideoMessenger && (
+                                          <>
+                                              <video src={VideoMessenger} width="750" height="500" className='added-img'>
+                                              </video>
+                                          </>
+                                      )
+                                  }
+                              </section>
+                          )
                         }
                     </section>
-                    {
-                        !open ? (
-                            <section className="addpost">
-                                <input onChange={(e) => setData({...data, img: e.target.files[0]})} id='field__file-2' className='btn file-btn' type='file'/>
-                                <label className="field__file" htmlFor="field__file-2">
-                                    <img className="addpost-upload" src={uploadimage} alt="uploadimage"/>
-                                    <span className='addpost-name'>{data.img.name}</span>
-                                </label>
-                                <label className='title' htmlFor="title">
-                                    <span className='title-span'>Title:</span>
-                                    <input onChange={(e) => setData({...data, title: e.target.value})} value={data.title} className='title-input' id='title' type="text"/>
-                                </label>
-                                <label className='title' htmlFor="title">
-                                    <span className='title-span'>Desc:</span>
-                                    <input onChange={(e) => setData({...data, desc: e.target.value})} value={data.desc}  className='title-input' id='title' type="text"/>
-                                </label>
-                                <section className='btn-container'>
-                                    <span className='error'>{error}</span>
-                                    <button onClick={(e) => sendPostHandler(e)} className='btn-send'>Send</button>
-                                </section>
-                            </section>
-                        ) : null
-                    }
                     <section className="posts">
                         {
                             postsFilter ? postsFilter.map((e, i) => {
@@ -161,7 +189,6 @@ const Lenta = () => {
 
                     </section>
                 </section>
-                <Github />
             </main>
         </>
     )

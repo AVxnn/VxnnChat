@@ -35,11 +35,19 @@ const Registration = () => {
                 const user = userCredential.user;
                 await setDoc(doc(db, "users", user.uid), {
                     name: data.name,
+                    description: '',
                     email: data.email,
                     uid: user.uid,
                     createdAt: Timestamp.fromDate(new Date()),
                     isOnline: true,
-                    isAdmin: false
+                    isAdmin: false,
+                    typing: false,
+                    lastOnline: Timestamp.fromDate(new Date()),
+                    stats: 0,
+                    friends: [],
+                    notifications: [],
+                    background: '',
+                    backgroundPath: '',
                 });
                 console.log(data)
             })
@@ -86,7 +94,7 @@ const Registration = () => {
                             <span className="form-title">Password</span>
                             <input onChange={(e) => {setData({
                                 ...data, password: e.currentTarget.value
-                            })}} className={`form-input ${data.error ? 'error': ''}`} id='Password' type="text"/>
+                            })}} className={`form-input ${data.error ? 'error': ''}`} id='Password' type="password"/>
                         </label>
                         <button onClick={() => register()} className="form-button">Create Account</button>
                         <section className='form-login-container'>

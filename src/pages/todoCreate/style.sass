@@ -1,0 +1,318 @@
+
+.todo-container
+  width: 600px
+  height: 85vh
+
+  .title-block
+    display: flex
+    align-items: center
+    width: 100%
+    margin-bottom: 30px
+
+    .title-block-img
+      width: 503px
+
+  .title-task
+
+    .title-task_title
+      color: #FFFFFF
+
+    .title-task_input
+      font-size: 14px
+      color: #FFFFFF
+      margin-top: 16px
+      outline: none
+      border: none
+      width: 100%
+      height: 60px
+      padding: 25px 22px
+      box-sizing: border-box
+      border-radius: 14px
+      background-color: #1C1E21
+
+  .category-task
+    margin-top: 30px
+
+    .category_title
+      margin-bottom: 16px
+      color: #FFFFFF
+
+    .category-input
+      position: relative
+      width: 100%
+      padding: 10px
+      height: 80px
+      display: flex
+      justify-content: space-between
+      box-sizing: border-box
+      background-color: #1C1E21
+      border-radius: 14px
+
+      .input-left
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 285px
+        cursor: pointer
+
+        z-index: 2
+
+        &:hover ~ .category-dash
+          left: 10px !important
+
+        &.active ~ .category-dash
+          left: 10px !important
+
+        .category_icon
+          margin-right: 10px
+
+        .category_subtitle
+          color: #FFFFFF
+
+      .input-right
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 285px
+        cursor: pointer
+        z-index: 2
+
+        //&:hover .tooltiptext
+        //  visibility: visible
+        //  opacity: 1
+
+        &.active ~ .category-dash
+          left: 305px !important
+          transition: all 0.2s ease-in-out
+
+        .category_icon
+          margin-right: 10px
+
+        .category_subtitle
+          color: #FFFFFF
+
+        //.tooltiptext
+        //  visibility: hidden
+        //  opacity: 0
+        //  top: 60px
+        //  right: 50px
+        //  position: absolute
+        //  width: 100px
+        //  height: 30px
+        //  font-size: 16px
+        //  display: flex
+        //  align-items: center
+        //  justify-content: center
+        //  background-color: #FF3D00
+        //  color: #fff
+        //  text-align: center
+        //  padding: 5px 0
+        //  border-radius: 14px
+        //  border-top-left-radius: 0
+        //  opacity: 0
+        //  transition: opacity 0.3s
+
+
+
+      .category-dash
+        position: absolute
+        width: 285px
+        left: 10px
+        height: 60px
+        border-radius: 14px
+        background-color: #437ED8
+        transition: all 0.2s ease-in-out
+
+  .description
+    margin-top: 30px
+
+    .description_title
+      color: #FFFFFF
+
+    .description_input
+      font-size: 14px
+      color: #FFFFFF
+      margin-top: 16px
+      outline: none
+      border: none
+      max-width: 600px
+      min-width: 600px
+      min-height: 120px
+      max-height: 200px
+      padding: 25px 22px
+      box-sizing: border-box
+      border-radius: 14px
+      background-color: #1C1E21
+
+  .date
+    margin-top: 30px
+    display: flex
+    justify-content: space-between
+    width: 600px
+
+    .date-section
+      width: 295px
+
+      .date_title
+        color: #FFFFFF
+        margin-bottom: 16px
+
+      .date-btn
+        height: 60px
+        color: #FFFFFF
+        display: flex
+        align-items: center
+        justify-content: center
+        border-radius: 14px
+        background-color: #1C1E21
+
+        .date-input
+          outline: none
+          border: none
+          background-color: rgba(0, 0, 0, 0)
+          font-size: 16px
+          color: #FFFFFF
+          display: flex
+          justify-content: center
+          align-items: center
+
+        .react-datepicker-wrapper
+          width: 80px
+
+    .time-section
+      color: #FFFFFF
+      width: 295px
+
+      .time_title
+        color: #FFFFFF
+        margin-bottom: 16px
+
+      .time-btn
+        height: 60px
+        color: #FFFFFF
+        display: flex
+        align-items: center
+        justify-content: center
+        border-radius: 14px
+        background-color: #1C1E21
+
+        .time-input
+          outline: none
+          border: none
+          background-color: rgba(0, 0, 0, 0)
+          font-size: 16px
+          color: #FFFFFF
+          display: flex
+          justify-content: center
+          align-items: center
+
+
+  .create
+    margin-top: 30px
+    width: 600px
+    display: flex
+    justify-content: space-between
+
+    .create-left
+
+      .cancel-btn
+        color: #437ED8
+        width: 295px
+        height: 60px
+        border-radius: 14px
+        font-size: 20px
+        background-color: rgba(0, 0, 0, 0)
+        border: 2px solid #437ED8
+        cursor: pointer
+        transition: all 0.1s ease
+
+        &:hover
+          background-color: #24272C
+
+    .create-right
+
+      .create-btn
+        color: #FFFFFF
+        width: 295px
+        height: 60px
+        font-size: 20px
+        border-radius: 14px
+        background-color: #437ED8
+        cursor: pointer
+        transition: all 0.1s ease
+
+        &:hover
+          background-color: #376bb8
+
+
+
+@media screen and (max-width: 720px)
+  .category_title,
+  .title-task_title,
+  .description_title,
+  .date_title,
+  .time_title
+    font-size: 16px !important
+
+  .category-dash
+    width: 190px !important
+
+  .description_input
+    max-width: 400px !important
+    min-width: 400px !important
+    min-height: 120px !important
+    max-height: 200px !important
+
+  .date
+    width: 400px !important
+
+  .create
+    width: 400px !important
+
+  .date-section
+    width: 190px !important
+
+  .time-section
+    width: 190px !important
+
+  .cancel-btn
+    width: 190px !important
+
+  .create-btn
+    width: 190px !important
+
+@media screen and (max-width: 450px)
+  .category_title,
+  .title-task_title,
+  .description_title,
+  .date_title,
+  .time_title
+    font-size: 16px !important
+
+  .category-dash
+    width: 130px !important
+
+  .description_input
+    max-width: 280px !important
+    min-width: 280px !important
+    min-height: 120px !important
+    max-height: 200px !important
+
+  .date
+    width: 280px !important
+
+  .create
+    width: 280px !important
+
+  .date-section
+    width: 130px !important
+
+  .time-section
+    width: 130px !important
+
+  .cancel-btn
+    width: 130px !important
+
+  .create-btn
+    width: 130px !important
+
