@@ -61,6 +61,13 @@
 
     .user-container
       display: flex
+      align-items: center
+
+      .user-bar-arrow
+        width: 28px
+        height: 28px
+        transform: rotate(180deg)
+        margin-right: 15px
 
       .user-info
         display: flex
@@ -245,7 +252,6 @@
       height: 20px
       border-left: 2px solid #6C6C6C
 
-
 @media screen and (max-width: 1280px)
   .send-bar
     height: 60px !important
@@ -253,3 +259,9 @@
   .field__file
     display: flex
     align-items: center
+
+@media screen and (max-width: 768px)
+  .chat
+    width: 100% !important
+    max-width: 100% !important
+    margin: 0

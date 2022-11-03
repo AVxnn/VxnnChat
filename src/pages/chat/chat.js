@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import Header from "../../widgets/header/header";
-import './style.css'
+import './style.sass'
 import ItemMessage from "../../shared/item-message/itemMessage";
 import Messenger from "../../features/messenger/messenger";
 import {useState} from "react";
-import { storage } from '../../shared/api/firebase'
+import {db, storage} from '../../shared/api/firebase'
 import {
     collection,
     onSnapshot,
@@ -26,8 +26,7 @@ import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import {getAuth} from "firebase/auth";
 import {NavLink} from "react-router-dom";
 
-const Chat = () => {
-
+const Chat = ({width}) => {
     const [activeTab, setActiveTab] = useState('')
     let clickEventHandler = (id) => { setActiveTab(id) }
     const [data, setData] = useState([])
@@ -106,8 +105,8 @@ const Chat = () => {
             let msgs = []
             let msgIds = []
             querySnapshot.forEach(snapshot => {
-                msgs.push(snapshot.data())
-                msgIds.push(snapshot._document.key.path.segments[8])
+                msgs.push({...snapshot.data(), tid: snapshot._document.key.path.segments[8]})
+                msgIds.push()
             })
             setMsgs(msgs)
             setMsgIds(msgIds)
@@ -301,6 +300,7 @@ const Chat = () => {
                                        chatImg={chat.avatar}
                                        msgs={msgs}
                                        text={text}
+                                       width={width}
                                        deleteHandler={deleteHandler}
                                        msgIds={msgIds}
                                        localUser={localUser}

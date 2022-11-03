@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../widgets/header/header";
 import Github from "../../features/github/github";
-import './style.css'
+import './style.sass'
 import avatar from '../../img/test.png'
+import trash from '../../img/trash.png'
+import cog from '../../img/cog.png'
 import Moment from "react-moment";
 import {NavLink, useNavigate} from "react-router-dom";
-import {collection, doc, onSnapshot, query, updateDoc} from "firebase/firestore";
+import {collection, deleteDoc, doc, onSnapshot, query, updateDoc} from "firebase/firestore";
 import {auth, db} from "../../shared/api/firebase";
 
 const Todo = () => {
@@ -35,6 +37,10 @@ const Todo = () => {
         setActiveLink(3)
         break
     }
+  }
+
+  const deleteHandler = async (item) => {
+    await deleteDoc(doc(db, 'todo', item.uid, `${item.uid}todo`, item.tid))
   }
 
   const changeChecked = async (e) => {
@@ -100,8 +106,23 @@ const Todo = () => {
                     <h3 className={`item-top-title ${i.closed ? 'closed' : ''}`}>{i.title}</h3>
                     <p className='item-top-subtitle'>{i.description}</p>
                   </section>
-                  <input checked={i.closed} className='item-top_check' id='happy' type="checkbox"/>
-                  <label onClick={() => changeChecked(i)} htmlFor="happy"><div className='item-top_check-div'></div></label>
+                  <section className='item-right'>
+                    {
+                      i.closed ? (
+                        <button onClick={() => deleteHandler(i)} className='item-right-btn'>
+                          <img className='item-right-btn_img' src={trash} alt="trash"/>
+                        </button>
+                      ) : (
+                        <NavLink to={`/todo/edit`}>
+                          <button className='item-right-btn blue'>
+                            <img className='item-right-btn_img' src={cog} alt="cog"/>
+                          </button>
+                        </NavLink>
+                      )
+                    }
+                    <input checked={i.closed} className='item-top_check' id='happy' type="checkbox"/>
+                    <label onClick={() => changeChecked(i)} htmlFor="happy"><div className='item-top_check-div'></div></label>
+                  </section>
                 </section>
                 <section className='item-bottom'>
                   <h3 className='item-bottom_title'>{(i.date ? <Moment format='D MMM'>{i.date.toDate()}</Moment> : '')} <span>{i?.time ? i.time : ''}</span></h3>

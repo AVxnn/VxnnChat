@@ -1,11 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {getAuth} from "firebase/auth";
-import './style.css'
+import './style.sass'
 import Popup from "../popup/popup";
 import Moment from "react-moment";
 import arrowLook from "../../img/arrowLook.png";
+import trash from "../../img/trash.png";
+import {deleteDoc, doc} from "firebase/firestore";
+import {db} from "../../shared/api/firebase";
 
-const SecondMessageItem = ({keyу, lastMsg, msg, name, chatImg, user2Avatar, deleteHandler, msgIds}) => {
+const SecondMessageItem = ({keyу, lastMsg, msg, name, chat, chatImg, user2Avatar, msgIds}) => {
 
   const scrollRef = useRef()
 
@@ -13,7 +16,16 @@ const SecondMessageItem = ({keyу, lastMsg, msg, name, chatImg, user2Avatar, del
 
   const [open, setOpen] = useState(false)
   const [showTime, setShowTime] = useState(false)
+  const [isDelete, setIsDelete] = useState(false)
 
+  const user2 = auth.currentUser.uid
+  const user1 = chat.uid
+
+  const deleteHandler = async (item) => {
+    console.log(item)
+    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
+    await deleteDoc(doc(db, 'messages', id, `chat`, item.tid))
+  }
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({behavior: 'smooth'})
@@ -22,10 +34,15 @@ const SecondMessageItem = ({keyу, lastMsg, msg, name, chatImg, user2Avatar, del
   const openHandler = () => {
     open ? setOpen(false) : setOpen(true)
   }
+
   return (
     <>
       {open ? <Popup src={msg.media} text={msg.text} open={setOpen}/> : null}
-      <section ref={scrollRef} key={keyу} className={`message-container-m-f ${msg.from === auth.currentUser.uid ? 'me' : 'you'}`}>
+      <section onMouseEnter={() => setIsDelete(true)}
+               onMouseLeave={() => setIsDelete(false)}
+               ref={scrollRef}
+               key={keyу}
+               className={`message-container-m-f ${msg.from === auth.currentUser.uid ? 'me' : 'you'}`}>
         <section className='message-field'>
         </section>
         <section className='message-second'>
@@ -54,6 +71,13 @@ const SecondMessageItem = ({keyу, lastMsg, msg, name, chatImg, user2Avatar, del
             )
           }
         </section>
+        {
+          isDelete && (
+            <button onClick={() => deleteHandler(msg)} className='second-delete'>
+              <img className='second-delete-img' src={trash} alt="trash"/>
+            </button>
+          )
+        }
         {
           lastMsg.text === msg.text && lastMsg.unread && (
             <section className='message-notlook'>

@@ -5,13 +5,14 @@ import './style.css'
 import {onSnapshot, doc, getFirestore} from "firebase/firestore";
 import Moment from "react-moment";
 import {Link} from "react-router-dom";
+import {db} from "../api/firebase";
 
 const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
 
     const db = getFirestore();
     const user2 = user?.uid
     const [data, setData] = useState('')
-    const [openContext, setOpenContext] = useState(false)
+    const [typing, setTyping] = useState(false)
 
     useEffect(() => {
         const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
@@ -20,6 +21,15 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
         })
         return () => unsub();
     }, [])
+
+    useEffect(() => {
+        // if (user) {
+        //     let unsub = onSnapshot(doc(db, 'users', chat.uid), (doc) => {
+        //         setTyping(doc.data().typing)
+        //     })
+        //     return () => unsub()
+        // }
+    }, [user])
 
     return (
         <>

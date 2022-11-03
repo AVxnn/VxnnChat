@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
-import './style.css'
+import './style.sass'
 import send from './img/send.png'
 import MessageItem from "../message-item/messageItem";
 import {getAuth} from "firebase/auth";
@@ -7,6 +7,7 @@ import {doc, onSnapshot, updateDoc} from "firebase/firestore";
 import SecondMessageItem from "../secondMessageItem/secondMessageItem";
 import logo from "../../img/te.png";
 import addImage from "../../img/addImage.png";
+import arrow from "../../img/arrow-right.png";
 import pin from "../../img/pin.png";
 import smile from "../../img/smile.png";
 import {Link} from "react-router-dom";
@@ -19,7 +20,7 @@ import img from "../../img/te.png";
 import settings from "../../img/cog.png";
 
 
-const Messenger = ({chat, handleSubmit, deleteHandler, localUser, text, setText, setImg, img, msgs, chatImg, msgIds}) => {
+const Messenger = ({chat, handleSubmit, width = false, deleteHandler, localUser, text, setText, setImg, img, msgs, chatImg, msgIds}) => {
 
     const auth = getAuth()
     const [data, setData] = useState({})
@@ -72,7 +73,11 @@ const Messenger = ({chat, handleSubmit, deleteHandler, localUser, text, setText,
         }
         setSettingsOpen(false)
     }
-    console.log(chat)
+
+    const linkHandler = () => {
+
+    }
+
     const changeMessage = async (e, type) => {
         if (type === 'text') {
             setText(e)
@@ -115,7 +120,6 @@ const Messenger = ({chat, handleSubmit, deleteHandler, localUser, text, setText,
         if (user) {
             let unsub = onSnapshot(doc(db, 'lastMsg', id), (doc) => {
                 setLastMsg(doc.data()?.from ? doc.data() : '')
-                console.log(doc.data())
             })
             return () => unsub()
         }
@@ -126,6 +130,11 @@ const Messenger = ({chat, handleSubmit, deleteHandler, localUser, text, setText,
             <section className="chat">
                 <section className='user-bar'>
                     <section className='user-container'>
+                        {
+                          !width && (
+                            <img onClick={() => linkHandler()} className='user-bar-arrow' src={arrow}/>
+                          )
+                        }
                         <section className='user-avatar'>
                             <Link to={`/profile/${chat.uid}`}><img className="user-avatar-img" src={chat.avatar ? chat.avatar : logo} alt="avatar"/></Link>
                             <span className={`user-avatar-icon ${chat.isOnline ? 'online' : 'offline'}`}></span>
@@ -164,16 +173,16 @@ const Messenger = ({chat, handleSubmit, deleteHandler, localUser, text, setText,
                     {msgs.length ? msgs.map((msg, i) => {
                         if (i < 1) {
                             return (
-                              <MessageItem lastMsg={lastMsg} msgIds={msgIds[i]} deleteHandler={deleteHandler} name={chat.name} msgIds={msgIds[i]} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
+                              <MessageItem lastMsg={lastMsg} msgIds={msgIds[i]} deleteHandler={deleteHandler} name={chat.name} chat={chat} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
                             )
                         } else {
                             if (msg.from === msgs[i - 1].from) {
                                 return (
-                                  <SecondMessageItem lastMsg={lastMsg} msgIds={msgIds[i]} deleteHandler={deleteHandler} name={chat.name} msgIds={msgIds[i]} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
+                                  <SecondMessageItem lastMsg={lastMsg} msgIds={msgIds[i]} deleteHandler={deleteHandler} name={chat.name} chat={chat} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
                                 )
                             } else {
                                 return (
-                                  <MessageItem lastMsg={lastMsg} msgIds={msgIds[i]} deleteHandler={deleteHandler} name={chat.name} msgIds={msgIds[i]} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
+                                  <MessageItem lastMsg={lastMsg} msgIds={msgIds[i]} deleteHandler={deleteHandler} name={chat.name} chat={chat} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
                                 )
                             }
                         }

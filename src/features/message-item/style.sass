@@ -78,6 +78,27 @@
   justify-content: flex-start
   flex-direction: row-reverse
 
+  .second-delete
+    position: relative
+    width: 32px
+    height: 32px
+    display: flex
+    align-items: center
+    justify-content: center
+    border-radius: 14px
+    background-color: #24272C
+    border: none
+    top: 36%
+    cursor: pointer
+    transition: all 0.1s ease-in-out
+
+    &:hover
+      background-color: #101113
+
+    .second-delete-img
+      width: 18px
+      height: 18px
+
   .message-second
     display: flex
     flex-direction: column
@@ -91,6 +112,7 @@
     height: 100%
     display: flex
     align-items: center
+    z-index: 2
 
   .message-text-container
     display: flex
@@ -124,6 +146,10 @@
 
 
 .you
+
+  .second-delete
+    display: none
+
 
   .message-notlook
     display: none

@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import './style.css'
+import './style.sass'
 
 import avatar from './img/avatar.png'
 import arrowLook from '../../img/arrowLook.png'
@@ -7,11 +7,16 @@ import {getAuth} from "firebase/auth";
 import Moment from "react-moment";
 import Popup from "../popup/popup";
 import {Link} from "react-router-dom";
+import trash from "../../img/trash.png";
+import {deleteDoc, doc} from "firebase/firestore";
+import {db} from "../../shared/api/firebase";
 
-const MessageItem = ({keyу, lastMsg, msg, name, user2Avatar}) => {
+const MessageItem = ({keyу, lastMsg, chat, msg, name, user2Avatar}) => {
     const scrollRef = useRef()
 
     const [open, setOpen] = useState(false)
+
+    const [isDelete, setIsDelete] = useState(false)
 
     const auth = getAuth()
 
@@ -19,15 +24,25 @@ const MessageItem = ({keyу, lastMsg, msg, name, user2Avatar}) => {
         scrollRef.current?.scrollIntoView({behavior: 'auto'})
     }, [msg])
 
+    const user2 = auth.currentUser.uid
+    const user1 = chat.uid
+
+    const deleteHandler = async (item) => {
+        const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
+        await deleteDoc(doc(db, 'messages', id, `chat`, item.tid))
+    }
+
     const openHandler = () => {
         open ? setOpen(false) : setOpen(true)
     }
-    console.log(lastMsg)
+
     return (
         <>
             {open ? <Popup src={msg.media} text={msg.text} open={setOpen}/> : null}
             <section
               ref={scrollRef}
+              onMouseEnter={() => setIsDelete(true)}
+              onMouseLeave={() => setIsDelete(false)}
               key={keyу}
               className={`message-container-m ${msg.from === auth.currentUser.uid ? 'me' : 'you'}`}>
                 <section
@@ -76,6 +91,13 @@ const MessageItem = ({keyу, lastMsg, msg, name, user2Avatar}) => {
                     }
                     </section>
                 </section>
+                {
+                  isDelete && (
+                    <button onClick={() => deleteHandler(msg)} className='second-delete'>
+                        <img className='second-delete-img' src={trash} alt="trash"/>
+                    </button>
+                  )
+                }
                 {
                     lastMsg === msg.text && (
                         <section className='message-notlook'>
