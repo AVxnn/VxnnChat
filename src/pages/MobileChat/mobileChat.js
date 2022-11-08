@@ -60,10 +60,8 @@ const MobileChat = ({width}) => {
       let msgIds = []
       querySnapshot.forEach(snapshot => {
         msgs.push({...snapshot.data(), tid: snapshot._document.key.path.segments[8]})
-        msgIds.push()
       })
       setMsgs(msgs)
-      setMsgIds(msgIds)
       console.log(msgs, msgIds)
     })
 
@@ -71,8 +69,8 @@ const MobileChat = ({width}) => {
     if (docSnap.data()?.from !== user1){
       await updateDoc(doc(db, 'lastMsg', id), { unread: false })
     }
-    setActiveLink(true)
-    navigate(`/chat/${user.uid}`)
+    await setActiveLink(true)
+    await navigate(`/chat/${user.uid}`)
   }
 
   const deleteHandler = async (e, u2) => {
@@ -137,11 +135,13 @@ const MobileChat = ({width}) => {
   }
 
   useEffect(() => {
-    if(data.length > 1 || dataPinned.length > 1 && user1) {
+    if(data.length >= 1 || dataPinned.length >= 1 && user1) {
       setTimeout(() => {
-        let res = dataPinned.filter(i => i.uid === params.uid)[0] || data.filter(i => i.uid === params.uid)[0]
-        console.log(res)
-        params.uid ? selectUser(res) : setActiveLink(false)
+        let res = dataPinned.filter(i => i.uid === params.uid) || data.filter(i => i.uid === params.uid)
+        console.log(dataPinned.filter(i => i.uid === params.uid) || data.filter(i => i.uid === params.uid))
+        if (res.length >= 1) {
+          params.uid ? selectUser(res[0]) : setActiveLink(false)
+        }
       }, 1000)
     }
   }, [data, dataPinned, user1])

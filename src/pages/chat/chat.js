@@ -94,7 +94,7 @@ const Chat = ({width}) => {
 
     const selectUser = async (user) => {
         setChat(user)
-
+        console.log(user)
         const user2 = user.uid
         const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
 
@@ -106,10 +106,8 @@ const Chat = ({width}) => {
             let msgIds = []
             querySnapshot.forEach(snapshot => {
                 msgs.push({...snapshot.data(), tid: snapshot._document.key.path.segments[8]})
-                msgIds.push()
             })
             setMsgs(msgs)
-            setMsgIds(msgIds)
         })
 
         const docSnap = await getDoc(doc(db, 'lastMsg', id))

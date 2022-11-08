@@ -1,14 +1,10 @@
 import React from 'react';
 import Header from "../../widgets/header/header";
-import block from '../../img/block.png'
-import './style.css'
-import Button from "../../shared/button/button";
+import './style.sass'
 import {getAuth} from "firebase/auth";
-import Github from "../../features/github/github";
 import arrowRight from "../../img/arrow-right.png";
-import bg from "../../img/bgbg.png";
-import bg2 from "../../img/bg2.png";
 import {NavLink} from "react-router-dom";
+import Slider from "react-slick";
 
 const Main = () => {
 
@@ -41,6 +37,16 @@ const Main = () => {
       }
     ]
 
+    const settings = {
+      className: "slider variable-width",
+      infinite: true,
+      slidesToShow: 1,
+      dots: false,
+      arrows: false,
+      slidesToScroll: 1,
+      variableWidth: true
+    };
+
     return (
         <>
             <main className="background">
@@ -60,39 +66,47 @@ const Main = () => {
                         </section>
                       ) : ''
                     }
-                    {
-                      data.map((item, index) => {
-                        if (item.format === 1) {
-                          return (
-                            <section style={{backgroundImage: `url("${item.image}")`}}
-                                     className='main-item main-item-big'>
-                              <h3 className='main-item_title'>{item.title}</h3>
-                              {
-                                item.link_format === 1 ? (
-                                  <NavLink to={item.link} className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></NavLink>
-                                ) : (
-                                  <a href={item.link} target='_blank'  className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></a>
-                                )
-                              }
-                            </section>
-                          )
-                        } else {
-                          return (
-                            <section style={{backgroundImage: `url("${item.image}")`}}
-                                     className='main-item'>
-                              <h3 className='main-item_title'>{item.title}</h3>
-                              {
-                                item.link_format === 1 ? (
-                                  <NavLink to={item.link} className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></NavLink>
-                                ) : (
-                                  <a href={item.link} target='_blank' className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></a>
-                                )
-                              }
-                            </section>
-                          )
+                    <div className='main-list-info'>
+                      <Slider {...settings}>
+                        {
+                          data.map((item, index) => {
+                            if (item.format === 1) {
+                              return (
+                                <div className='main-item-container'>
+                                  <div style={{backgroundImage: `url("${item.image}")`}}
+                                       className='main-item main-item-big'>
+                                    <h3 className='main-item_title'>{item.title}</h3>
+                                    {
+                                      item.link_format === 1 ? (
+                                        <NavLink to={item.link} className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></NavLink>
+                                      ) : (
+                                        <a href={item.link} target='_blank'  className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></a>
+                                      )
+                                    }
+                                  </div>
+                                </div>
+                              )
+                            } else {
+                              return (
+                                <div className='main-item-container'>
+                                  <div style={{backgroundImage: `url("${item.image}")`}}
+                                           className='main-item'>
+                                    <h3 className='main-item_title'>{item.title}</h3>
+                                    {
+                                      item.link_format === 1 ? (
+                                        <NavLink to={item.link} className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></NavLink>
+                                      ) : (
+                                        <a href={item.link} target='_blank' className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></a>
+                                      )
+                                    }
+                                  </div>
+                                </div>
+                              )
+                            }
+                          })
                         }
-                      })
-                    }
+                      </Slider>
+                    </div>
                   </section>
                   <section className='main-sublist'>
                     <section className='main-vote'>

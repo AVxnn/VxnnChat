@@ -12,12 +12,16 @@
     margin-top: 20px
 
   .post-left
-    width: 50px
-    height: 50px
+    min-width: 50px
+    min-height: 50px
+    max-width: 50px
+    max-height: 50px
 
     @media screen and (max-width: 450px)
-      width: 40px
-      height: 40px
+      min-width: 40px
+      min-height: 40px
+      max-width: 40px
+      max-height: 40px
 
     .header-a
       width: 100%
@@ -67,6 +71,7 @@
     .post-title
       margin-top: 6px
       color: #BDBDBD
+      font-weight: 500
       word-break: break-word
       font-size: 16px
       margin-bottom: 14px

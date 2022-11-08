@@ -19,6 +19,10 @@ import ProfileEdit from "./pages/profileEdit/profileEdit";
 import TodoOpen from "./pages/todoOpen/todoOpen";
 import Friends from "./pages/friends/friends";
 import LayoutChat from "./shared/LayoutChat/LayoutChat";
+import Post from "./pages/post/Post";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const App = () => {
 
@@ -62,6 +66,11 @@ const App = () => {
                 <Route path="chat/:uid" element={
                     <PrivateRoute>
                         <LayoutChat />
+                    </PrivateRoute>
+                }/>
+                <Route path="post/:uid" element={
+                    <PrivateRoute>
+                        <Post />
                     </PrivateRoute>
                 }/>
                 <Route path="music" element={

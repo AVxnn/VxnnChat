@@ -13,7 +13,7 @@
     margin-bottom: 15px
 
   .main-list
-    display: flex
+    position: relative
     width: 100%
     margin-top: 40px
 
@@ -40,88 +40,93 @@
           text-decoration: none
           justify-content: center
 
-    .main-item
-      position: relative
-      width: 310px
-      height: 380px
-      display: flex
-      flex-direction: column
-      align-items: flex-start
-      justify-content: space-between
-      background-color: #151618
-      border-radius: 32px
-      padding: 50px 30px
-      box-sizing: border-box
-      margin-right: 40px
-      box-shadow: 0px 0px 4px 0px #FFFFFF40
-      background-position: center
-      background-size: 105% 105%
-      object-fit: cover
-      transition: all 0.3s ease-in-out
+    .main-item-container
+      margin: 20px 30px 20px 0
 
-      &:hover
-        background-size: 110% 110%
-
-      .main-item_title
-        font-size: 32px
-        color: #FFFFFF
-        font-weight: 700
-
-      .main-item_btn
-        display: flex
-        align-items: center
-        font-size: 14px
-        color: #FFFFFF
-        font-weight: 600
-        padding: 14px 17px 14px 25px
-        border-radius: 999px
+      .main-item
+        position: relative
+        width: 310px
+        height: 380px
+        display: flex !important
+        flex-direction: column
+        align-items: flex-start
+        justify-content: space-between
+        background-color: #151618
+        border-radius: 32px
+        padding: 50px 30px
         box-sizing: border-box
-        border: none
-        outline: none
-        text-decoration: none
-        background-color: #1C1E21
-        cursor: pointer
-        transition: all 0.1s ease
+        margin-right: 40px
+        background-image: url(".")
+        box-shadow: 0px 0px 4px 0px #FFFFFF40
+        background-position: center
+        background-size: 105% 105%
+        object-fit: cover
+        transition: all 0.3s ease-in-out
 
         &:hover
-          background-color: #121215
+          background-size: 110% 110%
 
-        &:active
-          background-color: #2e2e33
+        .main-item_title
+          font-size: 32px
+          color: #FFFFFF
+          font-weight: 700
+
+        .main-item_btn
+          display: flex
+          align-items: center
+          font-size: 14px
+          color: #FFFFFF
+          font-weight: 600
+          padding: 14px 17px 14px 25px
+          border-radius: 999px
+          box-sizing: border-box
+          border: none
+          outline: none
+          text-decoration: none
+          background-color: #1C1E21
+          cursor: pointer
+          transition: all 0.1s ease
+
+          &:hover
+            background-color: #121215
+
+          &:active
+            background-color: #2e2e33
 
 
 
-    .main-item:last-child
-      margin-right: 0
+      .main-item:last-child
+        margin-right: 0
 
-    .main-item-big
-      width: 620px
+      .main-item-big
+        width: 620px
 
-      .main-item_title
-        font-size: 48px
-        color: #FFFFFF
-        font-weight: 700
+        .main-item_title
+          font-size: 48px
+          color: #FFFFFF
+          font-weight: 700
 
-      .main-item_btn
-        display: flex
-        align-items: center
-        font-size: 14px
-        color: #FFFFFF
-        font-weight: 600
-        padding: 14px 17px 14px 25px
-        border-radius: 999px
-        box-sizing: border-box
-        border: none
-        outline: none
-        background-color: #1C1E21
-        cursor: pointer
-        transition: all 0.1s ease
+        .main-item_btn
+          display: flex
+          align-items: center
+          font-size: 14px
+          color: #FFFFFF
+          font-weight: 600
+          padding: 14px 17px 14px 25px
+          border-radius: 999px
+          box-sizing: border-box
+          border: none
+          background-image: url(".")
+          outline: none
+          background-color: #1C1E21
+          cursor: pointer
+          transition: all 0.1s ease
 
-        &:hover
-          background-color: #121215
+          &:hover
+            background-color: #121215
 
-        &:active
-          background-color: #2e2e33
+          &:active
+            background-color: #2e2e33
 
   .main-sublist
     display: flex
@@ -274,6 +279,7 @@
 
       .main-item_title
         font-size: 38px !important
+
 
 
 @media screen and (max-width: 1280px)
@@ -435,7 +441,6 @@
       margin-right: 0 !important
 
     .main-item
-      margin-top: 30px !important
       width: 235px !important
       height: 270px !important
       margin-right: 30px !important
@@ -508,14 +513,8 @@
       flex-wrap: wrap
       margin-top: 20px !important
 
-    .main-item:last-child
-      margin-right: 0 !important
-
     .main-item
-      margin-top: 30px !important
-      width: 47.5% !important
       height: 270px !important
-      margin-right: 4% !important
       padding: 40px 25px 25px 25px !important
 
       .main-item_title
@@ -531,9 +530,9 @@
 
     .main-item-big
       margin-top: 0 !important
-      width: 100% !important
+      width: 90% !important
       height: 270px !important
-      margin-right: 0 !important
+      margin-right: 20px !important
 
       .main-item_title
         font-size: 24px !important
@@ -586,7 +585,6 @@
       margin-right: 0 !important
 
     .main-item
-      margin-top: 20px !important
       height: 170px !important
       margin-right: 10px !important
       padding: 30px 25px 25px 25px !important

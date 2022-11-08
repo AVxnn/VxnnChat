@@ -173,16 +173,16 @@ const Messenger = ({chat, handleSubmit, width = false, deleteHandler, localUser,
                     {msgs.length ? msgs.map((msg, i) => {
                         if (i < 1) {
                             return (
-                              <MessageItem lastMsg={lastMsg} msgIds={msgIds[i]} deleteHandler={deleteHandler} name={chat.name} chat={chat} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
+                              <MessageItem lastMsg={lastMsg}  deleteHandler={deleteHandler} name={chat.name} chat={chat} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
                             )
                         } else {
                             if (msg.from === msgs[i - 1].from) {
                                 return (
-                                  <SecondMessageItem lastMsg={lastMsg} msgIds={msgIds[i]} deleteHandler={deleteHandler} name={chat.name} chat={chat} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
+                                  <SecondMessageItem lastMsg={lastMsg} deleteHandler={deleteHandler} name={chat.name} chat={chat} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
                                 )
                             } else {
                                 return (
-                                  <MessageItem lastMsg={lastMsg} msgIds={msgIds[i]} deleteHandler={deleteHandler} name={chat.name} chat={chat} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
+                                  <MessageItem lastMsg={lastMsg} deleteHandler={deleteHandler} name={chat.name} chat={chat} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
                                 )
                             }
                         }

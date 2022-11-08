@@ -11,7 +11,7 @@ import {db} from "../../shared/api/firebase";
 const SecondMessageItem = ({keyу, lastMsg, msg, name, chat, chatImg, user2Avatar, msgIds}) => {
 
   const scrollRef = useRef()
-
+  console.log(msg)
   const auth = getAuth()
 
   const [open, setOpen] = useState(false)
@@ -35,7 +35,7 @@ const SecondMessageItem = ({keyу, lastMsg, msg, name, chat, chatImg, user2Avata
     open ? setOpen(false) : setOpen(true)
   }
 
-  return (
+  return msg && (
     <>
       {open ? <Popup src={msg.media} text={msg.text} open={setOpen}/> : null}
       <section onMouseEnter={() => setIsDelete(true)}
@@ -51,13 +51,13 @@ const SecondMessageItem = ({keyу, lastMsg, msg, name, chat, chatImg, user2Avata
             onMouseLeave={() => setShowTime(false)}
             className='message-text-container'>
             {
-              msg.media ? (
-                <img className='message-img' style={msg.text ? (msg.from === auth.currentUser.uid ? {borderRadius: '14px 0 0 0'} : {borderRadius: '0 14px 0 0'}) : null}  onClick={() => openHandler()} src={msg.media} alt="chat"/>
+              msg?.media ? (
+                <img className='message-img' style={msg?.text ? (msg.from === auth.currentUser.uid ? {borderRadius: '14px 0 0 0'} : {borderRadius: '0 14px 0 0'}) : null}  onClick={() => openHandler()} src={msg.media} alt="chat"/>
               ) : ''
             }
             {
-              msg.text ? (
-                <span className='message-text' style={msg.media ? (msg.from === auth.currentUser.uid ? {borderRadius: '0 0 14px 14px'} : {borderRadius: '0 0 14px 14px'}) : null} >{msg.text}</span>
+              msg?.text ? (
+                <span className='message-text' style={msg.media ? (msg.from === auth.currentUser.uid ? {borderRadius: '0 0 14px 14px'} : {borderRadius: '0 0 14px 14px'}) : null} >{msg.text ? msg.text : ''}</span>
               ) : ''
             }
           </section>
@@ -71,20 +71,7 @@ const SecondMessageItem = ({keyу, lastMsg, msg, name, chat, chatImg, user2Avata
             )
           }
         </section>
-        {
-          isDelete && (
-            <button onClick={() => deleteHandler(msg)} className='second-delete'>
-              <img className='second-delete-img' src={trash} alt="trash"/>
-            </button>
-          )
-        }
-        {
-          lastMsg.text === msg.text && lastMsg.unread && (
-            <section className='message-notlook'>
-              <img src={arrowLook} alt="notLook"/>
-            </section>
-          )
-        }
+
       </section>
     </>
   );
