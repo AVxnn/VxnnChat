@@ -23,6 +23,7 @@ import Post from "./pages/post/Post";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import PostCreate from "./pages/postCreate/postCreate";
 
 const App = () => {
 
@@ -68,9 +69,14 @@ const App = () => {
                         <LayoutChat />
                     </PrivateRoute>
                 }/>
-                <Route path="post/:uid" element={
+                <Route path="post/:id" element={
                     <PrivateRoute>
                         <Post />
+                    </PrivateRoute>
+                }/>
+                <Route path="post/create" element={
+                    <PrivateRoute>
+                        <PostCreate />
                     </PrivateRoute>
                 }/>
                 <Route path="music" element={

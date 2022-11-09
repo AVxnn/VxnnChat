@@ -1,0 +1,219 @@
+
+
+.post-create-container
+  max-width: 700px
+  width: 100%
+  overflow-y: scroll
+
+  .post-header
+    display: flex
+    justify-content: space-between
+
+    .post-create-title
+      color: #FFFFFF
+
+    .post-create-save
+      width: 150px
+      color: #FFFFFF
+      border: 0
+      outline: none
+      border-radius: 16px
+      background-color: #437ED8
+      cursor: pointer
+
+      &:hover
+        background-color: #3f76c8
+
+      &:active
+        background-color: #3d72bf
+
+
+  .post-create-link
+    width: 100%
+
+    h2
+      color: #FFFFFF
+      margin: 50px 0 20px 0
+
+    input
+      width: 100%
+      font-size: 26px
+      background-color: rgba(0, 0, 0, 0)
+      color: #FFFFFF
+      border: 0
+      outline: none
+
+    button
+      width: 100%
+      height: 50px
+      margin-top: 40px
+      font-size: 18px
+      color: #FFFFFF
+      border: 0
+      outline: none
+      border-radius: 16px
+      background-color: #437ED8
+      cursor: pointer
+
+      &:hover
+        background-color: #3f76c8
+
+      &:active
+        background-color: #3d72bf
+
+
+  .post-create-add
+    margin-top: 20px
+    border-radius: 32px
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 180px
+    background-color: #1C1E21
+    cursor: pointer
+    transition: all 0.1s ease-in-out
+    animation: anim 200ms ease-in-out forwards
+
+    &:hover
+      background-color: #1a1c1e
+
+    &:active
+      background-color: #101112
+
+  .post-create-add-active
+    margin-top: 20px
+    border-radius: 32px
+    padding: 20px
+    width: 100%
+    box-sizing: border-box
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    grid-template-rows: 1fr 1fr 1fr
+    grid-gap: 10px
+    height: 180px
+    background-color: #1C1E21
+    transition: all 0.1s ease-in-out
+    animation: anim 200ms ease-in-out forwards
+
+    .post-create-add-active-btn
+      display: flex
+      justify-content: center
+      border-radius: 8px
+      cursor: pointer
+      align-items: center
+      color: #FFFFFF
+      transition: all 0.1s ease-in-out
+
+      &:hover
+        border-radius: 99px
+
+@keyframes anim
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+
+.title
+  background-color: rgba(0, 0, 0, 0)
+  color: #FFFFFF
+  font-size: 32px
+  border: 1px solid rgba(0, 0, 0, 0)
+  outline: none
+  padding: 20px 0
+  border-radius: 16px
+  width: 100%
+  resize: none
+
+  &:hover
+    border: 1px solid #1C1E21
+
+
+.description
+  background-color: rgba(0, 0, 0, 0)
+  color: #FFFFFF
+  font-size: 16px
+  border: 1px solid rgba(0, 0, 0, 0)
+  outline: none
+  margin: 0
+  padding: 10px 0
+  border-radius: 16px
+  width: 100%
+  resize: none
+
+  &:hover
+    border: 1px solid #1C1E21
+
+
+.quote
+  position: relative
+  margin: 20px 0 20px 45px
+  color: #FFFFFF
+
+  textarea
+    padding: 7px 0
+    background-color: rgba(0, 0, 0, 0)
+    border: 1px solid rgba(0, 0, 0, 0)
+    outline: none
+    font-size: 16px
+    color: #FFFFFF
+    width: 100%
+    margin: 0
+    resize: none
+
+    &:hover
+      border: 1px solid #1C1E21
+
+  &:before
+    content: ''
+    position: absolute
+    display: block
+    left: -20px
+    width: 5px
+    height: 100%
+    background-color: #00a6da
+
+.image-active,
+.image
+  width: 40%
+  height: 60px
+  display: flex
+  margin: 20px 0
+  align-items: center
+  justify-content: center
+  background-color: #1C1E21
+  transition: all 0.1s ease-in-out
+  cursor: pointer
+
+  &:hover
+    background-color: #1a1c1e
+
+  &:active
+    background-color: #101112
+
+  #field__file-2
+    display: none
+
+  .field__file
+    display: flex
+    width: 100%
+    height: 100%
+    align-items: center
+    justify-content: center
+
+  svg
+    cursor: pointer
+
+.image-active
+  width: 100%
+  border-radius: 32px
+  height: auto
+
+  .field__file
+    object-fit: cover
+
+  img
+    width: 100%
+    height: 100%
+    border-radius: 32px
