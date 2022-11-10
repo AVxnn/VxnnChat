@@ -65,22 +65,24 @@ const Post = () => {
     <main className="background">
       <Header />
       <div className='post-container'>
-        {
-          data && data[0].data.map((item, index) => {
-            switch (item.type){
-              case 'title':
-                return <Title text={item.text}/>
-              case 'description':
-                return <Description text={item.text}/>
-              case 'quote':
-                return <Quote text={item.text}/>
-              case 'image':
-                return <Image url={item.url}/>
-              case 'button':
-                return <Button text={item.text} link={item.link}/>
-            }
-          })
-        }
+        <div className='post-container-margin'>
+          {
+            data && data[0].data.map((item, index) => {
+              switch (item.type){
+                case 'title':
+                  return <Title text={item.text}/>
+                case 'description':
+                  return <Description text={item.text}/>
+                case 'quote':
+                  return <Quote text={item.text}/>
+                case 'image':
+                  return <Image url={item.url}/>
+                case 'button':
+                  return <Button text={item.text} link={item.link}/>
+              }
+            })
+          }
+        </div>
       </div>
     </main>
   );

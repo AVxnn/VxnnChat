@@ -12,38 +12,35 @@ import {useNavigate} from "react-router-dom";
 
 const Title = ({text, id, handlerTitle}) => {
   return (
-    <TextareaAutosize onChange={(e) => handlerTitle(e.target.value, id)} placeholder={'Type title'} className={'title'} />
+    <TextareaAutosize onChange={(e) => handlerTitle(e.target.value, id)} placeholder={'Type title'} className={'title-c'} />
   )
 }
 
-const Description = ({text}) => {
+const Description = ({handlerTitle, id}) => {
   return (
-    <TextareaAutosize placeholder={'Type description'} className={'description'} />
+    <TextareaAutosize onChange={(e) => handlerTitle(e.target.value, id)} placeholder={'Type description'} className={'description-c'} />
   )
 }
 
-const Quote = ({text}) => {
+const Quote = ({handlerTitle, id}) => {
   return (
     <div className={'quote'}>
-      <TextareaAutosize placeholder={'Type quote'} className={'quote'} />
+      <TextareaAutosize onChange={(e) => handlerTitle(e.target.value, id)} placeholder={'Type quote'} className={'quote-c'} />
     </div>
   )
 }
 
-const Image = ({handleSubmit, uid, url}) => {
-
-  const addImageHandler = (img) => {
-    handleSubmit(img, uid)
-  }
-
-
+const Image = ({handleSubmit, setImg, img, id, urlImage}) => {
   return (
-    <div className={url ? 'image-active' : 'image'}>
-      <input onChange={(e) => addImageHandler(e.target.files[0])} id='field__file-2' className='btn file-btn' type='file'/>
+    <div className={urlImage ? 'image-active' : 'image'}>
+      <input onChange={(e, index) => {
+        img.push(e.target.files[0])
+        handleSubmit([...img, e.target.files[0]], id)
+      }} id='field__file-2' className='btn file-btn' type='file'/>
       <label className="field__file" htmlFor="field__file-2">
         {
-          url ? (
-            <img src={url} alt=""/>
+          urlImage ? (
+            <img src={urlImage} alt=""/>
           ) : (
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="13" width="6" height="32" rx="3" fill="#D9D9D9"/>
@@ -71,8 +68,12 @@ const PostCreate = () => {
   const [open, setOpen] = useState(false)
   const [openRelease, setOpenRelease] = useState(false)
   const [data, setData] = useState([])
-  const [img, setImg] = useState()
   const [link, setLink] = useState('')
+
+
+  let url = []
+  let img = []
+  const [loading, setLoading] = useState(false)
 
   const openHandler = () => {
     setOpen(!open)
@@ -91,44 +92,55 @@ const PostCreate = () => {
       type: type,
       id: data.length
     }])
-    console.log(data)
   }
 
   const handlerTitle = (text, id) => {
     let oldData = data.filter((item) => item.id === id);
-    setData([...data.filter((item) => item.id !== id), {
+    let res = [...data.filter((item) => item.id !== id), {
       type: oldData[0].type,
       id: id,
       text: text
-    }])
+    }]
+    setData(res.sort((a, b) => a.id > b.id ? 1 : -1))
   }
-
-  const handleSubmit = async (img, id) => {
-    let url
-    if (img) {
-      const imgRef = ref(
-        storage,
-        `news/${new Date().getTime()} - ${img.name}`
-      )
-      const snap = await uploadBytes(imgRef, img)
-      const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))
-      url = dlUrl
-    }
-    let oldData = data.filter((item) => item.id === id);
-    setData([...data.filter((item) => item.id !== id), {
-      type: oldData[0].type,
-      id: id,
-      url: url
-    }])
-  }
-
 
   const savePost = async (id) => {
     await addDoc(collection(db, "news", id, 'data'), {data})
     setOpenRelease(false)
     navigate(`/post/${id}`)
   }
-  console.log(link)
+
+  const handleSubmit = async (img, id) => {
+    console.log(img, url)
+    let resOld = data.filter((item) => item.id === id);
+    let Old = [...data.filter((item) => item.id !== id), {
+      type: resOld[0].type,
+      id: resOld[0].id,
+    }]
+    let imgData = Old.filter((item) => item.type === 'image');
+    let resImg = imgData.findIndex(i => i.id === id)
+    let imgRef = ref(
+      storage,
+      `news/${new Date().getTime()} - ${img[resImg.name]}`
+    )
+    let snap = await uploadBytes(imgRef, img[resImg])
+    let dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))
+    url.push([...url, dlUrl])
+    if(url) {
+      let res = [...data.filter((item) => item.id !== id), {
+        type: resOld[0].type,
+        id: resOld[0].id,
+        url: [...url, dlUrl][resImg],
+      }]
+      console.log(url[resImg], resImg, url)
+      setData(res.sort((a, b) => a.id > b.id ? 1 : -1))
+    }
+  }
+
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+
   return (
     <main className="background">
       <Header />
@@ -145,18 +157,18 @@ const PostCreate = () => {
               <button onClick={() => savePost(link)}>Опубликовать</button>
             </div>
           ) : (
-            <div>
+            <div className='post-create-margin'>
               {
                 data && data.map((item, index) => {
                   switch (item.type) {
                     case 'title':
                       return <Title handlerTitle={handlerTitle} id={item.id}/>
                     case 'description':
-                      return <Description uid={item.id}/>
+                      return <Description handlerTitle={handlerTitle} id={item.id}/>
                     case 'quote':
-                      return <Quote uid={item.id}/>
+                      return <Quote handlerTitle={handlerTitle} id={item.id}/>
                     case 'image':
-                      return <Image handleSubmit={handleSubmit} uid={item.id} setImg={setImg} url={item?.url}/>
+                      return <Image handleSubmit={handleSubmit} img={img} id={item.id} urlImage={item?.url}/>
                     case 'button':
                       return <Button uid={item.id} link={item.link}/>
                   }
