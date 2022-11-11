@@ -4,6 +4,7 @@
   width: 100%
   height: 15vh
   min-height: 120px
+  max-height: 120px
   display: flex
   justify-content: space-between
   align-items: center
@@ -62,8 +63,9 @@
       align-items: center
       border-radius: 14px
       color: #EEEEEE
-      width: 40px
-      height: 40px
+      min-width: 40px
+      min-height: 40px
+      padding-right: 14px
       font-weight: 700
       text-decoration: none
       z-index: 2
@@ -90,8 +92,12 @@
 
     .home-y,
     .chat-y,
+    .lenta-y,
+    .music-y,
     .profile-y,
     .todo-y
+      display: flex
+      align-items: center
       transition: all 1s ease-in-out
 
     .new
@@ -205,6 +211,9 @@
       z-index: 0
       transition: all 0.2s ease-in-out
 
+    .todo-y
+      padding-right: 0
+
 @media screen and (max-width: 935px)
   .section-logo
     display: none !important
@@ -218,13 +227,19 @@
 
 @media screen and (max-width: 720px)
 
+  .down-trip
+    left: 10px !important
 
   .navigation
     width: 290px !important
     padding: 10px !important
 
+    .nav-item
+      padding-right: 6px !important
+
   .home-y:hover ~ .down-trip
-    left: 10px !important
+    left: 0 !important
+    margin-left: -10px !important
     background-color: #00e09c !important
 
   .home-y.active ~ .down-trip
@@ -233,6 +248,7 @@
 
   .lenta-y:hover ~ .down-trip
     left: 56px !important
+    margin-left: -18px !important
     background-color: #FF3D00 !important
 
   .lenta-y.active  ~ .down-trip
@@ -241,6 +257,7 @@
 
   .chat-y:hover ~ .down-trip
     left: 102px !important
+    margin-left: -26px !important
     background-color: #e00086 !important
 
   .chat-y.active  ~ .down-trip
@@ -249,6 +266,7 @@
 
   .music-y:hover ~ .down-trip
     left: 148px !important
+    margin-left: -34px !important
     background-color: #00C2FF !important
 
   .music-y.active  ~ .down-trip
@@ -257,6 +275,7 @@
 
   .profile-y:hover ~ .down-trip
     left: 194px !important
+    margin-left: -42px !important
     background-color: #95e000 !important
 
   .profile-y.active ~ .down-trip
@@ -265,6 +284,7 @@
 
   .todo-y:hover ~ .down-trip
     left: 240px !important
+    margin-left: -50px !important
     background-color: #E00086 !important
 
   .todo-y.active ~ .down-trip

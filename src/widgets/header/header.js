@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import "./style.css"
+import "./style.sass"
 import home from '../../img/home.png'
 import news from '../../img/news.png'
 import chat from '../../img/chat.png'
@@ -72,32 +72,32 @@ const Header = () => {
                 </section>
                 <nav className="navigation">
                     <NavLink to='/' className="nav-item home-y">
-                        <section className="nav-item home-y">
+                        <section className="home-y">
                             <img className="nav-item_img" src={home} alt="home"/>
                         </section>
                     </NavLink>
                     <NavLink to='/lenta' className="nav-item lenta-y">
-                        <section className="nav-item lenta-y">
+                        <section className="lenta-y">
                             <img className="nav-item_img" src={news} alt="news"/>
                         </section>
                     </NavLink>
                     <NavLink to='/chat' className="nav-item chat-y">
-                        <section className="nav-item chat-y">
+                        <section className="chat-y">
                             <img className="nav-item_img" src={chat} alt="chat"/>
                         </section>
                     </NavLink>
                     <NavLink to='/music' className="nav-item music-y">
-                        <section className="nav-item music-y">
+                        <section className="music-y">
                             <img className="nav-item_img" src={musicHeader} alt="music"/>
                         </section>
                     </NavLink>
                     <NavLink to={auth.currentUser ? `/profile/${auth.currentUser.uid}` : `/profile`} className="nav-item profile-y">
-                        <section className="nav-item profile-y">
+                        <section className="profile-y">
                             <img className="nav-item_img" src={user} alt="user"/>
                         </section>
                     </NavLink>
                     <NavLink to='/todo' className="nav-item todo-y">
-                        <section className="nav-item todo-y">
+                        <section className="todo-y">
                             <img className="nav-item_img" src={todo} alt="todo"/>
                         </section>
                     </NavLink>
