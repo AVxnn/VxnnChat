@@ -9,7 +9,7 @@ import {storage} from "../../shared/api/firebase";
 import uploadImage from "../../img/uploadimage.png";
 import dots from "../../img/dots.png";
 
-const Post = ({auth, post, postId}) => {
+const Post = ({auth, post, postId, index}) => {
     const [data, setData] = useState({
         img: post.img,
         video: post.video,
@@ -124,7 +124,7 @@ const Post = ({auth, post, postId}) => {
 
     return post ? (
         <>
-            <section className='post'>
+            <section className='post' style={{animationDelay: index * 200 + 'ms'}}>
                 {open ? <Popup src={post.img} text={post.title} open={setOpen}/> : null}
                 <section className='post-left'>
                     <Link className='header-a' to={`/profile/${post.uid}`}>{avatar ? <img className='header-img' src={avatar} alt="avatar"/> : <div className='header-img'></div>}</Link>

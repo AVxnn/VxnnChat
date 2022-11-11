@@ -99,7 +99,7 @@ const Todo = () => {
         <section className='todo-list'>
           {
             todosFilter.map((i, index) => (
-              <section key={index} className='todo-item' style={{borderLeft: `10px solid ${i.color ? i.color : '#FFFFFF'}`}}>
+              <section key={index} className='todo-item' style={{borderLeft: `10px solid ${i.color ? i.color : '#FFFFFF'}`, animationDelay: index * 100 + 'ms'}}>
                 <section className='item-top'>
                   {/*onClick={() => openTodo(i)}*/}
                   <section className='item-top_left'>

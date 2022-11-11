@@ -5,6 +5,7 @@ import {getAuth} from "firebase/auth";
 import arrowRight from "../../img/arrow-right.png";
 import {NavLink} from "react-router-dom";
 import Slider from "react-slick";
+import Vote from "../../widgets/vote/Vote";
 
 const Main = () => {
 
@@ -12,16 +13,18 @@ const Main = () => {
 
     const data = [
       {
-        title: 'Новая версия чата',
+        title: 'Beta V4.5',
         format: 1,
-        image: 'https://p4.wallpaperbetter.com/wallpaper/377/893/142/vector-landscape-minimalism-hd-wallpaper-preview.jpg',
-        btntext: 'Узнать больше',
+        description: 'Posts, share, animation',
+        image: 'https://firebasestorage.googleapis.com/v0/b/petprojectchat.appspot.com/o/main%2FGroup%20177.png?alt=media&token=26385319-4983-477b-a38f-b92678987422',
+        btntext: 'Прочитать пост',
         link_format: 1,
-        link: '/lenta'
+        link: '/post/BetaV4.5'
       },
       {
         title: 'Обновленный профиль 💪',
         format: 2,
+        description: '',
         image: 'https://assets-global.website-files.com/5e6a544cadf84b1393e2e022/611ab4ae1a89e8fb54119d5b_Vectornator_illustration_space_futuristic.png',
         btntext: 'Заценить',
         link_format: 2,
@@ -30,6 +33,7 @@ const Main = () => {
       {
         title: 'Набор админов 👌🏼',
         format: 2,
+        description: '',
         image: '',
         btntext: 'Заявиться',
         link_format: 2,
@@ -75,7 +79,10 @@ const Main = () => {
                                 <div className='main-item-container'>
                                   <div style={{backgroundImage: `url("${item.image}")`}}
                                        className='main-item main-item-big'>
-                                    <h3 className='main-item_title'>{item.title}</h3>
+                                    <div>
+                                      <h3 className='main-item_title'>{item.title}</h3>
+                                      <p className='main-item_description'>{item.description}</p>
+                                    </div>
                                     {
                                       item.link_format === 1 ? (
                                         <NavLink to={item.link} className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></NavLink>
@@ -91,7 +98,10 @@ const Main = () => {
                                 <div className='main-item-container'>
                                   <div style={{backgroundImage: `url("${item.image}")`}}
                                            className='main-item'>
-                                    <h3 className='main-item_title'>{item.title}</h3>
+                                    <div>
+                                      <h3 className='main-item_title'>{item.title}</h3>
+                                      <p className='main-item_description'>{item.description}</p>
+                                    </div>
                                     {
                                       item.link_format === 1 ? (
                                         <NavLink to={item.link} className='main-item_btn'>{item.btntext}<img className='main-item-btn_icon' src={arrowRight} alt="arrowRight"/></NavLink>
@@ -108,16 +118,7 @@ const Main = () => {
                       </Slider>
                     </div>
                   </section>
-                  <section className='main-sublist'>
-                    <section className='main-vote'>
-                      <h3 className='vote-title'>Что добавить следущее?</h3>
-                      <section className='vote-list'>
-                        <button className='vote-item_btn first'>SleepTimer</button>
-                        <button className='vote-item_btn second'>Update Profile</button>
-                        <button className='vote-item_btn thirt'>Add new features</button>
-                      </section>
-                    </section>
-                  </section>
+                  <Vote />
                 </section>
             </main>
 

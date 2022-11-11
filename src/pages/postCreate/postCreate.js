@@ -31,6 +31,7 @@ const Quote = ({handlerTitle, id}) => {
 }
 
 const Image = ({handleSubmit, setImg, img, id, urlImage}) => {
+  console.log(id, urlImage)
   return (
     <div className={urlImage ? 'image-active' : 'image'}>
       <input onChange={(e, index) => {

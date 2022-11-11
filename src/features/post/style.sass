@@ -7,6 +7,8 @@
   overflow-x: hidden
   justify-content: space-between
   flex-direction: row
+  opacity: 0
+  animation: anim 0.3s ease-in-out forwards
 
   @media screen and (max-width: 450px)
     margin-top: 20px
@@ -224,3 +226,9 @@
     word-break: break-word
     color: #c7c7c7
     padding: 0 20px 0 20px
+
+@keyframes anim
+  0%
+    opacity: 0
+  100%
+    opacity: 1

@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 import {collection, doc, getDoc, onSnapshot} from "firebase/firestore";
 import {db} from "../../shared/api/firebase";
 import button from "../../shared/button/button";
+import Error from "../error/error";
 
 const Title = ({text}) => {
   return (
@@ -45,9 +46,9 @@ const Button = ({text, link}) => {
 const Post = () => {
 
   const params = useParams()
-  console.log(params)
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
+  const [empty, setEmpty] = useState(false)
 
   useEffect(() => {
       let unsub = onSnapshot(collection(db, `news`, `${params.id}`, 'data'), (querySnapshot) => {
@@ -55,32 +56,52 @@ const Post = () => {
         querySnapshot.forEach(snapshot => {
           setData([...data, snapshot.data()])
         })
-        setLoading(true)
       })
       return () => unsub()
   }, [params])
+
+  useEffect(() => {
+    if (data.length <= 0) {
+      setLoading(false)
+    } else {
+      setLoading(true)
+    }
+  }, [data])
   console.log(data)
 
-  return loading && data && (
+  return (
     <main className="background">
       <Header />
       <div className='post-container'>
         <div className='post-container-margin'>
           {
-            data && data[0].data.map((item, index) => {
-              switch (item.type){
-                case 'title':
-                  return <Title text={item.text}/>
-                case 'description':
-                  return <Description text={item.text}/>
-                case 'quote':
-                  return <Quote text={item.text}/>
-                case 'image':
-                  return <Image url={item.url}/>
-                case 'button':
-                  return <Button text={item.text} link={item.link}/>
-              }
-            })
+            empty && (
+              <>
+                <Error />
+              </>
+            )
+          }
+          {
+            loading ? (
+              <>
+                {
+                    data[0].data.map((item, index) => {
+                    switch (item.type) {
+                      case 'title':
+                        return <Title text={item.text}/>
+                      case 'description':
+                        return <Description text={item.text}/>
+                      case 'quote':
+                        return <Quote text={item.text}/>
+                      case 'image':
+                        return <Image url={item.url}/>
+                      case 'button':
+                        return <Button text={item.text} link={item.link}/>
+                    }
+                  })
+                }
+              </>
+            ) : ''
           }
         </div>
       </div>

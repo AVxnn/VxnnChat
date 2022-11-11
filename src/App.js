@@ -109,7 +109,7 @@ const App = () => {
                         <Profile />
                     </PrivateRoute>
                 }/>
-                <Route path="friends" element={
+                <Route path="friends/:uid" element={
                     <PrivateRoute>
                         <Friends />
                     </PrivateRoute>

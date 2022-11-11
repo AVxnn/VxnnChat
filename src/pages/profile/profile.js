@@ -164,7 +164,7 @@ const Profile = () => {
                         }
                     </section>
                     <section className='profile-stats'>
-                        <NavLink to={`/friends`}>
+                        <NavLink to={`/friends/${userId}`}>
                             <section className='stats-block'>
                                 <h4 className='stats-title'>{user?.friends ? us?.friends.length : 0}</h4>
                                 <span className='stats-subtitle'>Friends</span>

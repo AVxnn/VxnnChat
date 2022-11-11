@@ -9,9 +9,13 @@ import avatar from '../../features/message-item/img/avatar.png'
 import {getAuth} from "firebase/auth";
 import {doc, onSnapshot} from "firebase/firestore";
 import {db} from "../../shared/api/firebase";
+import {useNavigate, useParams} from "react-router-dom";
 
 const Friends = () => {
 
+  const params = useParams()
+  const navigate = useNavigate()
+  console.log(params)
   const [data, setData] = useState([])
 
   const auth = getAuth()
@@ -19,8 +23,8 @@ const Friends = () => {
   const user = auth.currentUser
 
   useEffect(() => {
-    if (user) {
-      let unsub = onSnapshot(doc(db, 'users', user.uid), (doc) => {
+    if (user && params.uid) {
+      let unsub = onSnapshot(doc(db, 'users', params.uid), (doc) => {
         setData(doc.data().friends)
         console.log(doc.data().friends)
       })
@@ -46,7 +50,7 @@ const Friends = () => {
                 return (
                   <section className='friends-item'>
                     <section className='friends-info'>
-                      <img className='friends-img' src={i.avatar ? i.avatar : avatar} alt="avatar"/>
+                      <img onClick={() => navigate(`/profile/${i.uid}`)} className='friends-img' src={i.avatar ? i.avatar : avatar} alt="avatar"/>
                       <span className='friends-name'>{i.name ? i.name : 'anonymous'}</span>
                     </section>
                     <section className='friends-list-btn'>

@@ -100,10 +100,13 @@
     padding: 20px 20px
     background-color: #1C1E21
     margin-top: 30px
+    opacity: 0
     border-radius: 12px 12px 12px 12px
     border-left: 10px solid #437ED8
     cursor: pointer
     transition: all 0.2s ease-in-out
+    animation: anim 0.3s ease-in-out forwards
+    animation-delay: 0ms
 
     &:hover
       border-left: 20px solid #437ED8 !important
@@ -290,3 +293,10 @@
   .title-block_btn
     padding: 8px 12px !important
     height: 30px !important
+
+
+@keyframes anim
+  0%
+    opacity: 0
+  100%
+    opacity: 1

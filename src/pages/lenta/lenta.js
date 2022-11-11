@@ -179,7 +179,7 @@ const Lenta = () => {
                     <section className="posts">
                         {
                             postsFilter ? postsFilter.map((e, i) => {
-                                return <Post key={e.id} auth={auth} post={e} postId={postId[i]}/>
+                                return <Post key={e.id} auth={auth} post={e} postId={postId[i]} index={i}/>
                             }) : (
                                 <section className='pin-user'>
                                     <h1 className='pin-title'>Пусто</h1>
