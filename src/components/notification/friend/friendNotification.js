@@ -1,30 +1,66 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import avatar from "../../../features/message-item/img/avatar.png";
-import usersSnap from "../../../shared/snap/users/usersSnap";
+import {doc, onSnapshot, updateDoc} from "firebase/firestore";
+import {db} from "../../../shared/api/firebase";
 
-const FriendNotification = (item) => {
+const FriendNotification = ({item, data}) => {
 
-  console.log(usersSnap)
+  console.log(data)
 
-  // const acceptFriend = async (e, type) => {
-  //   const user2 = .filter(i => i.uid === e.uid)
-  //   if (type === 0) {
-  //     console.log(data, user2)
-  //     let result1 = data.notifications.filter(i => i.uid !== user2[0].uid)
-  //     let result2 = user2[0].notifications.filter(i => i.uid !== data.uid)
-  //     console.log(result1, result2)
-  //     await updateDoc(doc(db, "users", data.uid), {
-  //       notifications: result1,
-  //       friends: [...data.friends, {name: user2[0].name ? user2[0].name : 'anonymous', uid: user2[0].uid, avatar: user2[0].avatar ? user2[0].avatar : avatar}]
-  //     });
-  //     await updateDoc(doc(db, "users", user2[0].uid), {
-  //       notifications: result2,
-  //       friends: [...user2[0].friends, {name: data.name ? data.name : 'anonymous', uid: data.uid, avatar: data.avatar ? data.avatar : avatar}]
-  //     });
-  //   } else {
-  //
-  //   }
-  // }
+  const [user2, setUser2] = useState(false)
+
+  useEffect(() => {
+    if (item.uid) {
+      let unsub = onSnapshot(doc(db, 'users', item.uid), (doc) => {
+        setUser2(doc.data())
+      })
+      console.log(user2)
+      return () => unsub()
+    }
+  }, [item.uid])
+
+  const acceptFriend = async (e, type) => {
+    if (type === 0 && data) {
+      console.log(data.notifications, user2)
+      let result1 = data.notifications.filter(i => i.uid !== user2.uid && i.type !== user2.type)
+      let result2 = user2.notifications.filter(i => i.uid !== data.uid && i.type !== data.type)
+      console.log(result1, result2)
+      await updateDoc(doc(db, "users", data.uid), {
+        notifications: result1,
+        friends: [...data.friends, {name: user2.name ? user2.name : 'anonymous', uid: user2.uid, avatar: user2.avatar ? user2.avatar : avatar}]
+      });
+      await updateDoc(doc(db, "users", user2.uid), {
+        notifications: result2,
+        friends: [...user2.friends, {name: data.name ? data.name : 'anonymous', uid: data.uid, avatar: data.avatar ? data.avatar : avatar}]
+      });
+    }
+    console.log('accept')
+  }
+
+  const rejectFriend = async (e, type) => {
+    if (type === 0 && data) {
+      let result1 = data.notifications.filter(i => i.uid !== user2.uid && i.type !== user2.type)
+      let result2 = user2.notifications.filter(i => i.uid !== data.uid && i.type !== data.type)
+      console.log(result1, result2)
+      await updateDoc(doc(db, "users", data.uid), {
+        notifications: result1,
+        friends: [...data.friends]
+      });
+      await updateDoc(doc(db, "users", user2.uid), {
+        notifications: [...result2, {name: data.name ? data.name : 'anonymous', type: 'delete', uid: data.uid, avatar: data.avatar ? data.avatar : avatar}],
+        friends: [...user2.friends]
+      });
+    }
+    console.log('reject')
+  }
+
+  const closeNotification = async (e) => {
+    const user1 = data.notifications.filter(i => i.uid !== user2.uid && i.type !== user2.type)
+    await updateDoc(doc(db, "users", data.uid), {
+      notifications: [...user1],
+    });
+    console.log('close')
+  }
 
   if (item.type === 'reqFriend') {
     return (
@@ -37,8 +73,8 @@ const FriendNotification = (item) => {
           </section>
         </section>
         <section className='bell-btn-list'>
-          {/*<button onClick={() => acceptFriend(e, 0)} className='bell-item-btn accept'>Accept</button>*/}
-          {/*<button onClick={() => acceptFriend(e, 1)} className='bell-item-btn reject'>Reject</button>*/}
+          <button onClick={() => acceptFriend(item, 0)} className='bell-item-btn accept'>Accept</button>
+          <button onClick={() => rejectFriend(item, 0)} className='bell-item-btn reject'>Reject</button>
         </section>
       </section>
     )} else if (item.type === 'resFriend') {
@@ -52,11 +88,27 @@ const FriendNotification = (item) => {
           </section>
         </section>
         <section className='bell-btn-list'>
-          {/*<button onClick={() => acceptFriend(e, 1)} className='bell-item-btn reject'>Reject</button>*/}
+          <button onClick={() => rejectFriend(item, 0)} className='bell-item-btn reject'>Reject</button>
+        </section>
+      </section>
+    )
+  } else if (item.type === 'delete') {
+    return (
+      <section className='bell-item'>
+        <section className='bell-item-container'>
+          <img className='bell-item-avatar' src={avatar} alt="avatar"/>
+          <section className='bell-info'>
+            <span className='bell-item-name'>{item.name}</span>
+            <span className='bell-item-subtitle'>Didn't accept friend request</span>
+          </section>
+        </section>
+        <section className='bell-btn-list'>
+          <button onClick={() => closeNotification(item)} className='bell-item-btn reject'>Close ;(</button>
         </section>
       </section>
     )
   }
+  return <></>
 };
 
 export default FriendNotification;

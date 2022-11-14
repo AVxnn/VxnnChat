@@ -21,7 +21,7 @@ const Vote = () => {
   }, [])
 
   const submitVote = async (type) => {
-    if (!vote) {
+    if (!vote && user) {
       setLoading(false)
       setData({...data, [type]: [...data[type], user.uid]})
       await updateDoc(doc(db, "vote", 'main'), {...data, [type]: [...data[type], user.uid]})
@@ -29,14 +29,14 @@ const Vote = () => {
   }
 
   useEffect( () => {
-    if (data.first) {
+    if (data.first && user) {
       if ([...data.first.filter(i => i === user.uid), ...data.second.filter(i => i === user.uid), ...data.third.filter(i => i === user.uid)].length > 0) {
         setVote(true)
       } else {
         setVote(false)
       }
     }
-  }, [data])
+  }, [data, user])
 
   return data.first && (
     <>

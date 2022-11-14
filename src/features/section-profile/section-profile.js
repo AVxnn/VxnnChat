@@ -26,6 +26,7 @@ const SectionProfile = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenNotifications, setIsOpenNotifications] = useState(false)
     const [data, setData] = useState(false)
+    const [user2, setUser2] = useState({})
     const [users, setUsers] = useState([])
 
     const auth = getAuth()
@@ -45,15 +46,6 @@ const SectionProfile = () => {
             console.log('non')
         }
 
-    }
-
-
-
-    const closeNotification = async (e) => {
-        const user2 = data.notifications.filter(i => i.uid !== e.uid)
-        await updateDoc(doc(db, "users", user.uid), {
-            notifications: [...user2],
-        });
     }
 
 
@@ -89,13 +81,9 @@ const SectionProfile = () => {
                     <section className={`profile-bell-list ${data.notifications.length > 0 ? '' : 'empty'}`}>
                         {
                             data.notifications.length > 0 ? data.notifications.map((e) => {
-                                if (e.type == 'reqFriend' || e.type == 'resFriend') {
+                                if (e.type) {
                                     return (
-                                      <FriendNotification item={e}/>
-                                    )
-                                } else {
-                                    return (
-                                      <span>gege</span>
+                                      <FriendNotification data={data} item={e}/>
                                     )
                                 }
                             }) : <span className='profile-bell-empty'>Empty</span>
