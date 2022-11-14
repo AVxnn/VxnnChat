@@ -86,7 +86,6 @@ const Chat = ({width}) => {
             querySnapshot.forEach((doc) => {
                 users.push(doc.data());
             });
-
             setAllData(users)
         });
         return () => unsub()
@@ -181,10 +180,10 @@ const Chat = ({width}) => {
             }
             if (res === localUser.friends.length) {
                 await updateDoc(doc(db, "users", item.uid), {
-                    notifications: [...item?.notifications, {uid: localUser.uid, name: localUser.name ? localUser.name : 'anonymous', avatar: localUser.avatar ? localUser.avatar : avatar, type: 'reqFriend'}]
+                    notifications: [...item?.notifications, {uid: localUser.uid, random: Math.round(Math.random(1000000) * 1000), name: localUser.name ? localUser.name : 'anonymous', avatar: localUser.avatar ? localUser.avatar : avatar, type: 'reqFriend'}]
                 });
                 await updateDoc(doc(db, "users", localUser.uid), {
-                    notifications: [...localUser?.notifications, {uid: item.uid, name: item.name ? item.name : 'anonymous', avatar: item.avatar ? item.avatar : avatar, type: 'resFriend'}]
+                    notifications: [...localUser?.notifications, {uid: item.uid, random: Math.round(Math.random(1000000) * 1000), name: item.name ? item.name : 'anonymous', avatar: item.avatar ? item.avatar : avatar, type: 'resFriend'}]
                 });
             }
             setOpenFriend({...openFriend, status: false})

@@ -11,12 +11,14 @@
   justify-content: center
   align-items: center
   background-color: rgba(0, 0, 0, 0.6)
-  z-index: 2
+  z-index: 9999999999999
 
   .popup-img
-    width: 600px
+    max-width: 600px
+    width: 100%
     border-radius: 14px
     max-height: 750px
+    z-index: 9999999999999
 
   .popup-text
     margin-top: 50px
@@ -24,11 +26,12 @@
     border-radius: 14px
     background-color: #151618
     color: #FFFFFF
+    z-index: 9999999999999
 
 @media screen and (max-width: 1280px)
   .popup-img
-    object-fit: cover
-    width: 500px !important
+    padding: 40px !important
+    box-sizing: border-box !important
     max-height: 700px !important
 
   .popup-text

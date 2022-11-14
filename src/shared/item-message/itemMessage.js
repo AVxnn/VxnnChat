@@ -53,7 +53,7 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
                     <section className='member-new-info'>
                         {data ? (
                             <>
-                                <p className="member_description"><span className='member-status-span'>{data.from === user1 ? 'Me: ' : 'You: '}</span>{data.text}</p>
+                                <p className="member_description">{data.text}</p>
                                 {data?.from !== user1 && data?.unread ? <span className='member-new-msg'>1</span> : null}
                             </>
                         ) : <p style={{color: '#FFFFFF'}}> </p> }

@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
 import img from "../../img/te.png";
 import {getAuth} from "firebase/auth";
-import './style.css'
+import './style.sass'
 import avatar from '../../features/message-item/img/avatar.png'
 import signIn from '../../img/signin.png'
 import {AuthContext} from '../../shared/contextauth/auth'

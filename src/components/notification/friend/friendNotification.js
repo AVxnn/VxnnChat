@@ -5,7 +5,7 @@ import {db} from "../../../shared/api/firebase";
 
 const FriendNotification = ({item, data}) => {
 
-  console.log(data)
+  console.log(data, item)
 
   const [user2, setUser2] = useState(false)
 
@@ -21,10 +21,8 @@ const FriendNotification = ({item, data}) => {
 
   const acceptFriend = async (e, type) => {
     if (type === 0 && data) {
-      console.log(data.notifications, user2)
       let result1 = data.notifications.filter(i => i.uid !== user2.uid && i.type !== user2.type)
       let result2 = user2.notifications.filter(i => i.uid !== data.uid && i.type !== data.type)
-      console.log(result1, result2)
       await updateDoc(doc(db, "users", data.uid), {
         notifications: result1,
         friends: [...data.friends, {name: user2.name ? user2.name : 'anonymous', uid: user2.uid, avatar: user2.avatar ? user2.avatar : avatar}]
@@ -41,7 +39,6 @@ const FriendNotification = ({item, data}) => {
     if (type === 0 && data) {
       let result1 = data.notifications.filter(i => i.uid !== user2.uid && i.type !== user2.type)
       let result2 = user2.notifications.filter(i => i.uid !== data.uid && i.type !== data.type)
-      console.log(result1, result2)
       await updateDoc(doc(db, "users", data.uid), {
         notifications: result1,
         friends: [...data.friends]
@@ -55,7 +52,7 @@ const FriendNotification = ({item, data}) => {
   }
 
   const closeNotification = async (e) => {
-    const user1 = data.notifications.filter(i => i.uid !== user2.uid && i.type !== user2.type)
+    const user1 = data.notifications.filter(i => i.uid !== e.uid)
     await updateDoc(doc(db, "users", data.uid), {
       notifications: [...user1],
     });
@@ -88,7 +85,7 @@ const FriendNotification = ({item, data}) => {
           </section>
         </section>
         <section className='bell-btn-list'>
-          <button onClick={() => rejectFriend(item, 0)} className='bell-item-btn reject'>Reject</button>
+          <button onClick={() => closeNotification(item, 0)} className='bell-item-btn reject'>Reject</button>
         </section>
       </section>
     )

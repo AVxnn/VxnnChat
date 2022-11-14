@@ -70,8 +70,15 @@ const SecondMessageItem = ({keyу, lastMsg, msg, name, chat, chatImg, user2Avata
               </section>
             )
           }
-        </section>
 
+        </section>
+        {
+          isDelete && (
+            <button onClick={() => deleteHandler(msg)} className='second-delete'>
+              <img className='second-delete-img' src={trash} alt="trash"/>
+            </button>
+          )
+        }
       </section>
     </>
   );

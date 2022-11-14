@@ -26,7 +26,6 @@ const Profile = () => {
     const auth = getAuth()
 
     const {userId} = useParams()
-    console.log(userId)
 
     const requestFriend = async (item, type) => {
         let res = 0
@@ -34,7 +33,7 @@ const Profile = () => {
             if (type === 'add') {
                 setFriend(true)
                 await updateDoc(doc(db, "users", item.uid), {
-                    notifications: [...item?.notifications, {uid: curUser.uid, name: curUser.name ? curUser.name : 'anonymous', avatar: curUser.avatar ? curUser.avatar : avatar, type: 'reqFriend'}]
+                    notifications: [...item?.notifications, {uid: curUser.uid, random: Math.round(Math.random(1000000) * 1000), name: curUser.name ? curUser.name : 'anonymous', avatar: curUser.avatar ? curUser.avatar : avatar, type: 'reqFriend'}]
                 });
                 await updateDoc(doc(db, "users", curUser.uid), {
                     notifications: [...curUser?.notifications, {uid: item.uid, name: item.name ? item.name : 'anonymous', avatar: item.avatar ? item.avatar : avatar, type: 'resFriend'}]
@@ -44,9 +43,7 @@ const Profile = () => {
                 setFriend(false)
                 let resF = item.friends.filter(i => i.uid !== curUser.uid)
                 await updateDoc(doc(db, "users", item.uid), {
-                    notifications: [...item?.notifications, {uid: curUser.uid, name: curUser.name ? curUser.name : 'anonymous', avatar: curUser.avatar ? curUser.avatar : avatar, type: 'delete'}]
-                });
-                await updateDoc(doc(db, "users", item.uid), {
+                    notifications: [...item?.notifications, {uid: curUser.uid, name: curUser.name ? curUser.name : 'anonymous', avatar: curUser.avatar ? curUser.avatar : avatar, type: 'delete'}],
                     friends: [...resF]
                 });
                 let resC = curUser.friends.filter(i => i.uid !== item.uid)
@@ -54,7 +51,7 @@ const Profile = () => {
                     friends: [...resC]
                 });
             }
-
+            console.log(item, curUser)
         })
     }
 
