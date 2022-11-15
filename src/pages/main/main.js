@@ -13,13 +13,13 @@ const Main = () => {
 
     const data = [
       {
-        title: 'Beta V4.5',
+        title: 'Обновление V4.6',
         format: 1,
-        description: 'Posts, share, animation',
+        description: 'small update',
         image: 'https://firebasestorage.googleapis.com/v0/b/petprojectchat.appspot.com/o/main%2FGroup%20177.png?alt=media&token=26385319-4983-477b-a38f-b92678987422',
         btntext: 'Прочитать пост',
         link_format: 1,
-        link: '/post/BetaV4.5'
+        link: '/post/v4.6'
       },
       {
         title: 'Обновленный профиль 💪',

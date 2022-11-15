@@ -18,6 +18,7 @@ import Moment from "react-moment";
 import EmojiPicker from 'emoji-picker-react';
 import img from "../../img/te.png";
 import settings from "../../img/cog.png";
+import ReplyMessage from "../../widgets/ReplyMessage/ReplyMessage";
 
 
 const Messenger = ({chat, handleSubmit, width = false, deleteHandler, localUser, text, setText, setImg, img, msgs, chatImg, msgIds}) => {
@@ -171,6 +172,11 @@ const Messenger = ({chat, handleSubmit, width = false, deleteHandler, localUser,
                 </section>
                 <section className='message-list'>
                     {msgs.length ? msgs.map((msg, i) => {
+                        if (msg.type === 'widget') {
+                            return (
+                              <ReplyMessage />
+                            )
+                        }
                         if (i < 1) {
                             return (
                               <MessageItem lastMsg={lastMsg}  deleteHandler={deleteHandler} name={chat.name} chat={chat} user2Avatar={chat.avatar} chatImg={chatImg} keyу={i} msg={msg}/>
