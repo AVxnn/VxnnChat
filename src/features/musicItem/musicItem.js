@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import play from '../../img/play.png'
 import pause from '../../img/pause.png'
-import './style.css'
+import './style.sass'
 
 const MusicItem = ({data, selectMusic, setSelectMusic, startMusic, isPlaying, setIsPlaying}) => {
 

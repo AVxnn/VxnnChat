@@ -1,0 +1,51 @@
+.profile-menu-container
+  display: flex
+  align-items: center
+  justify-content: center
+  position: relative
+  padding: 10px
+  width: 20px
+  height: 20px
+  border-radius: 14px
+  cursor: pointer
+  transition: all 0.1s ease-in-out
+
+  &:hover
+    background-color: #24272C
+
+  .profile-menu
+    width: 20px
+    height: 20px
+
+  .profile-menu-list
+    position: absolute
+    display: flex
+    width: 240px
+    opacity: 0
+    top: 45px
+    padding: 24px 20px
+    box-sizing: border-box
+    right: 0
+    cursor: default
+    background-color: #1C1E21
+    z-index: 999999999999
+    justify-content: space-between
+    border-radius: 8px
+    animation: anim 0.1s ease forwards
+
+    .profile-menu-list-item
+      width: 40px
+      height: 40px
+      display: flex
+      align-items: center
+      justify-content: center
+      background-color: #151618
+      cursor: pointer
+      border-radius: 8px
+      transition: all 0.1s ease
+
+      &:hover
+        background-color: #18191C
+
+      .profile-menu-list-item_img
+        width: 24px

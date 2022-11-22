@@ -6,6 +6,7 @@ import arrowRight from "../../img/arrow-right.png";
 import {NavLink} from "react-router-dom";
 import Slider from "react-slick";
 import Vote from "../../widgets/vote/Vote";
+import {Helmet} from "react-helmet";
 
 const Main = () => {
 
@@ -53,6 +54,9 @@ const Main = () => {
 
     return (
         <>
+            <Helmet>
+              <title>{`PetChat - new update v4.6`}</title>
+            </Helmet>
             <main className="background">
                 <section className="main">
                   <h1 className='main-title'>Welcome to the VxnnChat</h1>

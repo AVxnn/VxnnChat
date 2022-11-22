@@ -19,6 +19,7 @@ import EmojiPicker from 'emoji-picker-react';
 import img from "../../img/te.png";
 import settings from "../../img/cog.png";
 import ReplyMessage from "../../widgets/ReplyMessage/ReplyMessage";
+import {Helmet} from "react-helmet";
 
 
 const Messenger = ({chat, handleSubmit, width = false, deleteHandler, localUser, text, setText, setImg, img, msgs, chatImg, msgIds}) => {

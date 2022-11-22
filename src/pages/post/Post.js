@@ -6,6 +6,7 @@ import {collection, doc, getDoc, onSnapshot} from "firebase/firestore";
 import {db} from "../../shared/api/firebase";
 import button from "../../shared/button/button";
 import Error from "../error/error";
+import {Helmet} from "react-helmet";
 
 const Title = ({text}) => {
   return (
@@ -70,41 +71,46 @@ const Post = () => {
   console.log(data)
 
   return (
-    <main className="background">
-      <div className='post-container'>
-        <div className='post-container-margin'>
-          {
-            empty && (
-              <>
-                <Error />
-              </>
-            )
-          }
-          {
-            loading ? (
-              <>
-                {
+    <>
+      <Helmet>
+        <title>{`PetChat - Post ${params.id}`}</title>
+      </Helmet>
+      <main className="background">
+        <div className='post-container'>
+          <div className='post-container-margin'>
+            {
+              empty && (
+                <>
+                  <Error />
+                </>
+              )
+            }
+            {
+              loading ? (
+                <>
+                  {
                     data[0].data.map((item, index) => {
-                    switch (item.type) {
-                      case 'title':
-                        return <Title text={item.text}/>
-                      case 'description':
-                        return <Description text={item.text}/>
-                      case 'quote':
-                        return <Quote text={item.text}/>
-                      case 'image':
-                        return <Image url={item.url}/>
-                      case 'button':
-                        return <Button text={item.text} link={item.link}/>
-                    }
-                  })
-                }
-              </>
-            ) : ''
-          }
+                      switch (item.type) {
+                        case 'title':
+                          return <Title text={item.text}/>
+                        case 'description':
+                          return <Description text={item.text}/>
+                        case 'quote':
+                          return <Quote text={item.text}/>
+                        case 'image':
+                          return <Image url={item.url}/>
+                        case 'button':
+                          return <Button text={item.text} link={item.link}/>
+                      }
+                    })
+                  }
+                </>
+              ) : ''
+            }
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 };
 

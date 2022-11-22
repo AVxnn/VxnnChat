@@ -2,6 +2,10 @@
 
 .music-container
   height: 85vh
+  width: 100%
+  display: flex
+  align-items: center
+  flex-direction: column
   overflow-y: scroll
 
   &::-webkit-scrollbar
@@ -17,10 +21,12 @@
     background-color: #00a6da
 
   .player
-    width: 560px
+    box-sizing: border-box
+    max-width: 560px
+    width: 100%
     display: flex
     padding: 14px 20px
-    background-color: #24272C
+    background-color: #1C1E21
     margin-top: 20px
     border-radius: 14px
     flex-direction: column
@@ -68,12 +74,13 @@
 
 
   .music-tools
-    width: 560px
+    max-width: 560px
+    width: 100%
     height: 42px
-    margin-right: 10px
+    box-sizing: border-box
     display: flex
     padding: 14px 20px
-    background-color: #24272C
+    background-color: #1C1E21
     border-radius: 14px
     justify-content: space-between
     align-items: center
@@ -122,11 +129,12 @@
     height: 227px
     margin-top: 20px
     display: flex
+    box-sizing: border-box
     flex-direction: column
     align-items: center
     padding: 14px 20px
     border-radius: 14px
-    background-color: #24272C
+    background-color: #1C1E21
     transition: all 0.1s ease-in-out
 
     #addmusic-2
@@ -198,5 +206,5 @@
 
 
 .music-list
-  margin-right: 10px
+  max-width: 560px
   margin-top: 20px

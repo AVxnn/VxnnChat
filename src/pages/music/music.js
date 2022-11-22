@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './style.css'
+import './style.sass'
 import Header from "../../widgets/header/header";
 import newPost from "../../img/pencil.png";
 import check from "../../img/check.png";

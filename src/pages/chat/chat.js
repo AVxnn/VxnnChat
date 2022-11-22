@@ -28,6 +28,7 @@ import close from '../../img/x.png'
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import {getAuth} from "firebase/auth";
 import {NavLink} from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 const Chat = ({width}) => {
     const [activeTab, setActiveTab] = useState('')
@@ -206,6 +207,9 @@ const Chat = ({width}) => {
     }
     return (
         <>
+            <Helmet>
+                <title>{`PetChat - Chat`}</title>
+            </Helmet>
             <main className="background">
                 <section className="section-chat" onClick={() => onlineHandler()}>
                     <section className="members">

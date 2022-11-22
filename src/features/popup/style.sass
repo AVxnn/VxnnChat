@@ -2,9 +2,9 @@
 
 .popup-container
   position: absolute
-  width: 100vw
   height: 100vh
-  left: 0
+  left: -5.5%
+  right: -5.5%
   top: 0
   display: flex
   flex-direction: column
@@ -18,21 +18,25 @@
     width: 100%
     border-radius: 14px
     max-height: 750px
-    z-index: 9999999999999
+    z-index: 99999931231239999999
+    object-fit: cover
 
   .popup-text
-    margin-top: 50px
     padding: 20px 40px
+    max-width: 500px
     border-radius: 14px
     background-color: #151618
     color: #FFFFFF
-    z-index: 9999999999999
+    margin: 50px 20px 0 20px
+    z-index: 999999123123129999999
 
 @media screen and (max-width: 1280px)
   .popup-img
     padding: 40px !important
     box-sizing: border-box !important
     max-height: 700px !important
+    z-index: 9999999999999 !important
 
   .popup-text
     margin-top: 15px !important
+    z-index: 9999999999999 !important

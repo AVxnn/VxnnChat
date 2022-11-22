@@ -6,6 +6,7 @@ import {onSnapshot, doc, getFirestore} from "firebase/firestore";
 import Moment from "react-moment";
 import {Link} from "react-router-dom";
 import {db} from "../api/firebase";
+import {Helmet} from "react-helmet";
 
 const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
 
@@ -13,6 +14,7 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
     const user2 = user?.uid
     const [data, setData] = useState('')
     const [typing, setTyping] = useState(false)
+    const [intervalTime, setIntervalTime] = useState(false)
 
     useEffect(() => {
         const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
@@ -31,8 +33,22 @@ const ChatItem = ({user, user1, active, addedName, selectUser, chat}) => {
         // }
     }, [user])
 
+    useEffect(() => {
+        setInterval(() => {
+            setIntervalTime(!intervalTime)
+        }, 1000)
+        return () => {
+            clearInterval(() => {
+                setIntervalTime(!intervalTime)
+            }, 1000)
+        }
+    })
+
     return (
         <>
+            <Helmet>
+                <title>{`${intervalTime && data?.unread ? '🥵 NeW mEsSaGe 🥵' : 'PetChat - Chat '}`}</title>
+            </Helmet>
             <section onClick={() => {
                         selectUser(user)
                         active(user.id)

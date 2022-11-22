@@ -48,7 +48,6 @@ const TodoCreate = () => {
 
   return (
     <main className="background">
-      <Header />
       <section className='todo-container'>
         <section className='title-task'>
           <h2 className='title-task_title'>Title Task</h2>

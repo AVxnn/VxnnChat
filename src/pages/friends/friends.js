@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header from "../../widgets/header/header";
-import './style.css'
+import './style.sass'
 
 import dots from '../../img/dotsb.png'
 import pen from '../../img/pencil.png'
@@ -10,6 +9,7 @@ import {getAuth} from "firebase/auth";
 import {doc, onSnapshot} from "firebase/firestore";
 import {db} from "../../shared/api/firebase";
 import {useNavigate, useParams} from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 const Friends = () => {
 
@@ -34,6 +34,9 @@ const Friends = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{`PetChat - Friends`}</title>
+      </Helmet>
       <main className="background">
         <section className="section-friends">
           <section className='friends-top'>

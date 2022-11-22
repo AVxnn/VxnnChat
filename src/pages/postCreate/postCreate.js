@@ -9,6 +9,7 @@ import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {db, storage} from "../../shared/api/firebase";
 import {addDoc, collection, doc, Timestamp} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 const Title = ({text, id, handlerTitle}) => {
   return (
@@ -143,64 +144,69 @@ const PostCreate = () => {
   }, [data])
 
   return (
-    <main className="background">
-      <div className='post-create-container'>
-        <div className='post-header'>
-          <h1 className='post-create-title'>Новый пост</h1>
-          <button className='post-create-save' onClick={() => setOpenRelease(!openRelease)}>{openRelease ? 'Закрыть' : 'Опубликовать'}</button>
-        </div>
-        {
-          openRelease ? (
-            <div className='post-create-link'>
-              <h2>Сome up with an ID</h2>
-              <input onChange={(e) => setLink(e.target.value)} placeholder={'post/ > *type id* <'} type="text"/>
-              <button onClick={() => savePost(link)}>Опубликовать</button>
-            </div>
-          ) : (
-            <div className='post-create-margin'>
-              {
-                data && data.map((item, index) => {
-                  switch (item.type) {
-                    case 'title':
-                      return <Title handlerTitle={handlerTitle} id={item.id}/>
-                    case 'description':
-                      return <Description handlerTitle={handlerTitle} id={item.id}/>
-                    case 'quote':
-                      return <Quote handlerTitle={handlerTitle} id={item.id}/>
-                    case 'image':
-                      return <Image handleSubmit={handleSubmit} img={img} id={item.id} urlImage={item?.url}/>
-                    case 'button':
-                      return <Button uid={item.id} link={item.link}/>
-                  }
-                })
-              }
-              {
-                !open ? (
-                  <div onClick={() => openHandler()} className='post-create-add'>
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="13" width="6" height="32" rx="3" fill="#D9D9D9"/>
-                      <rect x="32" y="13" width="6" height="32" rx="3" transform="rotate(90 32 13)" fill="#D9D9D9"/>
-                    </svg>
-                  </div>
-                ) : (
-                  <>
-                    <div onClick={() => openHandler()} className='post-create-add-active'>
-                      {
-                        list.map((item) => (
-                          <>
-                            <span onClick={() => createBlock(item.title)} style={{backgroundColor: item.color}} className='post-create-add-active-btn'>{item.title}</span>
-                          </>
-                        ))
-                      }
+    <>
+      <Helmet>
+        <title>{`PetChat - Post Create`}</title>
+      </Helmet>
+      <main className="background">
+        <div className='post-create-container'>
+          <div className='post-header'>
+            <h1 className='post-create-title'>Новый пост</h1>
+            <button className='post-create-save' onClick={() => setOpenRelease(!openRelease)}>{openRelease ? 'Закрыть' : 'Опубликовать'}</button>
+          </div>
+          {
+            openRelease ? (
+              <div className='post-create-link'>
+                <h2>Сome up with an ID</h2>
+                <input onChange={(e) => setLink(e.target.value)} placeholder={'post/ > *type id* <'} type="text"/>
+                <button onClick={() => savePost(link)}>Опубликовать</button>
+              </div>
+            ) : (
+              <div className='post-create-margin'>
+                {
+                  data && data.map((item, index) => {
+                    switch (item.type) {
+                      case 'title':
+                        return <Title handlerTitle={handlerTitle} id={item.id}/>
+                      case 'description':
+                        return <Description handlerTitle={handlerTitle} id={item.id}/>
+                      case 'quote':
+                        return <Quote handlerTitle={handlerTitle} id={item.id}/>
+                      case 'image':
+                        return <Image handleSubmit={handleSubmit} img={img} id={item.id} urlImage={item?.url}/>
+                      case 'button':
+                        return <Button uid={item.id} link={item.link}/>
+                    }
+                  })
+                }
+                {
+                  !open ? (
+                    <div onClick={() => openHandler()} className='post-create-add'>
+                      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="13" width="6" height="32" rx="3" fill="#D9D9D9"/>
+                        <rect x="32" y="13" width="6" height="32" rx="3" transform="rotate(90 32 13)" fill="#D9D9D9"/>
+                      </svg>
                     </div>
-                  </>
-                )
-              }
-            </div>
-          )
-        }
-      </div>
-    </main>
+                  ) : (
+                    <>
+                      <div onClick={() => openHandler()} className='post-create-add-active'>
+                        {
+                          list.map((item) => (
+                            <>
+                              <span onClick={() => createBlock(item.title)} style={{backgroundColor: item.color}} className='post-create-add-active-btn'>{item.title}</span>
+                            </>
+                          ))
+                        }
+                      </div>
+                    </>
+                  )
+                }
+              </div>
+            )
+          }
+        </div>
+      </main>
+    </>
   );
 };
 

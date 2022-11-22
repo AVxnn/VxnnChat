@@ -12,6 +12,7 @@ import {getAuth, updateProfile} from "firebase/auth";
 import {NavLink, useNavigate, useParams} from "react-router-dom";
 import Github from "../../features/github/github";
 import EmojiPicker from "emoji-picker-react";
+import {Helmet} from "react-helmet";
 
 const Profile = () => {
 
@@ -138,6 +139,9 @@ const Profile = () => {
 
     return (
         <>
+            <Helmet>
+                <title>{`PetChat - Profile`}</title>
+            </Helmet>
             <main className="background">
                 <section className="block-profile">
                     <div className='profile-background' style={{backgroundImage: `url(${user?.background ? user.background : ''})`}}>

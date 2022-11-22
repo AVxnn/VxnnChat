@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState, useContext, useRef} from 'react';
 import Header from "../../widgets/header/header";
 import './style.sass'
 import TextareaAutosize from 'react-textarea-autosize';
@@ -12,6 +12,7 @@ import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "../../shared/api/firebase";
 import {AuthContext} from "../../shared/contextauth/auth";
 import addImage from "../../img/addImage.png";
+import {Helmet} from "react-helmet";
 
 const Lenta = () => {
 
@@ -19,6 +20,11 @@ const Lenta = () => {
     const db = getFirestore()
 
     const {user} = useContext(AuthContext)
+
+    const listRef = useRef(null)
+
+    const viewsPage = 999
+    const loadPage = 1
 
     const [open, setOpen] = useState(true)
     const [iImgMessenger, setImgMessenger] = useState()
@@ -34,6 +40,14 @@ const Lenta = () => {
     const [posts, setPosts] = useState([])
     const [postsFilter, setPostsFilter] = useState([])
     const [postId, setPostId] = useState([])
+
+    const [list, setList] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+
+    useEffect(() => {
+        const currentCompanies = postsFilter.slice(0, currentPage * viewsPage)
+        setList(currentCompanies)
+    }, [posts, currentPage])
 
     const changeImg = (e, type) => {
         if (type === 'image') {
@@ -126,9 +140,12 @@ const Lenta = () => {
         });
         return () => unsub()
     }, [])
-
+    console.log(list)
     return (
         <>
+            <Helmet>
+                <title>{`PetChat - Lenta`}</title>
+            </Helmet>
             <main className="background">
                 <section className='lenta-container'>
                     <section className='lenta-tools'>
@@ -175,9 +192,9 @@ const Lenta = () => {
                           )
                         }
                     </section>
-                    <section className="posts">
+                    <section ref={listRef} className="posts">
                         {
-                            postsFilter ? postsFilter.map((e, i) => {
+                            list ? list.map((e, i) => {
                                 return <Post key={e.id} auth={auth} post={e} postId={postId[i]} index={i}/>
                             }) : (
                                 <section className='pin-user'>
