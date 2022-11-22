@@ -4,12 +4,11 @@
   width: 100%
   display: flex
   flex-direction: column
-  margin: 0 74px
 
 
   .section-error
     width: 100%
-    height: 90vh
+    height: 70vh
     display: flex
     align-items: center
     justify-content: center
@@ -28,3 +27,27 @@
       .link
         color: #00FFB2
         text-decoration: none
+
+@media screen and (max-width: 936px)
+
+  .section-error
+
+    .error-title
+      width: 350px !important
+      font-size: 76px !important
+
+    .error-description
+      width: 350px !important
+      font-size: 24px !important
+
+@media screen and (max-width: 500px)
+
+  .section-error
+
+    .error-title
+      width: 300px !important
+      font-size: 66px !important
+
+    .error-description
+      width: 300px !important
+      font-size: 20px !important

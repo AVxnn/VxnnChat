@@ -71,7 +71,6 @@ const Post = () => {
 
   return (
     <main className="background">
-      <Header />
       <div className='post-container'>
         <div className='post-container-margin'>
           {

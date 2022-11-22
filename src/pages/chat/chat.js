@@ -14,6 +14,9 @@ import {
     addDoc,
     Timestamp,
     orderBy,
+    endAt,
+    limit,
+    startAt,
     doc,
     setDoc, getDoc, updateDoc, deleteDoc
 } from "firebase/firestore";
@@ -102,7 +105,6 @@ const Chat = ({width}) => {
 
         onSnapshot(q, querySnapshot => {
             let msgs = []
-            let msgIds = []
             querySnapshot.forEach(snapshot => {
                 msgs.push({...snapshot.data(), tid: snapshot._document.key.path.segments[8]})
             })
@@ -120,7 +122,6 @@ const Chat = ({width}) => {
         if (e) {
             e.preventDefault();
         }
-
         if (!text && img) {
         } else if (!text) {
             return null
@@ -206,7 +207,6 @@ const Chat = ({width}) => {
     return (
         <>
             <main className="background">
-                <Header />
                 <section className="section-chat" onClick={() => onlineHandler()}>
                     <section className="members">
                         <section className='members-top'>
@@ -269,7 +269,7 @@ const Chat = ({width}) => {
                                                                  addedName={activeTab === user.uid ? "active" : ''}/>
                                          }) : null
                                      }
-                                 </section>
+                                </section>
                              </>
                             ) : ''
                         }

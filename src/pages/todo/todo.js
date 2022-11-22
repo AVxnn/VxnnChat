@@ -79,7 +79,6 @@ const Todo = () => {
 
   return (
     <main className="background">
-      <Header />
       <section className='todo-container'>
         <section className='title-block'>
           <section className='title-block_left'>

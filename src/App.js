@@ -2,7 +2,7 @@ import {Route, Routes} from "react-router-dom";
 import React from 'react';
 import Main from "./pages/main/main";
 import Login from "./pages/login/login";
-import './style.css'
+import './style.sass'
 import Profile from "./pages/profile/profile";
 import Error from "./pages/error/error";
 import Registration from "./pages/registration/registration";
@@ -24,6 +24,7 @@ import Post from "./pages/post/Post";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import PostCreate from "./pages/postCreate/postCreate";
+import Layout from "./features/Layout/Layout";
 
 const App = () => {
 
@@ -50,77 +51,79 @@ const App = () => {
 
     return (
         <>
-            <Routes>
-                <Route path="/" element={<Main />}/>
-                <Route path="login" element={<Login />}/>
-                <Route path="register" element={<Registration />}/>
-                <Route path="lenta" element={
-                    <PrivateRoute>
-                        <Lenta />
-                    </PrivateRoute>
-                }/>
-                <Route path="chat" element={
-                    <PrivateRoute>
-                        <LayoutChat />
-                    </PrivateRoute>
-                }/>
-                <Route path="chat/:uid" element={
-                    <PrivateRoute>
-                        <LayoutChat />
-                    </PrivateRoute>
-                }/>
-                <Route path="post/:id" element={
-                    <PrivateRoute>
-                        <Post />
-                    </PrivateRoute>
-                }/>
-                <Route path="post/create" element={
-                    <PrivateRoute>
-                        <PostCreate />
-                    </PrivateRoute>
-                }/>
-                <Route path="music" element={
-                    <PrivateRoute>
-                        <Music />
-                    </PrivateRoute>
-                }/>
-                <Route path="todo" element={
-                    <PrivateRoute>
-                        <Todo />
-                    </PrivateRoute>
-                }/>
-                <Route path="todo/:tid" element={
-                    <PrivateRoute>
-                        <TodoOpen />
-                    </PrivateRoute>
-                }/>
-                <Route path="todo/create" element={
-                    <PrivateRoute>
-                        <TodoCreate />
-                    </PrivateRoute>
-                }/>
-                <Route path="test" element={
-                    <PrivateRoute>
-                        <NewChat />
-                    </PrivateRoute>
-                }/>
-                <Route path="profile/:userId" element={
-                    <PrivateRoute>
-                        <Profile />
-                    </PrivateRoute>
-                }/>
-                <Route path="friends/:uid" element={
-                    <PrivateRoute>
-                        <Friends />
-                    </PrivateRoute>
-                }/>
-                <Route path="profile/:userId/edit" element={
-                    <PrivateRoute>
-                        <ProfileEdit />
-                    </PrivateRoute>
-                }/>
-                <Route path="*" element={<Error />}/>
-            </Routes>
+            <Layout>
+                <Routes>
+                    <Route path="/" element={<Main />}/>
+                    <Route path="login" element={<Login />}/>
+                    <Route path="register" element={<Registration />}/>
+                    <Route path="lenta" element={
+                        <PrivateRoute>
+                            <Lenta />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="chat" element={
+                        <PrivateRoute>
+                            <LayoutChat />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="chat/:uid" element={
+                        <PrivateRoute>
+                            <LayoutChat />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="post/:id" element={
+                        <PrivateRoute>
+                            <Post />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="post/create" element={
+                        <PrivateRoute>
+                            <PostCreate />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="music" element={
+                        <PrivateRoute>
+                            <Music />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="todo" element={
+                        <PrivateRoute>
+                            <Todo />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="todo/:tid" element={
+                        <PrivateRoute>
+                            <TodoOpen />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="todo/create" element={
+                        <PrivateRoute>
+                            <TodoCreate />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="test" element={
+                        <PrivateRoute>
+                            <NewChat />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="profile/:userId" element={
+                        <PrivateRoute>
+                            <Profile />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="friends/:uid" element={
+                        <PrivateRoute>
+                            <Friends />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="profile/:userId/edit" element={
+                        <PrivateRoute>
+                            <ProfileEdit />
+                        </PrivateRoute>
+                    }/>
+                    <Route path="*" element={<Error />}/>
+                </Routes>
+            </Layout>
         </>
     );
 }

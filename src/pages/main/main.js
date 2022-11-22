@@ -54,7 +54,6 @@ const Main = () => {
     return (
         <>
             <main className="background">
-                <Header />
                 <section className="main">
                   <h1 className='main-title'>Welcome to the VxnnChat</h1>
                   <section className='main-list'>

@@ -158,7 +158,6 @@ const Music = () => {
     return (
         <>
             <main className="background">
-                <Header />
                 <section className='music-container'>
                     <section className='music-tools'>
                         <nav className='music-nav'>

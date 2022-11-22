@@ -179,7 +179,6 @@ const MobileChat = ({width}) => {
 
   return (
     <main className="background">
-      <Header />
       <section className="section-chat">
         {activeLink ? (
           <Messenger handleSubmit={handleSubmit}

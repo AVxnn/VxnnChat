@@ -75,9 +75,6 @@ const Login = () => {
     return (
         <>
             <section className='login-container'>
-                <section className='login-img-container'>
-                    <img className='login-img' src={bg} alt=""/>
-                </section>
                 <section className="login">
                     <section className='login-c'>
                         <section className='login-logotype'>

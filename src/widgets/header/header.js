@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import "./style.sass"
-import home from '../../img/home.png'
-import news from '../../img/news.png'
-import chat from '../../img/chat.png'
-import musicHeader from '../../img/musicHeader.png'
-import user from '../../img/user.png'
-import todo from '../../img/yeye.png'
+import home from '../../img/home.svg'
+import news from '../../img/news.svg'
+import chat from '../../img/chat.svg'
+import musicHeader from '../../img/music.svg'
+import user from '../../img/user.svg'
+import todo from '../../img/todo.svg'
 
 import logo_home from '../../img/lhome.png'
 import logo_news from '../../img/lnews.png'

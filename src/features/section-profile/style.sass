@@ -19,7 +19,8 @@
   display: flex
   justify-content: center
   align-items: center
-  padding: 10px 14px
+  padding: 8px 14px
+  border: 2px solid #437ED8
   border-radius: 14px
   transition: all 0.1s ease-in-out
 
@@ -30,27 +31,11 @@
     width: 70px
 
 .profile-register
-  padding: 12.5px 14px
+  padding: 11px 14px
   border-radius: 14px
+  background-color: rgba(0, 0, 0, 0)
+  border: 2px solid #437ED8
   transition: all 0.1s ease-in-out
-
-.profile-dropMenu
-  opacity: 0
-  width: 60px
-  height: 110px
-  background-color: #1C1E21
-  top: 65px
-  right: -5px
-  z-index: -20
-  padding: 10px
-  display: flex
-  justify-content: space-between
-  box-sizing: border-box
-  flex-direction: column
-  border-radius: 14px
-  align-items: center
-  position: absolute
-  transition: all 0.1s ease
 
 .down-trip
   position: absolute
@@ -104,42 +89,185 @@
 
 
 
-.section-profile
+.section-auth
+  position: absolute
+  right: 0
   display: flex
   justify-content: flex-end
   align-items: center
 
-.section-profile-log
-  position: relative
-  width: 250px
+.section-block
+  position: absolute
+  right: 0
   display: flex
   justify-content: flex-end
   align-items: center
 
-  &:before
-    content: ""
-    position: absolute
-    width: 54px
-    right: -4px
-    border-radius: 9999px
-    height: 54px
-    background-color: rgba(0, 0, 0, 0)
-    border: 2px solid #437ED8
-
-  .profile-bell-container
+  .section-profile-container
     position: relative
 
-    .profile-bell
-      margin-right: 30px
-      width: 24px
-      height: 24px
-      padding: 10px
-      border-radius: 14px
+    .section-profile
+      display: flex
+      align-items: center
+      padding: 5px 8px
+      border-radius: 8px
       cursor: pointer
-      transition: all 0.1s ease-in-out
+      transition: all 0.1s ease
+      margin-right: 20px
 
       &:hover
         background-color: #24272C
+
+      &:hover
+        background-color: #1d1f23
+
+      .profile_img
+        position: relative
+        width: 30px
+        height: 30px
+        object-fit: cover
+        border-radius: 500%
+        margin-right: 10px
+
+        &:hover
+          background-image: linear-gradient(45deg, darken(#13abdb,5%), #B10DC9)
+
+      .profile-name
+        color: #FFFFFF
+        font-family: Inter, sans-serif
+        font-size: 13px
+        font-weight: 500
+        margin-right: 10px
+
+      .profile-downArrow
+
+    .profile-dropMenu
+      position: absolute
+      display: flex
+      width: 250px
+      opacity: 0
+      flex-direction: column
+      top: 45px
+      padding: 14px 12px
+      right: 20px
+      background-color: #1C1E21
+      z-index: 999999999999
+      border-radius: 8px
+      animation: anim 0.1s ease forwards
+
+      .profile-dropMenu-item
+        display: flex
+        padding: 8px
+        align-items: center
+        border-radius: 8px
+        cursor: pointer
+        transition: all 0.1s ease
+
+        &:hover
+          background-color: #18191C
+
+        .profile-dropMenu-item_img
+          padding: 8px
+          width: 16px
+          height: 16px
+          border-radius: 8px
+          margin-right: 10px
+          background-color: #151618
+
+        .profile-dropMenu-item_title
+          font-family: Inter, sans-serif
+          font-size: 14px
+          color: #FFFFFF
+
+      .profile-dropMenu-out
+        background-color: #151618
+        outline: 0
+        margin: 14px 8px 0 8px
+        border: none
+        border-radius: 8px
+        display: flex
+        align-items: center
+        justify-content: center
+        padding: 9px
+        transition: all 0.1s ease
+        cursor: pointer
+
+        &:hover
+          background-color: #18191C
+
+        .profile-dropMenu-out_img
+          margin-right: 6px
+
+        .profile-dropMenu-out_title
+          color: #FFFFFF
+          font-size: 14px
+          font-family: Inter, sans-serif
+
+
+  .profile-menu-container
+    display: flex
+    align-items: center
+    justify-content: center
+    position: relative
+    padding: 10px
+    width: 20px
+    height: 20px
+    border-radius: 14px
+    cursor: pointer
+    transition: all 0.1s ease-in-out
+
+    &:hover
+      background-color: #24272C
+
+    .profile-menu
+      width: 20px
+      height: 20px
+
+    .profile-menu-list
+      position: absolute
+      display: flex
+      width: 240px
+      opacity: 0
+      top: 45px
+      padding: 24px 20px
+      box-sizing: border-box
+      right: 0
+      background-color: #1C1E21
+      z-index: 999999999999
+      justify-content: space-between
+      border-radius: 8px
+      animation: anim 0.1s ease forwards
+
+      .profile-menu-list-item
+        width: 40px
+        height: 40px
+        display: flex
+        align-items: center
+        justify-content: center
+        background-color: #151618
+        border-radius: 8px
+        transition: all 0.1s ease
+
+        &:hover
+          background-color: #18191C
+
+
+
+  .profile-bell-container
+    position: relative
+    padding: 8px
+    width: 24px
+    height: 24px
+    margin-right: 20px
+    border-radius: 14px
+    cursor: pointer
+    transition: all 0.1s ease-in-out
+
+    &:hover
+      background-color: #24272C
+
+    .profile-bell
+      margin-right: 30px
 
     .profile-bell-span
       position: absolute
@@ -172,30 +300,35 @@
       color: #FFFFFF
 
   .profile-bell-list
-    width: 360px
-    top: 70px
-    border-radius: 14px
-    border: 1px solid #333333
-    background-color: #202326
     position: absolute
-    z-index: 9999999999
+    display: flex
+    width: 250px
+    opacity: 0
+    flex-direction: column
+    top: 45px
+    padding: 24px 20px
+    right: 0
+    background-color: #1C1E21
+    z-index: 999999999999
+    border-radius: 8px
+    animation: anim 0.1s ease forwards
 
     .bell-item
-      padding: 20px
+      width: 100%
       display: flex
-      align-items: center
-      justify-content: space-between
+      flex-direction: column
       z-index: 99999999
 
       .bell-item-container
         display: flex
+        margin-bottom: 12px
 
 
         .bell-item-avatar
           object-fit: cover
           border-radius: 99px
-          width: 40px
-          height: 40px
+          width: 30px
+          height: 30px
 
         .bell-info
           display: flex
@@ -214,42 +347,45 @@
             font-size: 12px
 
       .bell-btn-list
+        display: flex
 
         .bell-item-btn
           padding: 7px 12px
-          border: none
+          width: 100%
           border-radius: 99px
           color: #FFFFFF
+          border: 1px solid rgba(0, 0, 0, 0)
+          background-color: rgba(0, 0, 0, 0)
           cursor: pointer
           z-index: 10000
+          transition: all 0.1s ease
 
         .accept
-          background-color: #E00086
+          background-color: #437ED8
           margin-right: 6px
 
           &:hover
-            background-color: #b6006e
+            background-color: #3a70bf
 
         .reject
-          background-color: #151618
+          border-color: #437ED8
 
           &:hover
-            background-color: #0c0e0e
+            border-color: #3a70bf
 
-
-
-  .profile_img
-    position: relative
-    width: 50px
-    height: 50px
-    object-fit: cover
-    border-radius: 500%
-    cursor: pointer
-
-    &:hover
-      background-image: linear-gradient(45deg, darken(#13abdb,5%), #B10DC9)
+@keyframes anim
+  0%
+    opacity: 0
+  100%
+    opacity: 1
 
 @media screen and (max-width: 935px)
+
+  .profile-menu-container
+    display: none !important
+
+  .profile-bell-container
+    display: none !important
 
   .section-profile
     display: none !important

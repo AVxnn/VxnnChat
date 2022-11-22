@@ -35,7 +35,6 @@ const Friends = () => {
   return (
     <>
       <main className="background">
-        <Header />
         <section className="section-friends">
           <section className='friends-top'>
             <section className='friends-top-left'>

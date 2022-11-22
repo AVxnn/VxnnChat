@@ -139,7 +139,6 @@ const Profile = () => {
     return (
         <>
             <main className="background">
-                <Header />
                 <section className="block-profile">
                     <div className='profile-background' style={{backgroundImage: `url(${user?.background ? user.background : ''})`}}>
                     </div>

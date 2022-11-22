@@ -18,13 +18,21 @@ import {
 } from "firebase/firestore"
 import settings from "../../img/cog.png";
 import exit from "../../img/exit.png";
-import bell from "../../img/bell.png";
+import menu from "../../img/menu.svg";
+import bell from "../../img/bell.svg";
+import downArrow from "../../img/downArrow.svg";
+import profile from "../../img/profile.svg";
+import cog from "../../img/cog.svg";
+import logout from "../../img/logout.svg";
+import todo from "../../img/yeye.png";
 import FriendNotification from "../../components/notification/friend/friendNotification";
 
 const SectionProfile = () => {
 
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenNotifications, setIsOpenNotifications] = useState(false)
+    const [isOpenProfile, setIsOpenProfile] = useState(false)
+    const [isOpenMenu, setIsOpenMenu] = useState(false)
     const [data, setData] = useState(false)
     const [user2, setUser2] = useState({})
     const [users, setUsers] = useState([])
@@ -48,7 +56,6 @@ const SectionProfile = () => {
 
     }
 
-
     useEffect(() => {
         if (user) {
             let unsub = onSnapshot(doc(db, 'users', user.uid), (doc) => {
@@ -61,50 +68,76 @@ const SectionProfile = () => {
 
     return !user ? (
         <>
-            <section className="section-profile">
+            <section className="section-auth">
                 <button onClick={() => navigate('/login')} className='profile-login btn'><img src={signIn} alt="signIn"/><span>Sign In</span></button>
                 <button onClick={() => navigate('/register')} className='profile-register btn'>Sign Up</button>
             </section>
         </>
     ):(
         <>
-            <section className="section-profile-log">
-                <section onClick={() => setIsOpenNotifications(!isOpenNotifications)} className='profile-bell-container'>
-                    <img className='profile-bell' src={bell} alt="bell"/>
+            <section  className="section-block">
+                <section className='section-profile-container'>
+                    <section onClick={() => setIsOpenProfile(!isOpenProfile)} className='section-profile'>
+                        <img className="profile_img" src={auth.currentUser.photoURL ? auth.currentUser.photoURL : avatar} alt="Avatar"/>
+                        <p className='profile-name'>MetaVxnn</p>
+                        <img style={{transform: isOpenProfile && 'rotate(180deg)'}} className='profile-downArrow' src={downArrow} alt=""/>
+                    </section>
                     {
-                        data.notifications && data.notifications.length >= 1 ? (
-                          <div className='profile-bell-span'>{data.notifications.length}</div>
+                        isOpenProfile ? (
+                            <div className='profile-dropMenu'>
+                                <section onClick={() => navigate(`/profile/${user.uid}`)} className='profile-dropMenu-item'>
+                                    <img className='profile-dropMenu-item_img' src={profile} alt=""/>
+                                    <p className='profile-dropMenu-item_title'>Profile</p>
+                                </section>
+                                <section onClick={() => navigate(`/profile/${user.uid}/edit`)} className='profile-dropMenu-item'>
+                                    <img className='profile-dropMenu-item_img' src={cog} alt=""/>
+                                    <p className='profile-dropMenu-item_title'>Settings</p>
+                                </section>
+                                <button onClick={() => handleSignOut()} className='profile-dropMenu-out'>
+                                    <img className='profile-dropMenu-out_img' src={logout} alt=""/>
+                                    <span className='profile-dropMenu-out_title'>
+                                        Login Out
+                                    </span>
+                                </button>
+                            </div>
                         ) : ''
                     }
                 </section>
-                { isOpenNotifications ? (
-                    <section className={`profile-bell-list ${data.notifications.length > 0 ? '' : 'empty'}`}>
+                <section onClick={() => setIsOpenNotifications(!isOpenNotifications)} className='profile-bell-container'>
+                    <div>
+                        <img className='profile-bell' src={bell} alt="bell"/>
                         {
-                            data.notifications.length > 0 ? data.notifications.map((e) => {
-                                if (e.type) {
-                                    return (
-                                      <FriendNotification data={data} item={e}/>
-                                    )
-                                }
-                            }) : <span className='profile-bell-empty'>Empty</span>
-
+                            data.notifications && data.notifications.length >= 1 ? (
+                              <div className='profile-bell-span'>{data.notifications.length}</div>
+                            ) : ''
                         }
-                    </section>
+                        { isOpenNotifications && data.notifications.length > 0 ? (
+                          <section className={`profile-bell-list ${data.notifications.length > 0 ? '' : 'empty'}`}>
+                              {
+                                  data.notifications.length > 0 ? data.notifications.map((e) => {
+                                      if (e.type) {
+                                          return (
+                                            <FriendNotification data={data} item={e}/>
+                                          )
+                                      }
+                                  }) : ''
+
+                              }
+                          </section>
+                        ) : null
+                        }
+                    </div>
+                </section>
+                <section onClick={() => setIsOpenMenu(!isOpenMenu)} className='profile-menu-container'>
+                    <img className='profile-menu' src={menu} alt="bell"/>
+                    { isOpenMenu ? (
+                      <section className={`profile-menu-list`}>
+                        <section onClick={() => navigate(`/todo`)} className={`profile-menu-list-item`}>
+                            <img src={todo} alt=""/>
+                        </section>
+                      </section>
                     ) : null
-                }
-                <img onClick={() => setIsOpen(!isOpen)} className="profile_img" src={auth.currentUser.photoURL ? auth.currentUser.photoURL : avatar} alt="Avatar"/>
-                <section className={`profile-dropMenu ${isOpen && 'active'}`}>
-                    <NavLink to={auth.currentUser ? `/profile/${auth.currentUser.uid}` : `/profile`} className="profile-item settings-y">
-                        <section className="profile-item settings-y">
-                            <img className="profile-item_img" src={settings} alt="user"/>
-                        </section>
-                    </NavLink>
-                    <NavLink to='/' className="profile-item exit-y">
-                        <section className="profile-item exit-y">
-                            <img onClick={() => handleSignOut()} className="profile-item_img" src={exit} alt="todo"/>
-                        </section>
-                    </NavLink>
-                    <div className='down-trip'></div>
+                    }
                 </section>
             </section>
 

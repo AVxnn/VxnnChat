@@ -144,7 +144,6 @@ const PostCreate = () => {
 
   return (
     <main className="background">
-      <Header />
       <div className='post-create-container'>
         <div className='post-header'>
           <h1 className='post-create-title'>Новый пост</h1>

@@ -66,9 +66,6 @@ const Registration = () => {
     return (
         <>
             <section className='register-container'>
-                <section className='register-img-container'>
-                    <img className='register-img' src={bg} alt=""/>
-                </section>
                 <section className="register">
                     <section className='register-c'>
                         <section className='register-logotype'>

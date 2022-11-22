@@ -130,7 +130,6 @@ const Lenta = () => {
     return (
         <>
             <main className="background">
-                <Header />
                 <section className='lenta-container'>
                     <section className='lenta-tools'>
                         <section className='lenta-tools-top'>
