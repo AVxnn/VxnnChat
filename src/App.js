@@ -72,9 +72,7 @@ const App = () => {
                         </PrivateRoute>
                     }/>
                     <Route path="post/:id" element={
-                        <PrivateRoute>
-                            <Post />
-                        </PrivateRoute>
+                        <Post />
                     }/>
                     <Route path="post/create" element={
                         <PrivateRoute>

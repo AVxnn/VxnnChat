@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import Header from "../../widgets/header/header";
 import './style.sass'
 import TextareaAutosize from 'react-textarea-autosize';
 import pen from '../../img/pencil.png'
@@ -7,7 +6,7 @@ import avatar from "../../features/message-item/img/avatar.png";
 import video from '../../img/video.png'
 import Post from "../../features/post/post";
 import {getAuth} from "firebase/auth";
-import {addDoc, collection, getFirestore, onSnapshot, orderBy, query, Timestamp} from "firebase/firestore";
+import {addDoc, collection, doc, getDoc, getFirestore, onSnapshot, orderBy, query, Timestamp} from "firebase/firestore";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "../../shared/api/firebase";
 import {AuthContext} from "../../shared/contextauth/auth";
@@ -24,9 +23,8 @@ const Lenta = () => {
     const listRef = useRef(null)
 
     const viewsPage = 999
-    const loadPage = 1
 
-    const [open, setOpen] = useState(true)
+    const [dataUser, setDataUser] = useState({})
     const [iImgMessenger, setImgMessenger] = useState()
     const [VideoMessenger, setVideoMessenger] = useState('')
     const [data, setData] = useState({
@@ -49,10 +47,19 @@ const Lenta = () => {
         setList(currentCompanies)
     }, [posts, currentPage])
 
+    useEffect(() => {
+        getDoc(doc(db, 'users' , user.uid)).then(docSnap => {
+            if (docSnap.exists) {
+                setDataUser(docSnap.data())
+            }
+        })
+
+    }, [user])
+
     const changeImg = (e, type) => {
         if (type === 'image') {
             setData({...data, img: e})
-            var fileReader = new FileReader();
+            let fileReader = new FileReader();
             fileReader.onload = function() {
                 let res = fileReader.result;
                 setImgMessenger(res)
@@ -61,7 +68,7 @@ const Lenta = () => {
             fileReader.readAsDataURL(e);
         } else {
             setData({...data, video: e})
-            var fileReader = new FileReader();
+            let fileReader = new FileReader();
             fileReader.onload = function() {
                 let res = fileReader.result;
                 setVideoMessenger(res)
@@ -87,7 +94,7 @@ const Lenta = () => {
                 `posts/${new Date().getTime()} - ${data.img.name}`
             )
             const snap = await uploadBytes(imgRef, data.img)
-            const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))
+            let dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))
             data.img = dlUrl
         }
 
@@ -101,8 +108,6 @@ const Lenta = () => {
             data.video = dlUrl
         }
 
-        setOpen(false)
-
         await addDoc(collection(db, "posts"), {
             img: data.img || '',
             video: data.video || '',
@@ -111,9 +116,9 @@ const Lenta = () => {
             createdAt: Timestamp.fromDate(new Date()),
             counterLikes: [],
             id: Math.round(Math.random() * 10000000),
-            uid: auth.currentUser.uid,
-            uPhotoURL: auth.currentUser.photoURL,
-            uName: auth.currentUser.displayName,
+            uid: dataUser.uid,
+            uPhotoURL: dataUser.avatar,
+            uName: dataUser.name,
             recommendation: rec
         })
         setData({
@@ -172,9 +177,9 @@ const Lenta = () => {
                                       <img className='lenta-btn' src={addImage} alt=""/>
                                   </label>
                                   {
-                                      iImgMessenger && (
+                                  iImgMessenger && (
                                       <img className='added-img' src={iImgMessenger} alt=""/>
-                                    )
+                                  )
                                   }
                                   <input onChange={(e) => changeImg(e.target.files[0], 'video')} id='field__file-3' className='btn file-btn' type='file'/>
                                   <label className="lenta-video-btn" htmlFor="field__file-3">

@@ -6,8 +6,11 @@ import {collection, deleteDoc, doc, getFirestore, onSnapshot, query, updateDoc, 
 import {Link} from "react-router-dom";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "../../shared/api/firebase";
-import uploadImage from "../../img/uploadimage.png";
+import trash from "../../img/trash.png";
+import edit from "../../img/edit.png";
 import dots from "../../img/dots.png";
+import check from "../../img/check.png";
+import TextareaAutosize from "react-textarea-autosize";
 
 const Post = ({auth, post, postId, index}) => {
     const [data, setData] = useState({
@@ -17,6 +20,7 @@ const Post = ({auth, post, postId, index}) => {
         desc: post.desc
     })
     const [open, setOpen] = useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditOpen, setIsEditOpen] = useState(true)
     const [isLike, setIsLike] = useState(true)
     const [animation, setAnimation] = useState(!isLike)
@@ -26,7 +30,7 @@ const Post = ({auth, post, postId, index}) => {
     const db = getFirestore()
 
     const isEditHandler = () => {
-        setIsEditOpen(false)
+        isEditOpen ? setIsEditOpen(false) : setIsEditOpen(true)
         setData({
             img: post.img,
             title: post.title,
@@ -136,7 +140,7 @@ const Post = ({auth, post, postId, index}) => {
                         <span className='post-header-date'><Moment format="HH:mm DD.MM.YYYY">{post.createdAt.toDate()}</Moment></span>
                     </section>
                     {
-                        isEditOpen ? <h2 className='post-title'>{post.title}</h2> : <input onChange={(e) => setData({...data, title: e.target.value})} className='post-input post-input-title' type="text" value={data.title}/>
+                        isEditOpen ? <h2 className='post-title'>{post.title}</h2> : <TextareaAutosize onChange={(e) => setData({...data, title: e.target.value})} className='post-input post-input-title' type="text" value={data.title}/>
                     }
                     {
                         post.img && isEditOpen ?  <img onClick={() => {setOpen(true)}} className='post-img' src={post.img} alt="test"/> : null
@@ -162,13 +166,44 @@ const Post = ({auth, post, postId, index}) => {
                 <section className='post-right'>
                     {
                         auth.currentUser.uid === post.uid || auth.currentUser.uid === 'CmG7f8TGwDPEouwwNqnYUJmB5lr1' ? (
-                            <section className="post-right-dots">
-                                <img className="post-right-dots_img" src={dots} alt="dots"/>
-                            </section>
+                            <>
+                                <div className="post-list">
+                                    <section onClick={() => setIsMenuOpen(!isMenuOpen)} className="post-right-dots">
+                                        <img className="post-right-dots_img" src={dots} alt="dots"/>
+                                    </section>
+                                    {
+                                        !isEditOpen && (
+                                          <>
+                                              <section onClick={() => isEditOpenHandler()} className="post-right-accept">
+                                                  <img className="post-right-dots_img" src={check} alt="dots"/>
+                                              </section>
+                                          </>
+                                      )
+                                    }
+                                    {
+                                      isMenuOpen && (
+                                        <>
+                                            <section onClick={() => {
+                                                setIsMenuOpen(!isMenuOpen)
+                                                deletePostHandler()
+                                            }} className="post-right-delete">
+                                                <img className="post-right-dots_img" src={trash} alt="dots"/>
+                                            </section>
+                                            <section onClick={() => {
+                                                setIsMenuOpen(!isMenuOpen)
+                                                isEditHandler()
+                                            }} className="post-right-edit">
+                                                <img className="post-right-dots_img" src={edit} alt="dots"/>
+                                            </section>
+                                        </>
+                                      )
+                                    }
+                                </div>
+                            </>
                         ) : (
-                            <section className="post-right-dots">
-                                <img className="post-right-dots_img" src={dots} alt="dots"/>
-                            </section>
+                            <>
+
+                            </>
                         )
                     }
                 </section>

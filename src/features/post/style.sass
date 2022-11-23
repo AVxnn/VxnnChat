@@ -7,6 +7,7 @@
   overflow-x: hidden
   justify-content: space-between
   flex-direction: row
+  align-items: flex-start
   opacity: 0
   animation: anim 0.3s ease-in-out forwards
 
@@ -123,10 +124,10 @@
 
   .post-right
     display: flex
+    position: relative
     align-items: center
     justify-content: center
     min-width: 50px
-    height: 50px
 
     @media screen and (max-width: 450px)
       width: 40px
@@ -141,6 +142,71 @@
       border-radius: 14px
       cursor: pointer
       transition: all 0.1s ease-in-out
+      opacity: 0
+      animation: anim 0.1s ease forwards
+
+      &:hover
+        background-color: #1C1E21
+
+      @media screen and (max-width: 450px)
+        width: 28px
+        height: 28px
+
+    .post-right-delete
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 24px
+      padding: 5px
+      height: 24px
+      margin-top: 4px
+      border-radius: 14px
+      cursor: pointer
+      transition: all 0.1s ease-in-out
+      opacity: 0
+      animation: anim 0.1s ease forwards
+
+      @media screen and (max-width: 450px)
+        width: 28px
+        height: 28px
+
+      &:hover
+        background-color: #1C1E21
+
+    .post-right-edit
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 24px
+      padding: 5px
+      height: 24px
+      margin-top: 4px
+      border-radius: 14px
+      cursor: pointer
+      transition: all 0.1s ease-in-out
+      opacity: 0
+      animation: anim 0.1s ease forwards
+
+      @media screen and (max-width: 450px)
+        width: 28px
+        height: 28px
+
+      &:hover
+        background-color: #1C1E21
+
+    .post-right-accept
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 24px
+      padding: 5px
+      height: 24px
+      margin-top: 4px
+      border-radius: 14px
+      cursor: pointer
+      transition: all 0.1s ease-in-out
+      opacity: 0
+      animation: anim 0.1s ease forwards
 
       @media screen and (max-width: 450px)
         width: 28px
@@ -165,14 +231,15 @@
     background-color: rgba(0, 0, 0, 0)
     outline: none
     border: 0
-    margin-bottom: 1px
-    margin: 20px
+    margin: 6px 0 1px 0
     border-bottom: 1px solid #FF3D00
 
   .post-input-title
-    font-size: 24px
+    font-size: 16px
     color: #FFFFFF
-    font-weight: 700
+    font-weight: 300
+    max-width: 480px
+    max-height: 300px
     margin-bottom: 14px
 
   .post-input-desc
