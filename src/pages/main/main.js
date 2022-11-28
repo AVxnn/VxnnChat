@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from "../../widgets/header/header";
 import './style.sass'
 import {getAuth} from "firebase/auth";
@@ -42,6 +42,8 @@ const Main = () => {
       }
     ]
 
+    const [loading, setLoading] = useState()
+
     const settings = {
       className: "slider variable-width",
       infinite: true,
@@ -74,7 +76,7 @@ const Main = () => {
                       ) : ''
                     }
                     <div className='main-list-info'>
-                      <Slider {...settings}>
+                        <Slider {...settings}>
                         {
                           data.map((item, index) => {
                             if (item.format === 1) {
@@ -116,9 +118,12 @@ const Main = () => {
                                 </div>
                               )
                             }
+                            if (index == data.length) {
+                                setLoading(true)
+                            }
                           })
                         }
-                      </Slider>
+                        </Slider>
                     </div>
                   </section>
                   <Vote />

@@ -4,18 +4,31 @@
   display: flex
   flex-direction: column
   width: 1320px
-  height: 740px
+  height: 85vh
+  overflow-y: hidden
+  overflow-x: hidden
 
   .main-title
     margin-top: 40px
     color: #EEEEEE
     font-size: 48px
     margin-bottom: 15px
+    opacity: 0
+    animation: anim 0.5s ease forwards
+
+  .main-sublist
+    opacity: 0
+    animation: anim 1s ease forwards
 
   .main-list
     position: relative
     width: 100%
     margin-top: 40px
+
+    .main-list-info
+      opacity: 0
+      animation-delay: 1s
+      animation: anim 5s ease forwards
 
     .main-item-auth-container
       width: 100%
@@ -188,6 +201,15 @@
       margin-top: 1px
       color: #FFFFFF
       text-decoration: none
+
+
+@keyframes anim
+  0%
+    opacity: 0
+  50%
+    opacity: 0
+  100%
+    opacity: 1
 
 
 @media screen and (max-width: 1440px)

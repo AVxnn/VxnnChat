@@ -1,10 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {
+    useContext,
+    useEffect,
+    useState
+} from 'react';
 import "./style.sass"
 import home from '../../img/home.svg'
 import news from '../../img/news.svg'
 import chat from '../../img/chat.svg'
 import musicHeader from '../../img/music.svg'
-import user from '../../img/user.svg'
+import userLogo from '../../img/user.svg'
 import todo from '../../img/todo.svg'
 
 import logo_home from '../../img/lhome.png'
@@ -21,12 +25,15 @@ import cat from '../../img/cat.png'
 import {Link, NavLink, useLocation} from "react-router-dom";
 import SectionProfile from "../../features/section-profile/section-profile";
 import {getAuth} from "firebase/auth";
+import {AuthContext} from "../../shared/contextauth/auth";
 
 const Header = () => {
 
     const [logo, setLogo] = useState()
     const auth = getAuth()
     const navigate = useLocation()
+
+    const { user } = useContext(AuthContext)
 
     useEffect(() => {
         let i = navigate.pathname.split('/')[1]
@@ -91,9 +98,9 @@ const Header = () => {
                             <img className="nav-item_img" src={musicHeader} alt="music"/>
                         </section>
                     </NavLink>
-                    <NavLink to={auth.currentUser ? `/profile/${auth.currentUser.uid}` : `/profile`} className="nav-item profile-y">
+                    <NavLink to={auth.currentUser ? `/profile/${user.uid}` : `/profile`} className="nav-item profile-y">
                         <section className="profile-y">
-                            <img className="nav-item_img" src={user} alt="user"/>
+                            <img className="nav-item_img" src={userLogo} alt="user"/>
                         </section>
                     </NavLink>
                     <NavLink to='/todo' className="nav-item todo-y">

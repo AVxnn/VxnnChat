@@ -7,7 +7,7 @@ import edit from '../../img/edit.png'
 import cog from '../../img/cog.png'
 import {collection, doc, getDoc, getFirestore, onSnapshot, query, updateDoc, where} from "firebase/firestore";
 import {ref, getDownloadURL, uploadBytes, deleteObject} from "firebase/storage";
-import { storage } from '../../shared/api/firebase'
+import {db, storage} from '../../shared/api/firebase'
 import {getAuth, updateProfile} from "firebase/auth";
 import {NavLink, useNavigate, useParams} from "react-router-dom";
 import Github from "../../features/github/github";
@@ -19,6 +19,7 @@ const Profile = () => {
     const [us, setUs] = useState(null)
     const [loading, setLoading] = useState(false)
     const [user, setUser] = useState()
+    const [users, setUsers] = useState()
     const [curUser, setCurUser] = useState({})
     const [friend, setFriend] = useState(false)
     const [emoji, setEmoji] = useState('')
@@ -68,7 +69,6 @@ const Profile = () => {
             });
             setUs(users[0])
             setLoading(true)
-            console.log(us)
             // setFollow(users[0]?.followers.filter((i) => i === auth.currentUser.uid).length >= 1)
         });
         return () => unsub()
@@ -129,7 +129,23 @@ const Profile = () => {
     }, [userId])
 
     useEffect(() => {
-        console.log(curUser)
+        const unsub = onSnapshot(query(collection(db, "users")), (querySnapshot) => {
+            const data = [];
+            querySnapshot.forEach((doc) => {
+                console.log(doc.data())
+                user?.friends.map((i)  => {
+                    console.log(i.uid === doc.data().uid, i.uid, doc.data().uid)
+                    if (i.uid === doc.data().uid) {
+                        data.push(doc.data());
+                    }
+                })
+            });
+            setUsers(data)
+        });
+        return () => unsub()
+    }, [user])
+
+    useEffect(() => {
         curUser?.friends?.map(i => {
             if (i.uid === userId) {
                 setFriend(true)
@@ -189,7 +205,7 @@ const Profile = () => {
                             <section className='stats-block'>
                                 <div className='stats-friends-avatars-container'>
                                     {
-                                        user?.friends.map((i, key) => {
+                                        users && users.map((i, key) => {
                                             if (key <= 3) {
                                                 return (
                                                   <div className='stats-avatar-friends'>

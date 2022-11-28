@@ -14,9 +14,6 @@ import {
     addDoc,
     Timestamp,
     orderBy,
-    endAt,
-    limit,
-    startAt,
     doc,
     setDoc, getDoc, updateDoc, deleteDoc
 } from "firebase/firestore";
@@ -120,6 +117,7 @@ const Chat = ({width}) => {
     }
 
     const handleSubmit = async (e, text) => {
+        setText('')
         if (e) {
             e.preventDefault();
         }
@@ -161,8 +159,6 @@ const Chat = ({width}) => {
         })
 
         setImg('')
-        setText('')
-
     }
 
     const filterFriends = async (item) => {
